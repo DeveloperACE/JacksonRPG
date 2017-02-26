@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by Adrian on 2/26/17.
  */
 
-public class GameMenu implements Screen {
+public class MainGameMenu implements Screen {
 
     final JacksonRPG game;
 
@@ -25,11 +25,10 @@ public class GameMenu implements Screen {
     private SpriteBatch menuBatch = new SpriteBatch();
 
 
-    public GameMenu(final JacksonRPG gam) {
+    public MainGameMenu(final JacksonRPG gam) {
         game = gam;
 
         createSkin();
-
     }
 
     public void createSkin() {
@@ -37,6 +36,7 @@ public class GameMenu implements Screen {
         skin.add("default", new BitmapFont());
 
         //Create a texture
+        //TODO make button sizes fixed
         Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/10, Pixmap.Format.RGB888);
         pixmap.setColor(Color.WHITE);
         pixmap.fill();
@@ -53,7 +53,7 @@ public class GameMenu implements Screen {
         skin.add("default", textButtonStyle);
 
 
-        final TextButton button = new TextButton("PLAY", skin);
+        final TextButton button = new TextButton("TEST", skin);
 
         button.setWidth(200f);
         button.setHeight(20f);
