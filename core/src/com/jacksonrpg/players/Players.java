@@ -33,7 +33,7 @@ public class Players {
         return sprite;
     }
 
-    public refresh() {
+    public void refresh() {
 //        if (state == PlayerState.WALKING_RIGHT) {
 //
 //        }
@@ -59,8 +59,8 @@ public class Players {
 //        }
     }
 
-    public checkState() {}
-    public updatePlayerPosition(Boolean animate) {}
-    public updateState() {}
+    public void checkState() {}
+    public void updatePlayerPosition(Boolean animate) {}
+    public void updateState() {}
 
 }
