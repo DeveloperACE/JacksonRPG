@@ -1,0 +1,146 @@
+
+walking.png
+size: 128,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Left00
+  rotate: false
+  xy: 2, 206
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left01
+  rotate: false
+  xy: 2, 172
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left02
+  rotate: false
+  xy: 36, 206
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left03
+  rotate: false
+  xy: 2, 138
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left04
+  rotate: false
+  xy: 36, 172
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left05
+  rotate: false
+  xy: 70, 206
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left06
+  rotate: false
+  xy: 2, 104
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left07
+  rotate: false
+  xy: 36, 138
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left08
+  rotate: false
+  xy: 70, 172
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Left09
+  rotate: false
+  xy: 2, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right00
+  rotate: false
+  xy: 36, 104
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right01
+  rotate: false
+  xy: 70, 138
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right02
+  rotate: false
+  xy: 2, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right03
+  rotate: false
+  xy: 36, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right04
+  rotate: false
+  xy: 70, 104
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right05
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right06
+  rotate: false
+  xy: 36, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right07
+  rotate: false
+  xy: 70, 70
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right08
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right09
+  rotate: false
+  xy: 70, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
