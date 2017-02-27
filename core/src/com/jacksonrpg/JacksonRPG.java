@@ -18,7 +18,7 @@ public class JacksonRPG extends Game {
       //  batch = new SpriteBatch();
         //Use LibGDX's default Arial font.
         font = new BitmapFont();
-        this.setScreen(new GameMenu(this));
+        this.setScreen(new MainGameMenu(this));
     }
 
     public void render() {
