@@ -13,6 +13,10 @@ public class LesserJackson extends Players {
     private Integer walkFrames = 9;
     public Sprite sprite;
 
+    //maybe subtract 16 to center lesserjackson?
+    public Integer x = 0;
+    public Integer y = 0;
+
     private String walkingTextureSheetPath = "characters/lesserjackson/walking";
     private String jumpingTextureSheetPath;
 
