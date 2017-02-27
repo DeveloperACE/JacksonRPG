@@ -2,8 +2,15 @@ package com.jacksonrpg;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Affine2;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.jacksonrpg.players.LesserJackson;
 
@@ -13,13 +20,15 @@ import com.jacksonrpg.players.LesserJackson;
 public class Game implements Screen {
     final JacksonRPG game;
 
-    public Batch gameBatch;
+    public SpriteBatch gameBatch;
     private Stage gameStage;
 
     private LesserJackson lesserJackson;
 
     public Game(final JacksonRPG gam) {
         this.game = gam;
+
+        gameBatch = new SpriteBatch();
 
         lesserJackson = new LesserJackson();
         System.out.println("Done");
