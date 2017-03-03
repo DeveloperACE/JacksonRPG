@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.players.LesserJackson;
 
 /**
@@ -20,18 +21,21 @@ import com.jacksonrpg.players.LesserJackson;
 public class Game implements Screen {
     final JacksonRPG game;
 
-    public SpriteBatch gameBatch;
-    private Stage gameStage;
+    public Stage gameStage;
 
     private LesserJackson lesserJackson;
 
     public Game(final JacksonRPG gam) {
         this.game = gam;
 
-        gameBatch = new SpriteBatch();
-
         lesserJackson = new LesserJackson();
-        System.out.println("Done");
+
+        gameStage = new Stage(new ScreenViewport());
+
+        Gdx.input.setInputProcessor(gameStage);
+
+        gameStage.addActor(lesserJackson);
+
     }
 
     @Override
@@ -39,18 +43,21 @@ public class Game implements Screen {
         Gdx.gl.glClearColor(0.5f,.74f,1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        gameBatch.begin();
-        gameBatch.draw(lesserJackson.sprite, 0, 0, 100, 100);
+        gameStage.act(Gdx.graphics.getDeltaTime());
+        gameStage.draw();
 
-        gameBatch.end();
+
     }
 
     @Override
     public void dispose() {
+        gameStage.dispose();
     }
 
     @Override
     public void resize(int width, int height) {
+        gameStage.getViewport().update(width, height, true);
+
     }
 
     @Override
