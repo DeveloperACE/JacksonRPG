@@ -43,8 +43,8 @@ public class Game implements Screen {
 
     private LesserJackson lesserJackson;
 
-    public Game(final JacksonRPG game) {
-        this.game = game;
+    public Game(final JacksonRPG jacksonrpg) {
+        this.jacksonrpg = jacksonrpg;
 
         loadingTexture = new Texture(Gdx.files.internal("items/pillbottle.png"));
         //backgroundTexture = new Texture(Gdx.files.internal("backgrounds/Bus-Background.png"));

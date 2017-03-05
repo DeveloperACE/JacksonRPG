@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class MainGameMenu implements Screen {
 
-    final JacksonRPG game;
+    final JacksonRPG jacksonrpg;
 
     public static Texture backgroundTexture;
     public static Texture bannerTexture;
@@ -29,8 +29,8 @@ public class MainGameMenu implements Screen {
    // private SpriteBatch menuBatch = new SpriteBatch();
 
 
-    public MainGameMenu(final JacksonRPG game) {
-        this.game = game;
+    public MainGameMenu(final JacksonRPG jacksonrpg) {
+        this.jacksonrpg = jacksonrpg;
 
         Gdx.input.setInputProcessor(menuStage);
 
@@ -86,7 +86,7 @@ public class MainGameMenu implements Screen {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new Game(game));
+                jacksonrpg.setScreen(new Game(jacksonrpg));
                 dispose();
             }
         });
