@@ -20,56 +20,78 @@ public class MainGameMenu implements Screen {
 
     final JacksonRPG game;
 
+    public static Texture backgroundTexture;
+    public static Texture bannerTexture;
+
     private Stage menuStage = new Stage();
+
     private Skin skin = new Skin();
-    private SpriteBatch menuBatch = new SpriteBatch();
+   // private SpriteBatch menuBatch = new SpriteBatch();
 
 
-    public MainGameMenu(final JacksonRPG gam) {
-        game = gam;
+    public MainGameMenu(final JacksonRPG game) {
+        this.game = game;
 
-        createSkin();
+        Gdx.input.setInputProcessor(menuStage);
+
+        backgroundTexture = new Texture(Gdx.files.internal("backgrounds/TitleScreen-BusBack.png"));
+        bannerTexture = new Texture(Gdx.files.internal("bannerlogo.png"));
+
+
+        makeButton("DEMO", 0, 125, 100, 40);
+
     }
 
+    //TODO: WAT
     public void createSkin() {
-        //add font
-        skin.add("default", new BitmapFont());
+        BitmapFont font = new BitmapFont();
+        font.getData().setScale(2);
 
-        //Create a texture
-        //TODO make button sizes fixed
-        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/10, Pixmap.Format.RGB888);
+        skin.add("default", font);
+
+        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/10, Pixmap.Format.RGB888);
         pixmap.setColor(Color.WHITE);
         pixmap.fill();
 
         skin.add("background", new Texture(pixmap));
+        pixmap.dispose();
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("background", Color.GRAY);
+
+        //normal color
+        //textButtonStyle.up = skin.newDrawable("background", Color.LIGHT_GRAY);
+
+        //click+hold
         textButtonStyle.down = skin.newDrawable("background", Color.DARK_GRAY);
+        // wat
         textButtonStyle.checked = skin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.over = skin.newDrawable("background", Color.LIGHT_GRAY);
+        //hover
+        textButtonStyle.over = skin.newDrawable("background", Color.GRAY);
+
+
         textButtonStyle.font = skin.getFont("default");
         skin.add("default", textButtonStyle);
 
+    }
 
-        final TextButton button = new TextButton("TEST", skin);
+    public void makeButton(String text, float x, float y, float width, float height)  {
+        createSkin();
+        final TextButton button = new TextButton(text, skin);
 
-        button.setWidth(200f);
-        button.setHeight(20f);
-        button.setPosition(Gdx.graphics.getWidth() /2 - 100f, Gdx.graphics.getHeight()/2 - 10f);
+        button.setWidth(width);//200f
+        button.setHeight(height);//20f
+        button.setPosition( x, y);//Gdx.graphics.getWidth() /2 - 100f, Gdx.graphics.getHeight()/2 - 10f
 
-        button.addListener(new ClickListener(){
+        button.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new Game(game));
                 dispose();
             }
         });
 
         menuStage.addActor(button);
-
-        Gdx.input.setInputProcessor(menuStage);
     }
 
     @Override
@@ -83,10 +105,14 @@ public class MainGameMenu implements Screen {
        // game.batch.begin();
        // game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 150);
        // game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
-        menuBatch.begin();
-        menuStage.act();
+        menuStage.getBatch().begin();
+        menuStage.getBatch().draw(backgroundTexture, 0, 0, menuStage.getWidth(), menuStage.getHeight());
+        menuStage.getBatch().draw(bannerTexture, 0, menuStage.getHeight()-50, menuStage.getWidth(), 50);//50 was a manually calculated height
+
+        menuStage.getBatch().end();
+
         menuStage.draw();
-        menuBatch.end();
+        menuStage.act();
 
     }
 
@@ -113,7 +139,7 @@ public class MainGameMenu implements Screen {
     @Override
     public void dispose() {
         menuStage.dispose();
-        menuBatch.dispose();
+        backgroundTexture.dispose();
     }
 
 }
