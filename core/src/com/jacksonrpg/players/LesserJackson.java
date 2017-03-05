@@ -90,16 +90,7 @@ public class LesserJackson extends Actor {
         super.act(delta);
     }
 
-    private void move() {
-        if (getX() >= 0 || getX() <= this.getStage().getWidth()) {
 
-            if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
-                setX(getX() + movementSpeed);
-            } else if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
-                setX(getX() - movementSpeed);
-            }
-        }
-    }
 
     private void checkKeyPresses() {
 
@@ -114,5 +105,16 @@ public class LesserJackson extends Actor {
 
         move();
 
+    }
+
+    private void move() {
+        if (getX() >= 0 || getX() <= this.getStage().getWidth()) {
+
+            if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
+                setX(getX() + movementSpeed);
+            } else if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
+                setX(getX() - movementSpeed);
+            }
+        }
     }
 }
