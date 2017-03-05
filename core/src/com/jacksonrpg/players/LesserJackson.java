@@ -77,7 +77,7 @@ public class LesserJackson extends Actor {
         //reset movement to standing in case no buttons are pressed
         this.movementState = MovementState.STANDING;
 
-
+        checkKeyPresses();
 
 
 
