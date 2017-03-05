@@ -26,7 +26,6 @@ public class LesserJackson extends Actor {
     private static TextureAtlas atlasFile;
     private String textureSheetPath = "characters/lesserjackson/walking";
 
-    private TextureRegion region;
 
     public Animation<TextureRegion> walkAnimation;
 
@@ -49,7 +48,6 @@ public class LesserJackson extends Actor {
         walkAnimation = new Animation<TextureRegion>(1/19f, atlasFile.getRegions());
 
 
-        region = new TextureRegion(pngTexture, 0,0,100,100);
 
     }
 
