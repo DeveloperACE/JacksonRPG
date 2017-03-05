@@ -44,7 +44,7 @@ public class Game implements Screen {
         backgroundTexture = new Texture(Gdx.files.internal("backgrounds/Bus-Background.png"));
         backgroundTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-        gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(800, 400));
+        gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
         Gdx.input.setInputProcessor(gameStage);
 
         lesserJackson = new LesserJackson();
