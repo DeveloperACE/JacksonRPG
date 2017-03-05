@@ -4,15 +4,20 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * This class is basically a screen/window-manager for the entire application
+ */
 public class JacksonRPG extends Game {
 
-    public SpriteBatch batch;
-    public BitmapFont font;
+    public SpriteBatch gameBatch;
+   // public BitmapFont font;
 
     public void create() {
-      //  batch = new SpriteBatch();
+
         //Use LibGDX's default Arial font.
-        font = new BitmapFont();
+       // font = new BitmapFont();
+
+        //the main menu sets the screen of JacksonRPG to the game when play is clicked
         this.setScreen(new MainGameMenu(this));
     }
 
@@ -21,7 +26,7 @@ public class JacksonRPG extends Game {
     }
 
     public void dispose() {
-       // batch.dispose();
-        font.dispose();
+       // gameBatch.dispose();
+        //font.dispose();
     }
 }

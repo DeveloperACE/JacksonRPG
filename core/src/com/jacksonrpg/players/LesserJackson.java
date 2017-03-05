@@ -1,25 +1,32 @@
 package com.jacksonrpg.players;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.jacksonrpg.players.Players.*;
 
 /**
  * Created by Adrian on 2/25/17.
  */
 public class LesserJackson extends Actor {
 
+    enum GraphicalState {
+        FACINGRIGHT, FACINGLEFT
+    }
 
-//    public Actor lesserJackson;
+    enum MovementState {
+        STANDING, WALKING
+    }
 
-    private String textureSheetPath = "characters/lesserjackson/walking";
+
+    private GraphicalState graphicalState = GraphicalState.FACINGRIGHT;
+    private MovementState movementState = MovementState.STANDING;
+
     private static Texture pngTexture;
     private static TextureAtlas atlasFile;
-    TextureRegion region;
+    private String textureSheetPath = "characters/lesserjackson/walking";
+
+    private TextureRegion region;
 
     public Animation<TextureRegion> walkAnimation;
 
@@ -46,30 +53,34 @@ public class LesserJackson extends Actor {
 
     }
 
-    //controls drawing/graphical state of character?
     @Override
     public void draw (Batch batch, float parentAlpha) {
-
         elapsedTime += Gdx.graphics.getDeltaTime();
-        batch.draw(walkAnimation.getKeyFrame(elapsedTime, true), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
+        if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
 
+            batch.draw(walkAnimation.getKeyFrame(elapsedTime, true), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+
+        } else if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
+
+            batch.draw(walkAnimation.getKeyFrame(elapsedTime, true), this.getX()+this.getWidth(), this.getY(), -this.getWidth(), this.getHeight());
+
+        } else if (this.movementState == MovementState.STANDING) {
+
+            batch.draw(walkAnimation.getKeyFrame(0), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+
+        }
     }
 
-    //controls movement/errthang else?
     @Override
     public void act(float delta) {
+        //reset movement to standing in case no buttons are pressed
+        this.movementState = MovementState.STANDING;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            this.setX(this.getX() + movementSpeed);
-            System.out.println("D");
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            this.setX(this.getX() - movementSpeed);
-            System.out.println("A");
-        }
 
-        //System.out.println(delta);
+
+
+
         //elapsedTime += Gdx.graphics.getDeltaTime();
 //        batch.begin();
 //        batch.draw(runningAnimation.getKeyFrame(delta, true), 0, 0);
@@ -77,5 +88,31 @@ public class LesserJackson extends Actor {
 
 
         super.act(delta);
+    }
+
+    private void move() {
+        if (getX() >= 0 || getX() <= this.getStage().getWidth()) {
+
+            if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
+                setX(getX() + movementSpeed);
+            } else if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
+                setX(getX() - movementSpeed);
+            }
+        }
+    }
+
+    private void checkKeyPresses() {
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            this.movementState = MovementState.WALKING;
+            this.graphicalState = GraphicalState.FACINGRIGHT;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            this.movementState = MovementState.WALKING;
+            this.graphicalState = GraphicalState.FACINGLEFT;
+        }
+
+        move();
+
     }
 }
