@@ -2,6 +2,7 @@ package com.jacksonrpg;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,29 +26,43 @@ import com.jacksonrpg.players.LesserJackson;
 public class Game implements Screen {
 
     public enum GameState {
-        RUNNING, PAUSED, INACTIVE
+        RUNNING, PAUSED, INACTIVE, LOADING
     }
 
-    final JacksonRPG game;
-    private GameState gameState = GameState.RUNNING;
+    final JacksonRPG jacksonrpg;
+    private GameState gameState = GameState.LOADING;
 
 
-    public static Texture backgroundTexture;
+    public static Texture loadingTexture;
 
     public Stage gameStage;
+
+    public AssetManager assets = new AssetManager();
+
+
 
     private LesserJackson lesserJackson;
 
     public Game(final JacksonRPG game) {
         this.game = game;
 
-        backgroundTexture = new Texture(Gdx.files.internal("backgrounds/Bus-Background.png"));
-        backgroundTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        loadingTexture = new Texture(Gdx.files.internal("items/pillbottle.png"));
+        //backgroundTexture = new Texture(Gdx.files.internal("backgrounds/Bus-Background.png"));
+        //backgroundTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+
+        lesserJackson = new LesserJackson(this);
+        assets.load("backgrounds/Bus-Background.png", Texture.class);
+       // assets.load("backgrounds/Bus-Background.png", Texture.class);
 
         gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
         Gdx.input.setInputProcessor(gameStage);
 
-        lesserJackson = new LesserJackson();
+
+
+
+
+
+
         gameStage.addActor(lesserJackson);
 
     }
@@ -57,15 +72,39 @@ public class Game implements Screen {
         Gdx.gl.glClearColor(0.5f,.74f,1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        gameStage.getBatch().begin();
-        gameStage.getBatch().draw(backgroundTexture, 0, 0, gameStage.getWidth(), gameStage.getHeight());
-        gameStage.getBatch().end();
+
 
         switch(gameState){
+            case LOADING:
+                if(assets.update()) {
+                    //assets loaded
+                    gameState = GameState.RUNNING;
+                    lesserJackson.loaded();
+                } else {
+                    // display loading information
+                    float progress = assets.getProgress();
+                    gameStage.getBatch().begin();
+                    gameStage.getBatch().draw(loadingTexture, gameStage.getWidth()*progress, 150, 100, 100);
+                    gameStage.getBatch().end();
+                }
+                break;
             case RUNNING:
+                //add background
+                gameStage.getBatch().begin();
+
+                if(assets.isLoaded("backgrounds/Bus-Background.png")) {
+                    // texture is available, let's fetch it and do something interesting
+                    Texture background = assets.get("backgrounds/Bus-Background.png", Texture.class);
+
+                    gameStage.getBatch().draw(background, 0, 0, gameStage.getWidth(), gameStage.getHeight());
+                }
+
+                gameStage.getBatch().end();
+
                 //update stage and actors
                 gameStage.draw();
                 gameStage.act(delta);
+
                 break;
             case PAUSED:
                 //show menu
