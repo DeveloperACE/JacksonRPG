@@ -115,12 +115,17 @@ public class LesserJackson extends Actor {
     }
 
     private void move() {
-        if (getX() >= 0 || getX() <= this.getStage().getWidth()) {
+        if (getX() > 0) {
+            if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
+                setX(getX() - movementSpeed);
+            }
+
+        }
+
+        if (getX() <= this.getStage().getWidth()-getWidth()) {
 
             if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
                 setX(getX() + movementSpeed);
-            } else if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
-                setX(getX() - movementSpeed);
             }
         }
     }
