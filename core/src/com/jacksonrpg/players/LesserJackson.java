@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jacksonrpg.Game;
 
 /**
  * Created by Adrian on 2/25/17.
@@ -109,6 +110,11 @@ public class LesserJackson extends Actor {
             this.movementState = MovementState.WALKING;
             this.graphicalState = GraphicalState.FACINGLEFT;
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            game.state = Game.GameState.PAUSED;
+
+        }
+
 
         move();
 
