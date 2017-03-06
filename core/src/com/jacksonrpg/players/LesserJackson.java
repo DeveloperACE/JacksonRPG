@@ -115,15 +115,17 @@ public class LesserJackson extends Actor {
     }
 
     private void move() {
+        //if player is right of leftmost world border
         if (getX() > 0) {
+            //allow movement left
             if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
                 setX(getX() - movementSpeed);
             }
-
         }
 
-        if (getX() <= this.getStage().getWidth()-getWidth()) {
-
+        //if player is left of rightmost world border
+        if (getX() < this.getStage().getWidth()-getWidth()) {
+            //allow movement right
             if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
                 setX(getX() + movementSpeed);
             }

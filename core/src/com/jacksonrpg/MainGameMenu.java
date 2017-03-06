@@ -99,12 +99,7 @@ public class MainGameMenu implements Screen {
         Gdx.gl.glClearColor(0.5f,.74f,1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-       // camera.update();
-       //game.batch.setProjectionMatrix(camera.combined);
 
-       // game.batch.begin();
-       // game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 150);
-       // game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
         menuStage.getBatch().begin();
         menuStage.getBatch().draw(backgroundTexture, 0, 0, menuStage.getWidth(), menuStage.getHeight());
         menuStage.getBatch().draw(bannerTexture, 0, menuStage.getHeight()-50, menuStage.getWidth(), 50);//50 was a manually calculated height
