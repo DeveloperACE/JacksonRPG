@@ -30,7 +30,7 @@ public class Game implements Screen {
     }
 
     final JacksonRPG jacksonrpg;
-    private GameState gameState = GameState.LOADING;
+    public GameState state = GameState.LOADING;
 
 
     public static Texture loadingTexture;
@@ -74,11 +74,11 @@ public class Game implements Screen {
 
 
 
-        switch(gameState){
+        switch(state){
             case LOADING:
                 if(assets.update()) {
                     //assets loaded
-                    gameState = GameState.RUNNING;
+                    state = GameState.RUNNING;
                     lesserJackson.loaded();
                 } else {
                     // display loading information
