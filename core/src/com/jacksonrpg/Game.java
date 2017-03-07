@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.jacksonrpg.players.LesserJackson;
@@ -42,6 +43,7 @@ public class Game implements Screen {
         lesserJackson = new LesserJackson(this);
         assets.load("backgrounds/Bus-Background.png", Texture.class);
        // assets.load("backgrounds/Bus-Background.png", Texture.class);
+        assets.load("HUD/health.atlas", TextureAtlas.class);
 
         gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
         Gdx.input.setInputProcessor(gameStage);
@@ -86,6 +88,13 @@ public class Game implements Screen {
                     Texture background = assets.get("backgrounds/Bus-Background.png", Texture.class);
 
                     gameStage.getBatch().draw(background, 0, 0, gameStage.getWidth(), gameStage.getHeight());
+                }
+
+                if(assets.isLoaded("HUD/health.atlas")) {
+                    // texture is available, let's fetch it and do something interesting
+                    TextureAtlas healthStates = assets.get("HUD/health.atlas", TextureAtlas.class);
+
+                    gameStage.getBatch().draw(healthStates.getRegions().get(lesserJackson.healthLost), 5, gameStage.getHeight()-69, 64, 64);
                 }
 
                 gameStage.getBatch().end();

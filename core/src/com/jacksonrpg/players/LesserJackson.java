@@ -28,6 +28,8 @@ public class LesserJackson extends Actor {
     private float elapsedTime = 0;
 
     private Integer movementSpeed = 4;
+    public Integer healthLost = 0;//0-14, 0 = full, 14 = dead
+    public Integer maxHealth = 14;
 
     private com.jacksonrpg.Game game;
 
@@ -114,10 +116,28 @@ public class LesserJackson extends Actor {
             game.state = Game.GameState.PAUSED;
 
         }
-
-
         move();
+    }
 
+    public void addHealth() {
+        if (healthLost > 0) {
+            //remove a lost health, basically getting one back
+            healthLost = healthLost - 1;
+        }
+    }
+
+    public void subtractHealth() {
+        if (healthLost > maxHealth) {
+            //add one health lost
+            healthLost = healthLost + 1;
+        }
+    }
+
+    /**
+     * Returns current player health as a float/percentage
+     */
+    public float getHealth() {
+        return maxHealth-healthLost/maxHealth;
     }
 
     private void move() {
