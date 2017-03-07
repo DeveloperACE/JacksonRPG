@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -29,12 +30,16 @@ public class Game implements Screen {
 
     public AssetManager assets = new AssetManager();
 
+    private BitmapFont font;
 
 
     private LesserJackson lesserJackson;
 
     public Game(final JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
+
+        font = new BitmapFont();
+
 
         loadingTexture = new Texture(Gdx.files.internal("items/pillbottle.png"));
         //backgroundTexture = new Texture(Gdx.files.internal("backgrounds/Bus-Background.png"));
