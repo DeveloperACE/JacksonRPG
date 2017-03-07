@@ -49,6 +49,7 @@ public class Game implements Screen {
         assets.load("backgrounds/Bus-Background.png", Texture.class);
        // assets.load("backgrounds/Bus-Background.png", Texture.class);
         assets.load("HUD/health.atlas", TextureAtlas.class);
+        assets.load("items/currency.atlas", TextureAtlas.class);
 
         gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
         Gdx.input.setInputProcessor(gameStage);
@@ -100,6 +101,14 @@ public class Game implements Screen {
                     TextureAtlas healthStates = assets.get("HUD/health.atlas", TextureAtlas.class);
 
                     gameStage.getBatch().draw(healthStates.getRegions().get(lesserJackson.healthLost), 5, gameStage.getHeight()-69, 64, 64);
+                }
+
+                if(assets.isLoaded("items/currency.atlas")) {
+                    // texture is available, let's fetch it and do something interesting
+                    TextureAtlas currencyIcon = assets.get("items/currency.atlas", TextureAtlas.class);
+
+                    font.draw(gameStage.getBatch(), lesserJackson.getBalance(), 108, gameStage.getHeight()-7);
+                    gameStage.getBatch().draw(currencyIcon.findRegion("papercurrency"), 74, gameStage.getHeight()-21, 32, 16);
                 }
 
                 gameStage.getBatch().end();

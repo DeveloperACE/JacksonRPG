@@ -30,6 +30,7 @@ public class LesserJackson extends Actor {
     private Integer movementSpeed = 4;
     public Integer healthLost = 0;//0-14, 0 = full, 14 = dead
     public Integer maxHealth = 14;
+    private double monetaryBalance = 0;
 
     private com.jacksonrpg.Game game;
 
@@ -139,6 +140,34 @@ public class LesserJackson extends Actor {
     public float getHealth() {
         return maxHealth-healthLost/maxHealth;
     }
+
+
+
+
+    public void addMoney(double amount) {
+        monetaryBalance = monetaryBalance + amount;
+    }
+
+    public Boolean canSpend(double amount) {
+        if (monetaryBalance - amount > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void subtractMoney(double amount) {
+        if (canSpend(amount)) {
+            monetaryBalance = monetaryBalance - amount;
+        } else {
+            //TODO: HANDLE NOT ENOUGH FUNDS
+            System.out.println("ERROR: NOT ENOUGH FUNDS TO SPEND");
+        }
+    }
+
+    /**
+     * Returns current player balance
+     */
+    public String getBalance() {return "" + monetaryBalance;}
 
     private void move() {
         //if player is right of leftmost world border
