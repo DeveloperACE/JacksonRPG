@@ -100,7 +100,7 @@ public class Game implements Screen {
                     // texture is available, let's fetch it and do something interesting
                     TextureAtlas healthStates = assets.get("HUD/health.atlas", TextureAtlas.class);
 
-                    gameStage.getBatch().draw(healthStates.getRegions().get(lesserJackson.healthLost), 5, gameStage.getHeight()-69, 64, 64);
+                    gameStage.getBatch().draw(healthStates.getRegions().get(lesserJackson.getHealthLost()), 5, gameStage.getHeight()-69, 64, 64);
                 }
 
                 if(assets.isLoaded("items/currency.atlas")) {

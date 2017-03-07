@@ -28,8 +28,9 @@ public class LesserJackson extends Actor {
     private float elapsedTime = 0;
 
     private Integer movementSpeed = 4;
-    public Integer healthLost = 0;//0-14, 0 = full, 14 = dead
-    public Integer maxHealth = 14;
+    private Integer healthLost = 0;//0-14, 0 = full, 14 = dead
+    private Integer maxHealth = 14;
+
     private double monetaryBalance = 0;
 
     private com.jacksonrpg.Game game;
@@ -139,6 +140,9 @@ public class LesserJackson extends Actor {
      */
     public float getHealth() {
         return maxHealth-healthLost/maxHealth;
+    }
+    public int getHealthLost() {
+        return healthLost;
     }
 
 
