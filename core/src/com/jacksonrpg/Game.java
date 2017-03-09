@@ -41,15 +41,15 @@ public class Game implements Screen {
         font = new BitmapFont();
 
 
-        loadingTexture = new Texture(Gdx.files.internal("items/pillbottle.png"));
+        loadingTexture = new Texture(Gdx.files.internal("images/items/pillbottle.png"));
         //backgroundTexture = new Texture(Gdx.files.internal("backgrounds/Bus-Background.png"));
         //backgroundTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         lesserJackson = new LesserJackson(this);
-        assets.load("backgrounds/Bus-Background.png", Texture.class);
+        assets.load("images/backgrounds/Bus-Background.png", Texture.class);
        // assets.load("backgrounds/Bus-Background.png", Texture.class);
-        assets.load("HUD/health.atlas", TextureAtlas.class);
-        assets.load("items/currency.atlas", TextureAtlas.class);
+        assets.load("images/HUD/health.atlas", TextureAtlas.class);
+        assets.load("images/items/currency.atlas", TextureAtlas.class);
 
         gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
         Gdx.input.setInputProcessor(gameStage);
@@ -89,23 +89,23 @@ public class Game implements Screen {
                 //add background
                 gameStage.getBatch().begin();
 
-                if(assets.isLoaded("backgrounds/Bus-Background.png")) {
+                if(assets.isLoaded("images/backgrounds/Bus-Background.png")) {
                     // texture is available, let's fetch it and do something interesting
-                    Texture background = assets.get("backgrounds/Bus-Background.png", Texture.class);
+                    Texture background = assets.get("images/backgrounds/Bus-Background.png", Texture.class);
 
                     gameStage.getBatch().draw(background, 0, 0, gameStage.getWidth(), gameStage.getHeight());
                 }
 
-                if(assets.isLoaded("HUD/health.atlas")) {
+                if(assets.isLoaded("images/HUD/health.atlas")) {
                     // texture is available, let's fetch it and do something interesting
-                    TextureAtlas healthStates = assets.get("HUD/health.atlas", TextureAtlas.class);
+                    TextureAtlas healthStates = assets.get("images/HUD/health.atlas", TextureAtlas.class);
 
                     gameStage.getBatch().draw(healthStates.getRegions().get(lesserJackson.getHealthLost()), 5, gameStage.getHeight()-69, 64, 64);
                 }
 
-                if(assets.isLoaded("items/currency.atlas")) {
+                if(assets.isLoaded("images/items/currency.atlas")) {
                     // texture is available, let's fetch it and do something interesting
-                    TextureAtlas currencyIcon = assets.get("items/currency.atlas", TextureAtlas.class);
+                    TextureAtlas currencyIcon = assets.get("images/items/currency.atlas", TextureAtlas.class);
 
                     font.draw(gameStage.getBatch(), lesserJackson.getBalance(), 108, gameStage.getHeight()-7);
                     gameStage.getBatch().draw(currencyIcon.findRegion("papercurrency"), 74, gameStage.getHeight()-21, 32, 16);

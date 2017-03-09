@@ -46,17 +46,17 @@ public class LesserJackson extends Actor {
         this.setWidth(100);
         this.setHeight(100);
 
-        game.assets.load("characters/lesserjackson/walking.png", Texture.class);
-        game.assets.load("characters/lesserjackson/walking.atlas", TextureAtlas.class);
+        game.assets.load("images/characters/lesserjackson/walking.png", Texture.class);
+        game.assets.load("images/characters/lesserjackson/walking.atlas", TextureAtlas.class);
 
 
     }
     //extention of constructor, called when assets are loaded. for post processing
     public void loaded() {
 
-        if(game.assets.isLoaded("characters/lesserjackson/walking.atlas")) {
+        if(game.assets.isLoaded("images/characters/lesserjackson/walking.atlas")) {
             // texture is available, let's fetch it and do something interesting
-            TextureAtlas atlasFile = game.assets.get("characters/lesserjackson/walking.atlas", TextureAtlas.class);
+            TextureAtlas atlasFile = game.assets.get("images/characters/lesserjackson/walking.atlas", TextureAtlas.class);
 
             walkAnimation = new Animation<TextureRegion>(1/19f, atlasFile.getRegions());
 
