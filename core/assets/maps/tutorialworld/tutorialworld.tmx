@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="16" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="bus" tilewidth="32" tileheight="32" tilecount="21" columns="3">
+  <image source="bus_level_textures.png" width="96" height="224"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="32" height="16">
+  <data encoding="base64" compression="zlib">
+   eJzl0kkOgCAMBdAawXnG+5/Vv3BBGhtRF9+ExQtpC7QkBBEJGavJ2h/ooIeBFI8wwUyKF9hhi+JVxV/r1v6GjP332CoyByX4c7W4m/rbvdb5+A5rNqdquu/VHDrnE3qkvOtJzUf5InMHOnYRDw==
+  </data>
+ </layer>
+</map>
