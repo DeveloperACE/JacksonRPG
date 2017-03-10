@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="16" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="12" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="bus" tilewidth="32" tileheight="32" tilecount="21" columns="3">
   <image source="bus_level_textures.png" width="96" height="224"/>
  </tileset>
- <layer name="Background" width="32" height="16">
+ <layer name="Background" width="64" height="12">
   <data encoding="base64" compression="zlib">
-   eJzl0UsKgDAMBNCKjVr/Wu9/VmfhIgSrKYJZdPGQOEMrJjrnYsFaYwF6GGA0mieYYTGaVzhgZ/Mm5q95qt8ZC8YaYx5qoOuZ4l/y3C6x7hNSdHJ6f9J8U+r/8Sy1Gy8yed7d+fIdKe7Q7DUn47uvCncCtIYP1A==
+   eJztzksOgCAMBFCMVsS/xvuf1VmShihGSRfj4i2GFgbvnPPEAvQwwEiaJ5hhIc0rHLBHeVP57fxu36q/IxfIteSagqTw+1/01wl6Jhd7orKep+6k3rLql4yOnL8/mUl0bt1f/aidwYIUVQ==
   </data>
  </layer>
- <layer name="Foreground" width="32" height="16">
+ <layer name="Foreground" width="64" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgDAAgAAAE=
+   eJztwQEBAAAAgiD/r25IQAEAAC8GDAAAAQ==
   </data>
  </layer>
  <objectgroup name="Sprite Layer"/>
