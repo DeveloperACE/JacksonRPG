@@ -3,9 +3,15 @@
  <tileset firstgid="1" name="bus" tilewidth="32" tileheight="32" tilecount="21" columns="3">
   <image source="bus_level_textures.png" width="96" height="224"/>
  </tileset>
- <layer name="Tile Layer 1" width="32" height="16">
+ <layer name="Background" width="32" height="16">
   <data encoding="base64" compression="zlib">
    eJzl0UsKgDAMBNCKjVr/Wu9/VmfhIgSrKYJZdPGQOEMrJjrnYsFaYwF6GGA0mieYYTGaVzhgZ/Mm5q95qt8ZC8YaYx5qoOuZ4l/y3C6x7hNSdHJ6f9J8U+r/8Sy1Gy8yed7d+fIdKe7Q7DUn47uvCncCtIYP1A==
   </data>
  </layer>
+ <layer name="Foreground" width="32" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgDAAgAAAE=
+  </data>
+ </layer>
+ <objectgroup name="Sprite Layer"/>
 </map>
