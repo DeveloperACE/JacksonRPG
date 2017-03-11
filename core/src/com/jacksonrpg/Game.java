@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -77,12 +78,31 @@ public class Game implements Screen {
 
     }
 
+    public void renderAsset(String fileName, Class<Texture> fileType, Batch batch, float x, float y, float width, float height) {
+
+        if(assets.isLoaded(fileName)) {
+            batch.draw(assets.get(fileName, fileType), x, y, width, height);
+        }
+    }
+
+    public void renderAsset(String fileName, String regionName, Class<TextureAtlas> fileType, Batch batch, float x, float y, float width, float height) {
+
+        if(assets.isLoaded(fileName)) {
+                batch.draw(assets.get(fileName, fileType).findRegion(regionName), x, y, width, height);
+        }
+    }
+
+    public void renderAsset(String fileName, Integer regionIndex, Class<TextureAtlas> fileType, Batch batch, float x, float y, float width, float height) {
+
+        if(assets.isLoaded(fileName)) {
+            batch.draw(assets.get(fileName, fileType).getRegions().get(regionIndex), x, y, width, height);
+        }
+    }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.5f,.74f,1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
 
         switch(state){
             case LOADING:
@@ -102,27 +122,40 @@ public class Game implements Screen {
                 //add background
                 gameStage.getBatch().begin();
 
-                if(assets.isLoaded("images/backgrounds/Bus-Background.png")) {
-                    // texture is available, let's fetch it and do something interesting
-                    Texture background = assets.get("images/backgrounds/Bus-Background.png", Texture.class);
+                renderAsset(
+                        "images/backgrounds/Bus-Background.png",
+                        Texture.class,
+                        gameStage.getBatch(),
+                        0,
+                        0,
+                        gameStage.getWidth(),
+                        gameStage.getHeight()
+                );
 
-                    gameStage.getBatch().draw(background, 0, 0, gameStage.getWidth(), gameStage.getHeight());
-                }
+                renderAsset(
+                        "images/HUD/health.atlas",
+                        lesserJackson.getHealthLost(),
+                        TextureAtlas.class,
+                        gameStage.getBatch(),
+                        5,
+                        gameStage.getHeight()-64-5,
+                        64,
+                        64
 
-                if(assets.isLoaded("images/HUD/health.atlas")) {
-                    // texture is available, let's fetch it and do something interesting
-                    TextureAtlas healthStates = assets.get("images/HUD/health.atlas", TextureAtlas.class);
+                        );
 
-                    gameStage.getBatch().draw(healthStates.getRegions().get(lesserJackson.getHealthLost()), 5, gameStage.getHeight()-69, 64, 64);
-                }
-
-                if(assets.isLoaded("images/items/currency.atlas")) {
-                    // texture is available, let's fetch it and do something interesting
-                    TextureAtlas currencyIcon = assets.get("images/items/currency.atlas", TextureAtlas.class);
-
-                    font.draw(gameStage.getBatch(), lesserJackson.getBalance(), 108, gameStage.getHeight()-7);
-                    gameStage.getBatch().draw(currencyIcon.findRegion("papercurrency"), 74, gameStage.getHeight()-21, 32, 16);
-                }
+                renderAsset(
+                        "images/items/currency.atlas",
+                        "papercurrency",
+                        TextureAtlas.class,
+                        gameStage.getBatch(),
+                        74,
+                        gameStage.getHeight()-21,
+                        32,
+                        16
+                );
+                //draw balance by currency
+                font.draw(gameStage.getBatch(), lesserJackson.getBalance(), 108, gameStage.getHeight()-7);
 
                 gameStage.getBatch().end();
 
