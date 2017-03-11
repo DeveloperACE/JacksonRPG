@@ -37,7 +37,7 @@ public class Game implements Screen {
     private BitmapFont font;
 
 
-    private LesserJackson lesserJackson;
+    private LesserJackson character;
 
 
 
@@ -48,7 +48,7 @@ public class Game implements Screen {
         //setvars
         font = new BitmapFont();
         loadingTexture = new Texture(Gdx.files.internal("images/items/pillbottle.png"));
-        lesserJackson = new LesserJackson(this);
+        character = new LesserJackson(this);
         gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
 
         //load assets
@@ -58,7 +58,7 @@ public class Game implements Screen {
 
         Gdx.input.setInputProcessor(gameStage);
 
-        gameStage.addActor(lesserJackson);
+        gameStage.addActor(character);
 
     }
 
@@ -109,7 +109,7 @@ public class Game implements Screen {
                 if(assets.update()) {
                     //assets loaded
                     state = GameState.RUNNING;
-                    lesserJackson.loaded();
+                    character.loaded();
                 } else {
                     // display loading information
                     float progress = assets.getProgress();
@@ -134,7 +134,7 @@ public class Game implements Screen {
 
                 renderAsset(
                         "images/HUD/health.atlas",
-                        lesserJackson.getHealthLost(),
+                        character.getHealthLost(),
                         TextureAtlas.class,
                         gameStage.getBatch(),
                         5,
@@ -155,7 +155,7 @@ public class Game implements Screen {
                         16
                 );
                 //draw balance by currency
-                font.draw(gameStage.getBatch(), lesserJackson.getBalance(), 108, gameStage.getHeight()-7);
+                font.draw(gameStage.getBatch(), character.getBalance(), 108, gameStage.getHeight()-7);
 
                 gameStage.getBatch().end();
 
