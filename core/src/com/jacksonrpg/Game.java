@@ -72,8 +72,7 @@ public class Game implements Screen {
 
         //load assets
         assets.load("maps/tutorialworld/tutorialworld.tmx", TiledMap.class);
-        assets.load("images/HUD/health.atlas", TextureAtlas.class);
-        assets.load("images/items/currency.atlas", TextureAtlas.class);
+
         assets.load("images/backgrounds/Bus-Background.png", Texture.class);
 
     }
@@ -131,32 +130,7 @@ public class Game implements Screen {
                         gameStage.getWidth(),
                         gameStage.getHeight()
                 );
-
-                renderAsset(
-                        "images/HUD/health.atlas",
-                        character.getHealthLost(),
-                        TextureAtlas.class,
-                        gameStage.getBatch(),
-                        5,
-                        gameStage.getHeight()-64-5,
-                        64,
-                        64
-
-                        );
-
-                renderAsset(
-                        "images/items/currency.atlas",
-                        "papercurrency",
-                        TextureAtlas.class,
-                        gameStage.getBatch(),
-                        74,
-                        gameStage.getHeight()-21,
-                        32,
-                        16
-                );
-                //draw balance by currency
-                font.draw(gameStage.getBatch(), character.getBalance(), 108, gameStage.getHeight()-7);
-
+                
                 gameStage.getBatch().end();
 
                 //update stage and actors
