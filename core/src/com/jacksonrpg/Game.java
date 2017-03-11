@@ -25,22 +25,17 @@ public class Game implements Screen {
     }
 
     final JacksonRPG jacksonrpg;
-    public Stage gameStage;
-
-    public GameState state = GameState.LOADING;
-
 
     public AssetManager assets = new AssetManager();
 
+    public Stage gameStage;
+    public GameState state = GameState.LOADING;
 
     public static Texture loadingTexture;
+
     private BitmapFont font;
-
-
     private LesserJackson character;
-
-
-
+    
 
     public Game(final JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
