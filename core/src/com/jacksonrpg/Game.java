@@ -114,6 +114,8 @@ public class Game implements Screen {
                     float progress = assets.getProgress();
                     gameStage.getBatch().begin();
                     gameStage.getBatch().draw(loadingTexture, gameStage.getWidth()*progress, 150, 100, 100);
+                    font.getData().setScale(2);
+                    font.draw(gameStage.getBatch(), "Loading", 150, gameStage.getHeight()/3);
                     gameStage.getBatch().end();
                 }
                 break;
