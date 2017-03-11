@@ -3,10 +3,13 @@ package com.jacksonrpg;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.jacksonrpg.players.LesserJackson;
@@ -21,46 +24,56 @@ public class Game implements Screen {
     }
 
     final JacksonRPG jacksonrpg;
+    public Stage gameStage;
+
     public GameState state = GameState.LOADING;
 
 
-    public static Texture loadingTexture;
-
-    public Stage gameStage;
-
     public AssetManager assets = new AssetManager();
 
+
+    public static Texture loadingTexture;
     private BitmapFont font;
 
 
     private LesserJackson lesserJackson;
 
+
+
+
     public Game(final JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
 
+        //setvars
         font = new BitmapFont();
-
-
         loadingTexture = new Texture(Gdx.files.internal("images/items/pillbottle.png"));
-        //backgroundTexture = new Texture(Gdx.files.internal("backgrounds/Bus-Background.png"));
-        //backgroundTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-
         lesserJackson = new LesserJackson(this);
-        assets.load("images/backgrounds/Bus-Background.png", Texture.class);
-       // assets.load("backgrounds/Bus-Background.png", Texture.class);
-        assets.load("images/HUD/health.atlas", TextureAtlas.class);
-        assets.load("images/items/currency.atlas", TextureAtlas.class);
-
         gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
+
+        //load assets
+        loadAssets();
+
+
+
         Gdx.input.setInputProcessor(gameStage);
 
-
-
-
-
-
-
         gameStage.addActor(lesserJackson);
+
+    }
+
+
+
+
+    public void loadAssets() {
+        //set any custom loaders
+        assets.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+
+
+        //load assets
+        assets.load("maps/tutorialworld/tutorialworld.tmx", TiledMap.class);
+        assets.load("images/HUD/health.atlas", TextureAtlas.class);
+        assets.load("images/items/currency.atlas", TextureAtlas.class);
+        assets.load("images/backgrounds/Bus-Background.png", Texture.class);
 
     }
 
