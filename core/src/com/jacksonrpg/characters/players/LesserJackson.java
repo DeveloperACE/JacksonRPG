@@ -1,10 +1,10 @@
-package com.jacksonrpg.players;
+package com.jacksonrpg.characters.players;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.jacksonrpg.Game;
+import com.jacksonrpg.game.Game;
 
 /**
  * Created by Adrian on 2/25/17.

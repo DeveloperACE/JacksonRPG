@@ -1,8 +1,8 @@
 package com.jacksonrpg;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.jacksonrpg.game.MainGameMenu;
 
 /**
  * This class is basically a screen/window-manager for the entire application

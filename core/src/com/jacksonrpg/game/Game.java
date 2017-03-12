@@ -1,4 +1,4 @@
-package com.jacksonrpg;
+package com.jacksonrpg.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,7 +13,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.jacksonrpg.players.LesserJackson;
+import com.jacksonrpg.JacksonRPG;
+import com.jacksonrpg.characters.players.LesserJackson;
 
 /**
  * Created by Adrian on 2/26/17.
@@ -35,7 +36,7 @@ public class Game implements Screen {
 
     private BitmapFont font;
     private LesserJackson character;
-    
+
 
     public Game(final JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
@@ -66,9 +67,8 @@ public class Game implements Screen {
 
 
         //load assets
+        //TODO: load map as background
         assets.load("maps/tutorialworld/tutorialworld.tmx", TiledMap.class);
-
-        assets.load("images/backgrounds/Bus-Background.png", Texture.class);
 
     }
 
@@ -102,7 +102,7 @@ public class Game implements Screen {
             case LOADING:
                 if(assets.update()) {
                     //assets loaded
-                    state = GameState.RUNNING;
+                  //  state = GameState.RUNNING;
                     character.loaded();
                 } else {
                     // display loading information
