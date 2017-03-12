@@ -102,7 +102,7 @@ public class Game implements Screen {
             case LOADING:
                 if(assets.update()) {
                     //assets loaded
-                  //  state = GameState.RUNNING;
+                    state = GameState.RUNNING;
                     character.loaded();
                 } else {
                     // display loading information
@@ -118,7 +118,7 @@ public class Game implements Screen {
                 //add background
                 gameStage.getBatch().begin();
 
-                renderAsset(
+                /*renderAsset(
                         "images/backgrounds/Bus-Background.png",
                         Texture.class,
                         gameStage.getBatch(),
@@ -126,13 +126,13 @@ public class Game implements Screen {
                         0,
                         gameStage.getWidth(),
                         gameStage.getHeight()
-                );
-                
+                );*/
+                font.draw(gameStage.getBatch(), "Done Loading", 100, gameStage.getHeight()/3);
                 gameStage.getBatch().end();
 
                 //update stage and actors
-                gameStage.draw();
-                gameStage.act(delta);
+                //gameStage.draw();
+                //gameStage.act(delta);
 
                 break;
             case PAUSED:

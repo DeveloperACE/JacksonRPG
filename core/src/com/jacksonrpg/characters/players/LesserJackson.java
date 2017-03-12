@@ -33,11 +33,11 @@ public class LesserJackson extends Actor {
 
     private double monetaryBalance = 0;
 
-    private com.jacksonrpg.Game game;
+    private Game game;
 
 
 //setup basic vars and load assets for character into game's asset manager
-    public LesserJackson(com.jacksonrpg.Game game) {
+    public LesserJackson(Game game) {
 
         this.game = game;
 
