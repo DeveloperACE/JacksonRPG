@@ -3,5 +3,8 @@ package com.jacksonrpg.world;
 /**
  * Created by Adrian on 3/12/17.
  */
-public class MainWorld {
+public class MainWorld extends World{
+
+    private String mapPath = "";
+
 }
