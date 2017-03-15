@@ -46,8 +46,8 @@ public class LesserJackson extends Actor {
         this.setWidth(100);
         this.setHeight(100);
 
-        game.assets.load("images/characters/lesserjackson/walking.png", Texture.class);
-        game.assets.load("images/characters/lesserjackson/walking.atlas", TextureAtlas.class);
+        game.assets.load("core/assets/images/characters/lesserjackson/walking.png", Texture.class);
+        game.assets.load("core/assets/images/characters/lesserjackson/walking.atlas", TextureAtlas.class);
 
 
     }

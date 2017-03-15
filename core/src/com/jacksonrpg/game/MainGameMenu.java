@@ -34,8 +34,8 @@ public class MainGameMenu implements Screen {
 
         Gdx.input.setInputProcessor(menuStage);
 
-        backgroundTexture = new Texture(Gdx.files.internal("images/backgrounds/TitleScreen-BusBack.png"));
-        bannerTexture = new Texture(Gdx.files.internal("images/bannerlogo.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("core/assets/images/backgrounds/TitleScreen-BusBack.png"));
+        bannerTexture = new Texture(Gdx.files.internal("core/assets/images/bannerlogo.png"));
 
 
         makeButton("DEMO", 0, 125, 100, 40);

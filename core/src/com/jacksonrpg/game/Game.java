@@ -43,7 +43,7 @@ public class Game implements Screen {
 
         //setvars
         font = new BitmapFont();
-        loadingTexture = new Texture(Gdx.files.internal("images/items/pillbottle.png"));
+        loadingTexture = new Texture(Gdx.files.internal("core/assets/images/items/pillbottle.png"));
         character = new LesserJackson(this);
         gameStage = new Stage(/*new ScreenViewport()*/new FitViewport(400, 400));
 
@@ -68,7 +68,7 @@ public class Game implements Screen {
 
         //load assets
         //TODO: load map as background
-        assets.load("maps/tutorialworld/tutorialworld.tmx", TiledMap.class);
+        assets.load("core/assets/maps/tutorialworld/tutorialworld.tmx", TiledMap.class);
 
     }
 
