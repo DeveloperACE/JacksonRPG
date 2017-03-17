@@ -2,7 +2,6 @@ package com.jacksonrpg.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -12,10 +11,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jacksonrpg.JacksonRPG;
-import com.jacksonrpg.JacksonRPG.GameState;
 
 /**
  * Created by edwar12421 on 3/15/2017.
@@ -26,9 +25,15 @@ public class MainMenu implements Screen {
 
     private Stage menuStage = new Stage();
     private Skin menuButtonSkin = getButtonStyling();
-    Texture tex;
-    ButtonActor act;
 
+    private ClickListener clickListener = new ClickListener() {
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            System.out.println("Click");
+            //jacksonrpg.state = JacksonRPG.GameState.RUNNING;
+            //dispose();
+        }
+    };
 
 
 
@@ -47,22 +52,12 @@ public class MainMenu implements Screen {
     
     public void assetsLoaded() {
 
-    System.out.println("Loaded");
         //TextButton butt = addButton("DEMO", 200, 125, 100, 40);
         //butt.rotateBy(90);
         menuStage.addActor(addButton("DEMO", 0, 125, 100, 40));
 
-        this.tex = jacksonrpg.assets.get("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);//fetchAsset("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);
-        this.act = new ButtonActor(tex, 200, 200, 100, 100);
-        //act.rotateBy(90);
-        this.act.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                jacksonrpg.state = JacksonRPG.GameState.RUNNING;
-                dispose();
-            }
-        });
-        menuStage.addActor(this.act);
+
+        menuStage.addActor(addCharacterButton("core/assets/images/titlescreen/lj_sleeping.png"));
     }
 
     private TextButton addButton(String text, float x, float y, float width, float height) {
@@ -72,15 +67,22 @@ public class MainMenu implements Screen {
         button.setHeight(height);//20f
         button.setPosition(x, y);
 
-       button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                jacksonrpg.state = JacksonRPG.GameState.RUNNING;
-                dispose();
-            }
-        });
+       button.addListener(clickListener);
 
        return button;
+    }
+
+    private Actor addCharacterButton(String fileName) {
+
+        Texture tex = jacksonrpg.assets.get(fileName, Texture.class);//fetchAsset("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);
+        ButtonActor act = new ButtonActor(tex, 200, 200, 50, 100);
+        System.out.println(act.getRotation());
+        act.setRotation(90);
+        System.out.println(act.getRotation());
+        act.setTouchable(Touchable.enabled);
+        act.addListener(clickListener);
+
+        return act;
     }
 
     private Skin getButtonStyling() {
@@ -111,7 +113,6 @@ public class MainMenu implements Screen {
 
 
 
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0, 1);
@@ -119,30 +120,36 @@ public class MainMenu implements Screen {
         
 
         menuStage.getBatch().begin();
-        jacksonrpg.drawAsset(
-                "core/assets/images/titlescreen/TitleScreen-BusBack.png",
-                Texture.class,
-                menuStage.getBatch(),
-                0,
-                0,
-                menuStage.getWidth(),
-                menuStage.getHeight()
-        );
+        if (jacksonrpg.assets.isLoaded("core/assets/images/titlescreen/TitleScreen-BusBack.png")) {
+            menuStage.getBatch().draw(
+                    jacksonrpg.assets.get(
+                            "core/assets/images/titlescreen/TitleScreen-BusBack.png",
+                            Texture.class
+                    ),
+                    0,
+                    0,
+                    menuStage.getWidth(),
+                    menuStage.getHeight()
+            );
+        }
 
-        jacksonrpg.drawAsset(
-                "core/assets/images/titlescreen/bannerlogo.png",
-                Texture.class,
-                menuStage.getBatch(),
-                0,
-                menuStage.getHeight()-100,
-                400,//1536,
-                100 // 384*/
-        );
-
+        if (jacksonrpg.assets.isLoaded("core/assets/images/titlescreen/bannerlogo.png")) {
+            menuStage.getBatch().draw(
+                    jacksonrpg.assets.get(
+                            "core/assets/images/titlescreen/bannerlogo.png",
+                            Texture.class
+                    ),
+                    0,
+                    menuStage.getHeight()-100,
+                    400,//1536,
+                    100 // 384*/
+            );
+        }
+        menuStage.draw();
+        menuStage.act(delta);
         menuStage.getBatch().end();
 
-        menuStage.draw();
-        menuStage.act();
+
 
     }
 
@@ -195,11 +202,12 @@ public class MainMenu implements Screen {
         this.y = y;
         this.width = width;
         this.height = height;
+
     }
 
     @Override
     public void draw(Batch batch, float alpha){
-        batch.draw(texture, this.x, this.y);
+        batch.draw(texture, this.x, this.y, this.width, this.height);
     }
 
 }

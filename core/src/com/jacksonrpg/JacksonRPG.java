@@ -30,39 +30,10 @@ public class JacksonRPG extends ApplicationAdapter {
 
 	}
 
-    public Texture fetchAsset(String fileName, Class<Texture> fileType) {
 
-        if(assets.isLoaded(fileName)) {
-            return assets.get(fileName, fileType);
-        } else {
-            //TODO: Error handling here
-            //asset not loaded
-            return null;
-        }
-    }
 
-    public void drawAsset(String fileName, Class<Texture> fileType, Batch batch, float x, float y, float width, float height) {
 
-        if(assets.isLoaded(fileName)) {
-            batch.draw(assets.get(fileName, fileType), x, y, width, height);
-        }
-    }
-
-    public void drawAsset(String fileName, String regionName, Class<TextureAtlas> fileType, Batch batch, float x, float y, float width, float height) {
-
-        if(assets.isLoaded(fileName)) {
-            batch.draw(assets.get(fileName, fileType).findRegion(regionName), x, y, width, height);
-        }
-    }
-
-    public void drawAsset(String fileName, Integer regionIndex, Class<TextureAtlas> fileType, Batch batch, float x, float y, float width, float height) {
-
-        if(assets.isLoaded(fileName)) {
-            batch.draw(assets.get(fileName, fileType).getRegions().get(regionIndex), x, y, width, height);
-        }
-    }
-
-	@Override
+    @Override
 	public void render () {
 		Gdx.gl.glClearColor(0.5f,.74f,1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);// This cryptic line clears the screen.
