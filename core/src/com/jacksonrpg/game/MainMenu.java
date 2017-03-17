@@ -76,10 +76,15 @@ public class MainMenu implements Screen {
 
         Texture tex = jacksonrpg.assets.get(fileName, Texture.class);//fetchAsset("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);
         ButtonActor act = new ButtonActor(tex, 200, 200, 50, 100);
-        System.out.println(act.getRotation());
-        act.setRotation(90);
-        System.out.println(act.getRotation());
-        act.setTouchable(Touchable.enabled);
+
+        act.setOrigin(act.getWidth()/2, act.getHeight()/2);
+        act.rotateBy(360*.5f);
+        //System.out.println(act.getRotation());
+       // act.setRotation(90);
+       // System.out.println(act.getRotation());
+
+
+//        act.setTouchable(Touchable.enabled);
         act.addListener(clickListener);
 
         return act;
@@ -145,10 +150,11 @@ public class MainMenu implements Screen {
                     100 // 384*/
             );
         }
-        menuStage.draw();
-        menuStage.act(delta);
+
         menuStage.getBatch().end();
 
+        menuStage.act();
+        menuStage.draw();
 
 
     }
