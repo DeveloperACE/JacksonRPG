@@ -2,38 +2,133 @@ package com.jacksonrpg;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.jacksonrpg.game.Game;
 import com.jacksonrpg.game.MainMenu;
 
 public class JacksonRPG extends ApplicationAdapter {
+
+    public enum GameState {
+        MENU, RUNNING, PAUSED, LOADING, INACTIVE
+    }
+
 	SpriteBatch batch;
 	MainMenu gameMenu;
-	Game game;
+	public Game game = new Game();
+	public GameState state = GameState.LOADING;
+	public AssetManager assets = new AssetManager();
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		gameMenu = new MainMenu();
+		gameMenu = new MainMenu(this);
 
 	}
+
+    public Texture fetchAsset(String fileName, Class<Texture> fileType) {
+
+        if(assets.isLoaded(fileName)) {
+            return assets.get(fileName, fileType);
+        } else {
+            //TODO: Error handling here
+            //asset not loaded
+            return null;
+        }
+    }
+
+    public void drawAsset(String fileName, Class<Texture> fileType, Batch batch, float x, float y, float width, float height) {
+
+        if(assets.isLoaded(fileName)) {
+            batch.draw(assets.get(fileName, fileType), x, y, width, height);
+        }
+    }
+
+    public void drawAsset(String fileName, String regionName, Class<TextureAtlas> fileType, Batch batch, float x, float y, float width, float height) {
+
+        if(assets.isLoaded(fileName)) {
+            batch.draw(assets.get(fileName, fileType).findRegion(regionName), x, y, width, height);
+        }
+    }
+
+    public void drawAsset(String fileName, Integer regionIndex, Class<TextureAtlas> fileType, Batch batch, float x, float y, float width, float height) {
+
+        if(assets.isLoaded(fileName)) {
+            batch.draw(assets.get(fileName, fileType).getRegions().get(regionIndex), x, y, width, height);
+        }
+    }
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(0.5f,.74f,1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);// This cryptic line clears the screen.
 
-		batch.begin();
-        //display menu
-		batch.end();
+        switch(state){
+            case MENU:
+
+                batch.begin();
+                gameMenu.render(Gdx.graphics.getDeltaTime());
+                batch.end();
+
+                break;
+            case LOADING:
+                if(assets.update()) {
+                    //assets loaded
+                    state = GameState.MENU;
+                    gameMenu.assetsLoaded();
+                }// else {
+//                    // display loading information
+//                    float progress = assets.getProgress();
+//                    gameStage.getBatch().begin();
+//                    gameStage.getBatch().draw(loadingTexture, gameStage.getWidth()*progress, 150, 100, 100);
+//                    font.getData().setScale(2);
+//                    font.draw(gameStage.getBatch(), "Loading", 150, gameStage.getHeight()/3);
+//                    gameStage.getBatch().end();
+//                }
+//                break;
+            case RUNNING:
+                //add background
+               // gameStage.getBatch().begin();
+
+                /*renderAsset(
+                        "images/backgrounds/Bus-Background.png",
+                        Texture.class,
+                        gameStage.getBatch(),
+                        0,
+                        0,
+                        gameStage.getWidth(),
+                        gameStage.getHeight()
+                );*/
+               // font.draw(gameStage.getBatch(), "Done Loading", 100, gameStage.getHeight()/3);
+                //gameStage.getBatch().end();
+
+                //update stage and actors
+                //gameStage.draw();
+                //gameStage.act(delta);
+
+                break;
+            case PAUSED:
+                //show in-game menu
+               // jacksonrpg.setScreen(new MainGameMenu(jacksonrpg));
+                //dispose();
+                break;
+            case INACTIVE:
+                //show overlay w/ pause icon
+                break;
+        }
+
+
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		gameMenu.dispose();
+		assets.dispose();
 
 	}
 }
