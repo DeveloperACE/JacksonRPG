@@ -8,13 +8,14 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.jacksonrpg.JacksonRPG;
+import com.jacksonrpg.characters.Character;
 
 /**
  * Created by edwar12421 on 3/15/2017.
@@ -24,7 +25,15 @@ public class MainMenu implements Screen {
     private JacksonRPG jacksonrpg;
 
     private Stage menuStage = new Stage();
-    private Skin menuButtonSkin = getButtonStyling();
+    
+
+    BitmapFont font = new BitmapFont();
+    //used for checking font widths
+    GlyphLayout layout = new GlyphLayout();
+
+    Character lesserJackson;
+    Character greaterJackson;
+
 
     private ClickListener clickListener = new ClickListener() {
         @Override
@@ -39,7 +48,10 @@ public class MainMenu implements Screen {
 
     public MainMenu(JacksonRPG jrpgInstance) {
         this.jacksonrpg = jrpgInstance;
-        
+
+        font.getData().setScale(2);
+
+
         Gdx.input.setInputProcessor(menuStage);
         
         jacksonrpg.assets.load("core/assets/images/titlescreen/TitleScreen-BusBack.png", Texture.class);
@@ -47,73 +59,82 @@ public class MainMenu implements Screen {
         jacksonrpg.assets.load("core/assets/images/titlescreen/gj_sleeping.png", Texture.class);
         jacksonrpg.assets.load("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);
 
-        //TODO: use asset manager for menu background, banner and character textures
     }
     
     public void assetsLoaded() {
 
-        //TextButton butt = addButton("DEMO", 200, 125, 100, 40);
-        //butt.rotateBy(90);
-        menuStage.addActor(addButton("DEMO", 0, 125, 100, 40));
+        lesserJackson = new Character(
+                jacksonrpg.assets.get("core/assets/images/titlescreen/lj_sleeping.png", Texture.class),
+                -80,
+                210,
+                100,
+                200,
+                -90
+        );
+        lesserJackson.addListener(clickListener);
+        menuStage.addActor(lesserJackson);
+
+        greaterJackson = new Character(
+                jacksonrpg.assets.get("core/assets/images/titlescreen/gj_sleeping.png", Texture.class),
+                280,
+                210,
+                100,
+                200,
+                -90,
+                false,
+                true
+        );
+        greaterJackson.addListener(clickListener);
+        menuStage.addActor(greaterJackson);
 
 
-        menuStage.addActor(addCharacterButton("core/assets/images/titlescreen/lj_sleeping.png"));
     }
+    //use this for "load game save" feature
+    private TextButton addTextButton(String text, float x, float y, float width, float height) {
+        //create a skin to hold the styles for the button
+        Skin baseStyle =  new Skin();
+        //Set font
+        BitmapFont font = new BitmapFont();
+        font.getData().setScale(2);
+        baseStyle.add("defaultfont", font);
 
-    private TextButton addButton(String text, float x, float y, float width, float height) {
+        //add pixmap (for background)
+        Pixmap pixmap = new Pixmap(1,1, Pixmap.Format.RGB888);
+        pixmap.setColor(Color.WHITE);
+        pixmap.fill();
+        baseStyle.add("background", new Texture(pixmap));
+        pixmap.dispose();
 
-        TextButton button = new TextButton(text, menuButtonSkin.get("default", TextButton.TextButtonStyle.class));
+        //create and add button style backgrounds for different states
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.down = baseStyle.newDrawable("background", Color.DARK_GRAY);
+        textButtonStyle.over = baseStyle.newDrawable("background", Color.GRAY);
+        // textButtonStyle.up = baseStyle.newDrawable("background", Color.WHITE);
+        textButtonStyle.font = baseStyle.getFont("defaultfont");
+        baseStyle.add("textbutton", textButtonStyle);
+
+        //create button using style/skin
+        TextButton button = new TextButton(text, baseStyle.get("textbutton", TextButton.TextButtonStyle.class));
         button.setWidth(width);//200f
         button.setHeight(height);//20f
         button.setPosition(x, y);
 
-       button.addListener(clickListener);
+        button.addListener(clickListener);
 
        return button;
     }
+    
 
-    private Actor addCharacterButton(String fileName) {
-
-        Texture tex = jacksonrpg.assets.get(fileName, Texture.class);//fetchAsset("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);
-        ButtonActor act = new ButtonActor(tex, 200, 200, 50, 100);
-
-        act.setOrigin(act.getWidth()/2, act.getHeight()/2);
-        act.rotateBy(360*.5f);
-        //System.out.println(act.getRotation());
-       // act.setRotation(90);
-       // System.out.println(act.getRotation());
-
-
-//        act.setTouchable(Touchable.enabled);
-        act.addListener(clickListener);
-
-        return act;
+    private void drawHorizontallyCenteredText(String text, float y) {
+        float width = getTextWidth(text);
+        addText(text, (menuStage.getWidth()-width)/2, y);
     }
-
-    private Skin getButtonStyling() {
-        Skin buttonSkin = new Skin();
-
-        //Add font to skin
-        BitmapFont font = new BitmapFont();
-        font.getData().setScale(2);
-        buttonSkin.add("default", font);
-
-        //add pixmap (idk wat this is)
-        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/10, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fill();
-        buttonSkin.add("background", new Texture(pixmap));
-        pixmap.dispose();
-
-        //create and add button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.down = buttonSkin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.checked = buttonSkin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.over = buttonSkin.newDrawable("background", Color.GRAY);
-        textButtonStyle.font = buttonSkin.getFont("default");
-        buttonSkin.add("default", textButtonStyle);
-
-        return buttonSkin;
+    private void addText(String text, float x, float y) {
+        font.draw(menuStage.getBatch(), text, x, y);
+    }
+    private float getTextWidth(String text) {
+        layout.setText(font, text);
+        return layout.width;
     }
 
 
@@ -150,6 +171,7 @@ public class MainMenu implements Screen {
                     100 // 384*/
             );
         }
+        drawHorizontallyCenteredText("Pick a Character To Start", 50);
 
         menuStage.getBatch().end();
 
@@ -189,31 +211,4 @@ public class MainMenu implements Screen {
     public void resize(int width, int height) {
 
     }
-}
-
-
-
-
-
- class ButtonActor extends Actor {
-    public Texture texture;
-    Float x;
-    Float y;
-    Float width;
-    Float height;
-
-    public ButtonActor(Texture texture, float x, float y, float width, float height) {
-        this.texture = texture;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-
-    }
-
-    @Override
-    public void draw(Batch batch, float alpha){
-        batch.draw(texture, this.x, this.y, this.width, this.height);
-    }
-
 }
