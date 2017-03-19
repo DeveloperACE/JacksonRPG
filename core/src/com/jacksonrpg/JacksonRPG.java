@@ -4,10 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.jacksonrpg.game.Game;
 import com.jacksonrpg.game.MainMenu;
 
@@ -17,8 +14,9 @@ public class JacksonRPG extends ApplicationAdapter {
         MENU, RUNNING, PAUSED, LOADING, INACTIVE
     }
 
-	SpriteBatch batch;
-	MainMenu gameMenu;
+	private SpriteBatch batch;
+	private MainMenu gameMenu;
+	
 	public Game game = new Game();
 	public GameState state = GameState.LOADING;
 	public AssetManager assets = new AssetManager();

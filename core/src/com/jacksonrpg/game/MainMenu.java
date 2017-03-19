@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.characters.Character;
 
@@ -25,26 +24,23 @@ public class MainMenu implements Screen {
     private JacksonRPG jacksonrpg;
 
     private Stage menuStage = new Stage();
-    
 
-    BitmapFont font = new BitmapFont();
+    private BitmapFont font = new BitmapFont();
     //used for checking font widths
-    GlyphLayout layout = new GlyphLayout();
+    private GlyphLayout layout = new GlyphLayout();
 
-    Character lesserJackson;
-    Character greaterJackson;
+    private Character lesserJackson;
+    private Character greaterJackson;
 
 
     private ClickListener clickListener = new ClickListener() {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             System.out.println("Click");
-            //jacksonrpg.state = JacksonRPG.GameState.RUNNING;
-            //dispose();
+            jacksonrpg.state = JacksonRPG.GameState.RUNNING;
+            dispose();
         }
     };
-
-
 
     public MainMenu(JacksonRPG jrpgInstance) {
         this.jacksonrpg = jrpgInstance;
@@ -123,7 +119,7 @@ public class MainMenu implements Screen {
 
        return button;
     }
-    
+
 
     private void drawHorizontallyCenteredText(String text, float y) {
         float width = getTextWidth(text);
@@ -183,6 +179,9 @@ public class MainMenu implements Screen {
 
     @Override
     public void dispose() {
+        font.dispose();
+        menuStage.dispose();
+
 
     }
 

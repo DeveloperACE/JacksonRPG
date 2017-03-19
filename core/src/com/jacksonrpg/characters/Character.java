@@ -2,7 +2,6 @@ package com.jacksonrpg.characters;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.jacksonrpg.JacksonRPG;
 
@@ -11,16 +10,15 @@ import com.jacksonrpg.JacksonRPG;
  */
 public class Character extends Actor {
 
-    JacksonRPG jacksonrpg;
-    Texture characterTexture;
+    private Texture characterTexture;
 
-    Integer sectionX;
-    Integer sectionY;
-    Integer sectionWidth;
-    Integer sectionHeight;
+    private Integer sectionX;
+    private Integer sectionY;
+    private Integer sectionWidth;
+    private Integer sectionHeight;
 
-    Boolean flipX;
-    Boolean flipY;
+    private Boolean flipX;
+    private Boolean flipY;
 
     public Character(Texture texture, float x, float y, float width, float height, float rotation, int sectionX, int sectionY, int sectionWidth, int sectionHeight, boolean flipX, boolean flipY) {
 
