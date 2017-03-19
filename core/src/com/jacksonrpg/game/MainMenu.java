@@ -16,8 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.characters.Character;
 
-/**
- * Created by edwar12421 on 3/15/2017.
+/** Manages the main menu of the game by displaying clickable objects for the user to select from
+ * Created by edwar12421 (Adrian Edwards) on 3/15/2017.
  */
 public class MainMenu implements Screen {
     
@@ -56,7 +56,11 @@ public class MainMenu implements Screen {
         jacksonrpg.assets.load("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);
 
     }
-    
+
+    /** Called when the JacksonRPG class finishes loading assets and acts as a secondary constructor for
+     * initialising objects that require assets to be loaded.
+     * @see JacksonRPG
+     */
     public void assetsLoaded() {
 
         lesserJackson = new Character(
@@ -85,7 +89,16 @@ public class MainMenu implements Screen {
 
 
     }
-    //use this for "load game save" feature
+
+    /** Creates and returns some text as a clickable button to give the user more options
+     *
+     * @param text The text that the button will display
+     * @param x The X coordinate of the button
+     * @param y The Y coordinate of the button
+     * @param width The width of the button
+     * @param height The height of the button
+     * @return A TextButton object to add to the stage as an actor
+     */
     private TextButton addTextButton(String text, float x, float y, float width, float height) {
         //create a skin to hold the styles for the button
         Skin baseStyle =  new Skin();
@@ -120,14 +133,31 @@ public class MainMenu implements Screen {
        return button;
     }
 
-
+    /** Draws text at the specified Y coordinate and automatically centers it horizontally on the stage
+     *
+     * @param text The string of text to show on screen
+     * @param y The Y coordinate (height) at which to display the text
+     */
     private void drawHorizontallyCenteredText(String text, float y) {
         float width = getTextWidth(text);
         addText(text, (menuStage.getWidth()-width)/2, y);
     }
+
+    /** Draws text on the menu starting at the specified x and y coordinates
+     *
+     * @param text The string of text to show on screen
+     * @param x The X coordinate at which to render the text
+     * @param y The Y coordinate at which to render the text
+     */
     private void addText(String text, float x, float y) {
         font.draw(menuStage.getBatch(), text, x, y);
     }
+
+    /** Calculates the width of the specified text string using the font defined for the menu
+     *
+     * @param text The string of text to return the final rendered width for
+     * @return Returns a float value of the number of pixels of width that the input string will need to display on screen
+     */
     private float getTextWidth(String text) {
         layout.setText(font, text);
         return layout.width;

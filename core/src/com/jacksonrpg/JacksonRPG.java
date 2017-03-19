@@ -8,8 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jacksonrpg.game.Game;
 import com.jacksonrpg.game.MainMenu;
 
+/** Manages States, stages and screens for the game and provides save/load functionality
+ */
 public class JacksonRPG extends ApplicationAdapter {
 
+    /** the GameState enum acts as a flag to display different game windows or screens
+     */
     public enum GameState {
         MENU, RUNNING, PAUSED, LOADING, INACTIVE
     }
