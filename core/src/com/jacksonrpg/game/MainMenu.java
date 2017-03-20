@@ -42,6 +42,41 @@ public class MainMenu implements Screen {
         }
     };
 
+    private ClickListener gjClickListener = new ClickListener() {
+
+        @Override
+        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                greaterJackson.setX(greaterJackson.getX() - 10);
+        }
+        @Override
+        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                greaterJackson.setX(greaterJackson.getX() + 10);
+        }
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            jacksonrpg.state = JacksonRPG.GameState.RUNNING;
+            dispose();
+        }
+    };
+
+    private ClickListener ljClickListener = new ClickListener() {
+
+        @Override
+        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            lesserJackson.setX(lesserJackson.getX() + 10);
+        }
+        @Override
+        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            lesserJackson.setX(lesserJackson.getX() - 10);
+        }
+
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            jacksonrpg.state = JacksonRPG.GameState.RUNNING;
+            dispose();
+        }
+    };
+
     public MainMenu(JacksonRPG jrpgInstance) {
         this.jacksonrpg = jrpgInstance;
 
