@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jacksonrpg.JacksonRPG;
-import com.jacksonrpg.characters.Character;
+import com.jacksonrpg.entities.Entity;
 
 /** Manages the main menu of the game by displaying clickable objects for the user to select from
  * Created by edwar12421 (Adrian Edwards) on 3/15/2017.
@@ -36,8 +36,8 @@ public class MainMenu implements Screen {
     private static final String LJ_SLEEP_PATH = "core/assets/images/characters/lesserjackson/lj_sleeping.png";
 
 
-    private Character lesserJackson;
-    private Character greaterJackson;
+    private Entity lesserJackson;
+    private Entity greaterJackson;
 
 
     private ClickListener clickListener = new ClickListener() {
@@ -105,7 +105,7 @@ public class MainMenu implements Screen {
      */
     public void assetsLoaded() {
 
-        lesserJackson = new Character(
+        lesserJackson = new Entity(
                 jacksonrpg.assets.get(LJ_SLEEP_PATH, Texture.class),
                 -80,
                 210,
@@ -116,7 +116,7 @@ public class MainMenu implements Screen {
         lesserJackson.addListener(ljClickListener);
         menuStage.addActor(lesserJackson);
 
-        greaterJackson = new Character(
+        greaterJackson = new Entity(
                 jacksonrpg.assets.get(GJ_SLEEP_PATH, Texture.class),
                 280,
                 210,
