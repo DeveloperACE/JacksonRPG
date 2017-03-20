@@ -30,10 +30,10 @@ public class MainMenu implements Screen {
     //used for checking font widths
     private GlyphLayout layout = new GlyphLayout();
 
-    private String backgroundPath = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
-    private String bannerPath = "core/assets/images/bannerlogo.png";
-    private String gjSleepPath = "core/assets/images/characters/greaterjackson/gj_sleeping.png";
-    private String ljSleepPath = "core/assets/images/characters/lesserjackson/lj_sleeping.png";
+    private static final String BACKGROUND_PATH = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
+    private static final String BANNER_PATH = "core/assets/images/bannerlogo.png";
+    private static final String GJ_SLEEP_PATH = "core/assets/images/characters/greaterjackson/gj_sleeping.png";
+    private static final String LJ_SLEEP_PATH = "core/assets/images/characters/lesserjackson/lj_sleeping.png";
 
 
     private Character lesserJackson;
@@ -44,7 +44,7 @@ public class MainMenu implements Screen {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             System.out.println("Click");
-            jacksonrpg.state = JacksonRPG.GameState.RUNNING;
+            jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
     };
@@ -61,7 +61,7 @@ public class MainMenu implements Screen {
         }
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            jacksonrpg.state = JacksonRPG.GameState.RUNNING;
+            jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
     };
@@ -79,7 +79,7 @@ public class MainMenu implements Screen {
 
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            jacksonrpg.state = JacksonRPG.GameState.RUNNING;
+            jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
     };
@@ -92,10 +92,10 @@ public class MainMenu implements Screen {
 
         Gdx.input.setInputProcessor(menuStage);
         
-        jacksonrpg.assets.load(backgroundPath, Texture.class);
-        jacksonrpg.assets.load(bannerPath, Texture.class);
-        jacksonrpg.assets.load(gjSleepPath, Texture.class);
-        jacksonrpg.assets.load(ljSleepPath, Texture.class);
+        jacksonrpg.assets.load(BACKGROUND_PATH, Texture.class);
+        jacksonrpg.assets.load(BANNER_PATH, Texture.class);
+        jacksonrpg.assets.load(GJ_SLEEP_PATH, Texture.class);
+        jacksonrpg.assets.load(LJ_SLEEP_PATH, Texture.class);
 
     }
 
@@ -106,7 +106,7 @@ public class MainMenu implements Screen {
     public void assetsLoaded() {
 
         lesserJackson = new Character(
-                jacksonrpg.assets.get(ljSleepPath, Texture.class),
+                jacksonrpg.assets.get(LJ_SLEEP_PATH, Texture.class),
                 -80,
                 210,
                 100,
@@ -117,7 +117,7 @@ public class MainMenu implements Screen {
         menuStage.addActor(lesserJackson);
 
         greaterJackson = new Character(
-                jacksonrpg.assets.get(gjSleepPath, Texture.class),
+                jacksonrpg.assets.get(GJ_SLEEP_PATH, Texture.class),
                 280,
                 210,
                 100,
@@ -214,10 +214,10 @@ public class MainMenu implements Screen {
         
 
         menuStage.getBatch().begin();
-        if (jacksonrpg.assets.isLoaded(backgroundPath)) {
+        if (jacksonrpg.assets.isLoaded(BACKGROUND_PATH)) {
             menuStage.getBatch().draw(
                     jacksonrpg.assets.get(
-                            backgroundPath,
+                            BACKGROUND_PATH,
                             Texture.class
                     ),
                     0,
@@ -227,10 +227,10 @@ public class MainMenu implements Screen {
             );
         }
 
-        if (jacksonrpg.assets.isLoaded(bannerPath)) {
+        if (jacksonrpg.assets.isLoaded(BANNER_PATH)) {
             menuStage.getBatch().draw(
                     jacksonrpg.assets.get(
-                            bannerPath,
+                            BANNER_PATH,
                             Texture.class
                     ),
                     0,
