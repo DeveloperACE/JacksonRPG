@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -28,6 +29,12 @@ public class MainMenu implements Screen {
     private BitmapFont font = new BitmapFont();
     //used for checking font widths
     private GlyphLayout layout = new GlyphLayout();
+
+    private String backgroundPath = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
+    private String bannerPath = "core/assets/images/bannerlogo.png";
+    private String gjSleepPath = "core/assets/images/characters/greaterjackson/gj_sleeping.png";
+    private String ljSleepPath = "core/assets/images/characters/lesserjackson/lj_sleeping.png";
+
 
     private Character lesserJackson;
     private Character greaterJackson;
@@ -85,10 +92,10 @@ public class MainMenu implements Screen {
 
         Gdx.input.setInputProcessor(menuStage);
         
-        jacksonrpg.assets.load("core/assets/images/titlescreen/TitleScreen-BusBack.png", Texture.class);
-        jacksonrpg.assets.load("core/assets/images/titlescreen/bannerlogo.png", Texture.class);
-        jacksonrpg.assets.load("core/assets/images/titlescreen/gj_sleeping.png", Texture.class);
-        jacksonrpg.assets.load("core/assets/images/titlescreen/lj_sleeping.png", Texture.class);
+        jacksonrpg.assets.load(backgroundPath, Texture.class);
+        jacksonrpg.assets.load(bannerPath, Texture.class);
+        jacksonrpg.assets.load(gjSleepPath, Texture.class);
+        jacksonrpg.assets.load(ljSleepPath, Texture.class);
 
     }
 
@@ -99,18 +106,18 @@ public class MainMenu implements Screen {
     public void assetsLoaded() {
 
         lesserJackson = new Character(
-                jacksonrpg.assets.get("core/assets/images/titlescreen/lj_sleeping.png", Texture.class),
+                jacksonrpg.assets.get(ljSleepPath, Texture.class),
                 -80,
                 210,
                 100,
                 200,
                 -90
         );
-        lesserJackson.addListener(clickListener);
+        lesserJackson.addListener(ljClickListener);
         menuStage.addActor(lesserJackson);
 
         greaterJackson = new Character(
-                jacksonrpg.assets.get("core/assets/images/titlescreen/gj_sleeping.png", Texture.class),
+                jacksonrpg.assets.get(gjSleepPath, Texture.class),
                 280,
                 210,
                 100,
@@ -119,7 +126,7 @@ public class MainMenu implements Screen {
                 false,
                 true
         );
-        greaterJackson.addListener(clickListener);
+        greaterJackson.addListener(gjClickListener);
         menuStage.addActor(greaterJackson);
 
 
@@ -207,10 +214,10 @@ public class MainMenu implements Screen {
         
 
         menuStage.getBatch().begin();
-        if (jacksonrpg.assets.isLoaded("core/assets/images/titlescreen/TitleScreen-BusBack.png")) {
+        if (jacksonrpg.assets.isLoaded(backgroundPath)) {
             menuStage.getBatch().draw(
                     jacksonrpg.assets.get(
-                            "core/assets/images/titlescreen/TitleScreen-BusBack.png",
+                            backgroundPath,
                             Texture.class
                     ),
                     0,
@@ -220,10 +227,10 @@ public class MainMenu implements Screen {
             );
         }
 
-        if (jacksonrpg.assets.isLoaded("core/assets/images/titlescreen/bannerlogo.png")) {
+        if (jacksonrpg.assets.isLoaded(bannerPath)) {
             menuStage.getBatch().draw(
                     jacksonrpg.assets.get(
-                            "core/assets/images/titlescreen/bannerlogo.png",
+                            bannerPath,
                             Texture.class
                     ),
                     0,
