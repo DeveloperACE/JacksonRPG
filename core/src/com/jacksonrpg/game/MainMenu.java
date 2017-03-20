@@ -44,6 +44,7 @@ public class MainMenu implements Screen {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             System.out.println("Click");
+            jacksonrpg.makeGame();
             jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
@@ -61,6 +62,7 @@ public class MainMenu implements Screen {
         }
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            jacksonrpg.makeGame();
             jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
@@ -79,6 +81,7 @@ public class MainMenu implements Screen {
 
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            jacksonrpg.makeGame();
             jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
@@ -91,19 +94,29 @@ public class MainMenu implements Screen {
 
 
         Gdx.input.setInputProcessor(menuStage);
-        
-        jacksonrpg.assets.load(BACKGROUND_PATH, Texture.class);
-        jacksonrpg.assets.load(BANNER_PATH, Texture.class);
-        jacksonrpg.assets.load(GJ_SLEEP_PATH, Texture.class);
-        jacksonrpg.assets.load(LJ_SLEEP_PATH, Texture.class);
 
-    }
 
-    /** Called when the JacksonRPG class finishes loading assets and acts as a secondary constructor for
-     * initialising objects that require assets to be loaded.
-     * @see JacksonRPG
-     */
-    public void assetsLoaded() {
+        //load assets if not already loaded
+        if (!jacksonrpg.assets.isLoaded(BACKGROUND_PATH)) {
+            jacksonrpg.assets.load(BACKGROUND_PATH, Texture.class);
+            jacksonrpg.assets.finishLoadingAsset(BACKGROUND_PATH);
+        }
+
+        if (!jacksonrpg.assets.isLoaded(BANNER_PATH)) {
+            jacksonrpg.assets.load(BANNER_PATH, Texture.class);
+            jacksonrpg.assets.finishLoadingAsset(BANNER_PATH);
+        }
+
+        if (!jacksonrpg.assets.isLoaded(GJ_SLEEP_PATH)) {
+            jacksonrpg.assets.load(GJ_SLEEP_PATH, Texture.class);
+            jacksonrpg.assets.finishLoadingAsset(GJ_SLEEP_PATH);
+        }
+
+        if (!jacksonrpg.assets.isLoaded(LJ_SLEEP_PATH)) {
+            jacksonrpg.assets.load(LJ_SLEEP_PATH, Texture.class);
+            jacksonrpg.assets.finishLoadingAsset(LJ_SLEEP_PATH);
+        }
+
 
         lesserJackson = new Entity(
                 jacksonrpg.assets.get(LJ_SLEEP_PATH, Texture.class),
@@ -251,6 +264,12 @@ public class MainMenu implements Screen {
 
     @Override
     public void dispose() {
+        //unload assets used
+        jacksonrpg.assets.unload(BACKGROUND_PATH);
+        jacksonrpg.assets.unload(BANNER_PATH);
+        jacksonrpg.assets.unload(GJ_SLEEP_PATH);
+        jacksonrpg.assets.unload(LJ_SLEEP_PATH);
+
         font.dispose();
         menuStage.dispose();
 
