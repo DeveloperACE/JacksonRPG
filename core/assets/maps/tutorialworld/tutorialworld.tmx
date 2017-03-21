@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="12" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Bus" tilewidth="32" tileheight="32" tilecount="24" columns="3">
+  <image source="bus_level_textures.png" width="96" height="224"/>
+ </tileset>
+ <tileset firstgid="25" name="seat" tilewidth="32" tileheight="32" tilecount="6" columns="2">
+  <image source="seat.png" width="64" height="96"/>
+ </tileset>
+ <layer name="Background" width="64" height="12">
+  <data encoding="base64" compression="zlib">
+   eJztkrkOhDAMRIOWsNwrAv//rUxBYY0mR4u8xSsmdiyP7SGEMDjmAF8wgsmJZmawgNWJZjawg5/RF2mOvznfcjpH3YMnPs6JoAfpoTdE85ZI8x9VR+XaOpzLPUT6z3mKUo6K1WqWei35tajZtvSofOc8tMym5jM3d7WXlt3y7lS9mofaTanbzM1Hxbo/rrkBeS8e9Q==
+  </data>
+ </layer>
+ <layer name="Foreground" width="64" height="12">
+  <data encoding="base64" compression="zlib">
+   eJztx9kJAEAIA1Hb2LP/Mo1F+BGcBwNJBICpltoGu+OXo67B7vjlqW+wOz4ATJbHcQxA
+  </data>
+ </layer>
+ <objectgroup name="Sprite Layer"/>
+</map>

@@ -59,7 +59,6 @@ public class MainMenu implements Screen {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             jacksonrpg.makeGame();
-            jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
     };
@@ -78,7 +77,6 @@ public class MainMenu implements Screen {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             jacksonrpg.makeGame();
-            jacksonrpg.state = JacksonRPG.GameScreen.GAME;
             dispose();
         }
     };

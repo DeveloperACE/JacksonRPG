@@ -77,19 +77,9 @@ public class JacksonRPG extends ApplicationAdapter {
 
             case GAME:
                 //add background
-               // gameStage.getBatch().begin();
-
-                /*renderAsset(
-                        "images/backgrounds/Bus-Background.png",
-                        Texture.class,
-                        gameStage.getBatch(),
-                        0,
-                        0,
-                        gameStage.getWidth(),
-                        gameStage.getHeight()
-                );*/
-               // font.draw(gameStage.getBatch(), "Done Loading", 100, gameStage.getHeight()/3);
-                //gameStage.getBatch().end();
+                batch.begin();
+                game.render(Gdx.graphics.getDeltaTime());
+                batch.end();
 
                 //update stage and actors
                 //gameStage.draw();

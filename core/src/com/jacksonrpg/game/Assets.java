@@ -1,6 +1,8 @@
 package com.jacksonrpg.game;
 
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.jacksonrpg.JacksonRPG;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -38,6 +40,7 @@ public class Assets {
     public TiledMap tutorialMap;
     
     //Tutorial World Paths
+    private static final String TUTORIAL_MAP_PATH = "core/assets/maps/tutorialworld/tutorialworld.tmx";
 
 
 
@@ -50,6 +53,7 @@ public class Assets {
 
 
     public void queueGlobalAssets() {
+
         manager.load(LESSER_JACKSON_WALKING, TextureAtlas.class);
     }
 
@@ -61,17 +65,19 @@ public class Assets {
     }
     
     public void queueTutorialAssets() {
+        manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        manager.load(TUTORIAL_MAP_PATH, TiledMap.class);
+//        manager.load("myothergraphics.pack", TextureAtlas.class);
+    }
+
+    public void queueMainGameAssets() {
 //        manager.load("mygraphics.pack", TextureAtlas.class);
 //        manager.load("myothergraphics.pack", TextureAtlas.class);
     }
-//
-//    public void queueMainGameAssets() {
-////        manager.load("mygraphics.pack", TextureAtlas.class);
-////        manager.load("myothergraphics.pack", TextureAtlas.class);
-//    }
 
 
     public void globalAssetsDone() {
+
         lesserjacksonWalking = manager.get(LESSER_JACKSON_WALKING, TextureAtlas.class);
     }
 
@@ -82,15 +88,15 @@ public class Assets {
         lesserjacksonSleepingTexture = manager.get(LJ_SLEEP_PATH, Texture.class);
     }
 
-    public static void tutorialAssetsDone() {
-//        myGraphics = manager.get("mygraphics.pack", TextureAtlas.class);
-//        myOtherGraphics = manager.get("myothergraphics.pack", TextureAtlas.class);
+    public void tutorialAssetsDone() {
+        tutorialMap = manager.get(TUTORIAL_MAP_PATH, TiledMap.class);
+        //myOtherGraphics = manager.get("myothergraphics.pack", TextureAtlas.class);
     }
 
-//    public static void gameAssetsDone() {
-////        myGraphics = manager.get("mygraphics.pack", TextureAtlas.class);
-////        myOtherGraphics = manager.get("myothergraphics.pack", TextureAtlas.class);
-//    }
+    public void mainGameAssetsDone() {
+        tutorialMap = manager.get(TUTORIAL_MAP_PATH, TiledMap.class);
+        //        myOtherGraphics = manager.get("myothergraphics.pack", TextureAtlas.class);
+    }
 
 
 
