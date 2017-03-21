@@ -30,10 +30,6 @@ public class MainMenu implements Screen {
     //used for checking font widths
     private GlyphLayout layout = new GlyphLayout();
 
-    private static final String BACKGROUND_PATH = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
-    private static final String BANNER_PATH = "core/assets/images/bannerlogo.png";
-    private static final String GJ_SLEEP_PATH = "core/assets/images/characters/greaterjackson/gj_sleeping.png";
-    private static final String LJ_SLEEP_PATH = "core/assets/images/characters/lesserjackson/lj_sleeping.png";
 
 
     private Entity lesserJackson;
@@ -95,31 +91,13 @@ public class MainMenu implements Screen {
 
         Gdx.input.setInputProcessor(menuStage);
 
-
-        //load assets if not already loaded
-        if (!jacksonrpg.assets.isLoaded(BACKGROUND_PATH)) {
-            jacksonrpg.assets.load(BACKGROUND_PATH, Texture.class);
-            jacksonrpg.assets.finishLoadingAsset(BACKGROUND_PATH);
-        }
-
-        if (!jacksonrpg.assets.isLoaded(BANNER_PATH)) {
-            jacksonrpg.assets.load(BANNER_PATH, Texture.class);
-            jacksonrpg.assets.finishLoadingAsset(BANNER_PATH);
-        }
-
-        if (!jacksonrpg.assets.isLoaded(GJ_SLEEP_PATH)) {
-            jacksonrpg.assets.load(GJ_SLEEP_PATH, Texture.class);
-            jacksonrpg.assets.finishLoadingAsset(GJ_SLEEP_PATH);
-        }
-
-        if (!jacksonrpg.assets.isLoaded(LJ_SLEEP_PATH)) {
-            jacksonrpg.assets.load(LJ_SLEEP_PATH, Texture.class);
-            jacksonrpg.assets.finishLoadingAsset(LJ_SLEEP_PATH);
-        }
-
+        jacksonrpg.assets.queueMenuAssets();
+        //TODO: replace with loading screen
+        jacksonrpg.assets.manager.finishLoading();
+        jacksonrpg.assets.menuAssetsDone();
 
         lesserJackson = new Entity(
-                jacksonrpg.assets.get(LJ_SLEEP_PATH, Texture.class),
+                jacksonrpg.assets.lesserjacksonSleepingTexture,
                 -80,
                 210,
                 100,
@@ -130,7 +108,7 @@ public class MainMenu implements Screen {
         menuStage.addActor(lesserJackson);
 
         greaterJackson = new Entity(
-                jacksonrpg.assets.get(GJ_SLEEP_PATH, Texture.class),
+                jacksonrpg.assets.greaterJacksonSleepingTexture,
                 280,
                 210,
                 100,
@@ -227,31 +205,22 @@ public class MainMenu implements Screen {
         
 
         menuStage.getBatch().begin();
-        if (jacksonrpg.assets.isLoaded(BACKGROUND_PATH)) {
             menuStage.getBatch().draw(
-                    jacksonrpg.assets.get(
-                            BACKGROUND_PATH,
-                            Texture.class
-                    ),
+                    jacksonrpg.assets.menuBackground,
                     0,
                     0,
                     menuStage.getWidth(),
                     menuStage.getHeight()
             );
-        }
 
-        if (jacksonrpg.assets.isLoaded(BANNER_PATH)) {
             menuStage.getBatch().draw(
-                    jacksonrpg.assets.get(
-                            BANNER_PATH,
-                            Texture.class
-                    ),
+                    jacksonrpg.assets.gameBanner,
                     0,
                     menuStage.getHeight()-100,
                     400,//1536,
                     100 // 384*/
             );
-        }
+
         drawHorizontallyCenteredText("Pick a Character To Start", 50);
 
         menuStage.getBatch().end();
@@ -264,12 +233,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void dispose() {
-        //unload assets used
-        jacksonrpg.assets.unload(BACKGROUND_PATH);
-        jacksonrpg.assets.unload(BANNER_PATH);
-        jacksonrpg.assets.unload(GJ_SLEEP_PATH);
-        jacksonrpg.assets.unload(LJ_SLEEP_PATH);
-
         font.dispose();
         menuStage.dispose();
 

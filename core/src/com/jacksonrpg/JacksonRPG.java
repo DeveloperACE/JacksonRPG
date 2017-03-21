@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jacksonrpg.game.Game;
 import com.jacksonrpg.game.MainMenu;
+import com.jacksonrpg.game.Assets;
 
 /** Manages States, stages and screens for the game and provides save/load functionality
  */
@@ -21,23 +22,23 @@ public class JacksonRPG extends ApplicationAdapter {
 
 	private SpriteBatch batch;
     public GameScreen state = GameScreen.MENU;
-    public AssetManager assets = new AssetManager();
+    //TODO: Move asset manager to its own class
+    public Assets assets = new Assets();
 
 	private MainMenu gameMenu;
 	public Game game;
 
-	private static final String LOADING_GRAPHIC = "core/assets/images/characters/lesserjackson/walking.atlas";
     private float elapsedAnimationTime;
+
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
 
-		if (!assets.isLoaded(LOADING_GRAPHIC, TextureAtlas.class)) {
-		    assets.load(LOADING_GRAPHIC, TextureAtlas.class);
-		    assets.finishLoadingAsset(LOADING_GRAPHIC);
-        }
+        assets.queueGlobalAssets();
+        assets.manager.finishLoading();
+        assets.globalAssetsDone();
 
         makeMenu();
 	}
@@ -45,7 +46,7 @@ public class JacksonRPG extends ApplicationAdapter {
 	public void makeMenu() {
         gameMenu = new MainMenu(this);
         //blocks until all assets are loaded, replace with loading screen
-        assets.finishLoading();
+
 //        loadUntilDone();
         state = GameScreen.MENU;
     }
@@ -53,8 +54,7 @@ public class JacksonRPG extends ApplicationAdapter {
     public void makeGame() {
         game = new Game(this);
         //blocks until all assets are loaded
-        //TODO: replace with loading screen
-        assets.finishLoading();
+
         state = GameScreen.GAME;
     }
 
