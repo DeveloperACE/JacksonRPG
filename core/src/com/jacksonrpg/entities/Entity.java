@@ -16,10 +16,10 @@ public class Entity extends Actor {
     private Integer sectionWidth;
     private Integer sectionHeight;
 
-    private Boolean flipX;
-    private Boolean flipY;
+    private Boolean flipEntityX;
+    private Boolean flipEntityY;
 
-    /** Creates a new entity with the x, y, width, height, rotation, section, flipX and flipY properties
+    /** Creates a new entity with the x, y, width, height, rotation, section, flipEntityX and flipEntityY properties
      *
      * @param texture The texture for the entity
      * @param x The X coordinate of the entity
@@ -35,10 +35,10 @@ public class Entity extends Actor {
      *                 multiple sprites)
      * @param sectionWidth The width of the section of the texture to render (if the texture contains multiple sprites)
      * @param sectionHeight The height of the section of the texture to render (if the texture contains multiple sprites)
-     * @param flipX Should the entity be flipped horizontally?
-     * @param flipY Should the entity be flipped vertically?
+     * @param flipEntityX Should the entity be flipped horizontally?
+     * @param flipEntityY Should the entity be flipped vertically?
      */
-    public Entity(Texture texture, float x, float y, float width, float height, float rotation, int sectionX, int sectionY, int sectionWidth, int sectionHeight, boolean flipX, boolean flipY) {
+    public Entity(Texture texture, float x, float y, float width, float height, float rotation, int sectionX, int sectionY, int sectionWidth, int sectionHeight, boolean flipEntityX, boolean flipEntityY) {
 
         entityTexture = texture;
 
@@ -51,12 +51,12 @@ public class Entity extends Actor {
         this.sectionY = sectionY;
         this.sectionWidth = sectionWidth;
         this.sectionHeight = sectionHeight;
-        this.flipX = flipX;
-        this.flipY = flipY;
+        this.flipEntityX = flipEntityX;
+        this.flipEntityY = flipEntityY;
 
     }
 
-    /** Creates a new entity with the x, y, width, height, rotation, flipX and flipY properties.
+    /** Creates a new entity with the x, y, width, height, rotation, flipEntityX and flipEntityY properties.
      * Section properties default to the x, y, width and height values of the entire texture
      *
      * @param texture The texture for the entity
@@ -67,11 +67,11 @@ public class Entity extends Actor {
      * @param height The height of the entity. Texture will only be scaled to these dimensions if the aspect ratio
      *              matches that of the texture
      * @param rotation The number of degrees to rotate the entity
-     * @param flipX Should the entity be flipped horizontally?
-     * @param flipY Should the entity be flipped vertically?
+     * @param flipEntityX Should the entity be flipped horizontally?
+     * @param flipEntityY Should the entity be flipped vertically?
      */
-    public Entity(Texture texture, float x, float y, float width, float height, float rotation, boolean flipX, boolean flipY) {
-        this(texture, x, y, width, height, rotation, 0, 0, texture.getWidth(), texture.getHeight(), flipX, flipY);
+    public Entity(Texture texture, float x, float y, float width, float height, float rotation, boolean flipEntityX, boolean flipEntityY) {
+        this(texture, x, y, width, height, rotation, 0, 0, texture.getWidth(), texture.getHeight(), flipEntityX, flipEntityY);
     }
 
     /** Creates a new entity with the x, y, width, height, rotation and section properties
@@ -192,8 +192,8 @@ public class Entity extends Actor {
                 this.sectionY,
                 this.sectionWidth,
                 this.sectionHeight,
-                this.flipX,
-                this.flipY
+                this.flipEntityX,
+                this.flipEntityY
         );
     }
 }

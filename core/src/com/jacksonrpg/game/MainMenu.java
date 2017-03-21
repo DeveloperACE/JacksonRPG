@@ -98,24 +98,32 @@ public class MainMenu implements Screen {
 
         lesserJackson = new Entity(
                 jacksonrpg.assets.lesserjacksonSleepingTexture,
-                -80,
+              /*  -80,
                 210,
                 100,
                 200,
-                -90
+                -90*/
+
+              120,
+                105,
+                100,
+                200,
+                90,
+                true,
+                true
         );
         lesserJackson.addListener(ljClickListener);
         menuStage.addActor(lesserJackson);
 
         greaterJackson = new Entity(
                 jacksonrpg.assets.greaterJacksonSleepingTexture,
-                280,
-                210,
+                310,
+                65,
                 100,
                 200,
-                -90,
+                0,
                 false,
-                true
+                false
         );
         greaterJackson.addListener(gjClickListener);
         menuStage.addActor(greaterJackson);
