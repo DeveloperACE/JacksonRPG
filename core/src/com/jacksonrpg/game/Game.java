@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.Matrix4;
 import com.jacksonrpg.JacksonRPG;
+import com.jacksonrpg.maps.World;
 
 /**
  * Created by Adrian on 3/14/17.
