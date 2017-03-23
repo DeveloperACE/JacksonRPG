@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.Matrix4;
 import com.jacksonrpg.JacksonRPG;
+import com.jacksonrpg.entities.Entity;
+import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.World;
 
 /**
@@ -21,15 +23,18 @@ public class Game implements Screen {
 
     JacksonRPG jacksonrpg;
     World world;
+   public Player character;
 
     public Game(JacksonRPG jrpginstance, World.Level level) {
         this.jacksonrpg = jrpginstance;
         world = new World(jacksonrpg, level);
+        character = new Player(jacksonrpg.assets.lesserjacksonWalking);
     }
 
     public Game(JacksonRPG jrpginstance) {
         this(jrpginstance, World.Level.TUTORIAL);
     }
+
 
     @Override
     public void render(float delta) {
