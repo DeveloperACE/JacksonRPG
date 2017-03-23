@@ -2,7 +2,10 @@ package com.jacksonrpg.maps;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.jacksonrpg.JacksonRPG;
 
@@ -13,6 +16,8 @@ public class World implements Screen {
 
     JacksonRPG jacksonrpg;
     TiledMap map;
+    TiledMapTileLayer backgroundLayer;
+    MapLayer objectLayer;
     OrthographicCamera camera;
 
     float unitScale = 1 / 32f;
@@ -44,9 +49,15 @@ public class World implements Screen {
                 break;
         }
         mapRenderer = new OrthogonalTiledMapRenderer(map, unitScale);
+        backgroundLayer = (TiledMapTileLayer)map.getLayers().get(0);
+        objectLayer = map.getLayers().get("Object Layer");
+
+
+
+        objectLayer.getObjects().add(jacksonrpg.game.character);
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 10,10);
+        camera.setToOrtho(false, backgroundLayer.getHeight(),backgroundLayer.getHeight());
         camera.update();
 
     }
