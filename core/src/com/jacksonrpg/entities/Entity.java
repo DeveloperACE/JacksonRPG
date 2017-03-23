@@ -1,15 +1,22 @@
 package com.jacksonrpg.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-/**
+/** A simple non-movable character that can be interacted with.
+ *
  * Created by Adrian on 3/14/17.
  */
 public class Entity extends Actor {
 
     private Texture entityTexture;
+    private Animation animation;
+    private TextureAtlas animationAtlas;
 
     private Integer sectionX;
     private Integer sectionY;
@@ -18,6 +25,8 @@ public class Entity extends Actor {
 
     private Boolean flipEntityX;
     private Boolean flipEntityY;
+
+    float stateTime;
 
     /** Creates a new entity with the x, y, width, height, rotation, section, flipEntityX and flipEntityY properties
      *
@@ -159,6 +168,20 @@ public class Entity extends Actor {
         this(texture, 0, 0);
     }
 
+    /** Updates the Entity texture
+     *
+     * @param newTexture The new texture to update to
+     */
+    public void updateTexture(Texture newTexture) {
+        entityTexture = newTexture;
+    }
+
+
+    public void addTextureAnimation(TextureAtlas atlas, float frameRate) {
+        animationAtlas = atlas;
+        animation = new Animation<TextureRegion>(1/frameRate, atlas.findRegions("running"), Animation.PlayMode.LOOP);
+    }
+
 
     /** Returns the current entity for inclusion in a Stage if needed
      *
@@ -171,12 +194,22 @@ public class Entity extends Actor {
      * @param x
      * @param y
      */
-    public Entity(float x, float y) {
-
+    public void moveBy(float x, float y) {
+        this.setX(this.getX() + x);
+        this.setY(this.getY() + y);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+
+        stateTime += Gdx.graphics.getDeltaTime();
+
+        if (animation != null) {
+            Integer currentFrameIndex = animation.getKeyFrameIndex(stateTime);
+            entityTexture = animationAtlas.getRegions().get(currentFrameIndex).getTexture();
+
+        }
+
         batch.draw(
                 entityTexture,
                 this.getX(),
