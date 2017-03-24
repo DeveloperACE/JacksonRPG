@@ -18,7 +18,7 @@ public class Assets {
     public TextureAtlas lesserjacksonWalking;
 
     //GLOBAL PATHS
-    private static final String LESSER_JACKSON_WALKING = "core/assets/images/characters/lesserjackson/walking.atlas";
+    private static final String LESSER_JACKSON_WALKING = "core/assets/images/entities/lesserjackson/walking.atlas";
 
 
 
@@ -31,14 +31,14 @@ public class Assets {
     //Main Menu Paths
     private static final String MENU_BACKGROUND_PATH = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
     private static final String BANNER_PATH = "core/assets/images/bannerlogo.png";
-    private static final String GJ_SLEEP_PATH = "core/assets/images/characters/greaterjackson/gj_sleeping.png";
-    private static final String LJ_SLEEP_PATH = "core/assets/images/characters/lesserjackson/lj_sleeping.png";
+    private static final String GJ_SLEEP_PATH = "core/assets/images/entities/greaterjackson/gj_sleeping.png";
+    private static final String LJ_SLEEP_PATH = "core/assets/images/entities/lesserjackson/lj_sleeping.png";
 
 
 
     //Tutorial World Assets
     public TiledMap tutorialMap;
-    
+
     //Tutorial World Paths
     private static final String TUTORIAL_MAP_PATH = "core/assets/maps/tutorialworld/tutorialworld.tmx";
 
