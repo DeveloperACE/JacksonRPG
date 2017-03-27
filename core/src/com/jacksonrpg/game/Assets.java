@@ -14,7 +14,6 @@ public class Assets {
     public AssetManager manager = new AssetManager();
     
     //GLOBAL/FREQUENTLY USED ASSETS
-    public OrthographicCamera camera;
     public TextureAtlas lesserjacksonWalking;
     public TextureAtlas speechBubbleAtlas;
 
