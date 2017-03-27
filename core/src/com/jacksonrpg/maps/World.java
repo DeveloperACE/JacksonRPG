@@ -2,12 +2,16 @@ package com.jacksonrpg.maps;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.jacksonrpg.JacksonRPG;
+import com.jacksonrpg.entities.Player;
+import com.jacksonrpg.maps.other.OrthoSpriteMapRenderer;
 
 /**
  * Created by edwar12421 on 3/21/2017.
@@ -48,19 +52,36 @@ public class World implements Screen {
                 jacksonrpg.assets.mainGameAssetsDone();
                 break;
         }
-        mapRenderer = new OrthogonalTiledMapRenderer(map, unitScale);
+        mapRenderer = new OrthoSpriteMapRenderer(map, unitScale);
         backgroundLayer = (TiledMapTileLayer)map.getLayers().get(0);
-        objectLayer = map.getLayers().get("Object Layer");
+        objectLayer = map.getLayers().get("Sprite Layer");
 
-
-
-        objectLayer.getObjects().add(jacksonrpg.game.character);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, backgroundLayer.getHeight(),backgroundLayer.getHeight());
         camera.update();
 
     }
+
+    /** adds a player to the world
+     *
+     * @param player The player to add to the world
+     */
+    public void addCharacter(Player player, int width, int height) {
+        TextureMapObject tmo = new TextureMapObject(new TextureRegion(
+                player.getTexture(),
+                width,
+                height
+        ));
+
+//        tmo.setX(player.getX());
+//        tmo.setY(player.getY());
+        tmo.setX(100);
+        tmo.setY(100);
+        objectLayer.getObjects().add(tmo);
+
+    }
+
 
     @Override
     public void render(float delta) {
