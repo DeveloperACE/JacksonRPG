@@ -16,9 +16,12 @@ public class Assets {
     //GLOBAL/FREQUENTLY USED ASSETS
     public OrthographicCamera camera;
     public TextureAtlas lesserjacksonWalking;
+    public TextureAtlas speechBubbleAtlas;
+
 
     //GLOBAL PATHS
     private static final String LESSER_JACKSON_WALKING = "core/assets/images/entities/lesserjackson/walking.atlas";
+    private static final String SPEECHBUBBLE_ATLAS_PATH = "core/assets/images/other/speechbubble/speechbubble.atlas";
 
 
 
@@ -52,9 +55,18 @@ public class Assets {
     //Main World Paths
 
 
+
+
+
+    //MISC Paths
+    public final String DEFAULT_ENTITY_TEXTURE_PATH = "core/assets/images/entities/defaulttexture.png";
+
+
     public void queueGlobalAssets() {
 
         manager.load(LESSER_JACKSON_WALKING, TextureAtlas.class);
+        manager.load(SPEECHBUBBLE_ATLAS_PATH, TextureAtlas.class);
+
     }
 
     public void queueMenuAssets() {
@@ -67,6 +79,7 @@ public class Assets {
     public void queueTutorialAssets() {
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(TUTORIAL_MAP_PATH, TiledMap.class);
+
 //        manager.load("myothergraphics.pack", TextureAtlas.class);
     }
 
@@ -90,6 +103,7 @@ public class Assets {
 
     public void tutorialAssetsDone() {
         tutorialMap = manager.get(TUTORIAL_MAP_PATH, TiledMap.class);
+        speechBubbleAtlas = manager.get(SPEECHBUBBLE_ATLAS_PATH, TextureAtlas.class);
         //myOtherGraphics = manager.get("myothergraphics.pack", TextureAtlas.class);
     }
 

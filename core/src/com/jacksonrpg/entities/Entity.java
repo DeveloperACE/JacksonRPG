@@ -1,11 +1,10 @@
 package com.jacksonrpg.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-/** A simple non-movable character that can be interacted with.
+/** A simple non-movable entity that can be interacted with.
  *
  * Created by Adrian on 3/14/17.
  */
@@ -95,15 +94,11 @@ public class Entity extends Actor {
     }
 
 
+    public void showSpeechBubble() {
 
-    /** Updates the Entity texture
-     *
-     * @param newTexture The new texture to update to
-     */
-    public void updateTexture(Texture newTexture) {
-        entityTexture = newTexture;
     }
 
+    public void hideSpeechBubble() {
 
     }
 
