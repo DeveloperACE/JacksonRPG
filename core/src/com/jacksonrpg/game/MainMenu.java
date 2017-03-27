@@ -96,13 +96,7 @@ public class MainMenu implements Screen {
 
         lesserJackson = new Entity(
                 jacksonrpg.assets.lesserjacksonSleepingTexture,
-              /*  -80,
-                210,
-                100,
-                200,
-                -90*/
-
-              120,
+                120,
                 105,
                 100,
                 200,
