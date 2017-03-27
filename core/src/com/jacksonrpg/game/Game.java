@@ -2,17 +2,8 @@ package com.jacksonrpg.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.math.Affine2;
-import com.badlogic.gdx.math.Matrix4;
 import com.jacksonrpg.JacksonRPG;
-import com.jacksonrpg.entities.Entity;
 import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.World;
 
@@ -21,14 +12,17 @@ import com.jacksonrpg.maps.World;
  */
 public class Game implements Screen {
 
-    JacksonRPG jacksonrpg;
-    World world;
-   public Player character;
+    private JacksonRPG jacksonrpg;
+    private World world;
+    public Player player;
 
     public Game(JacksonRPG jrpginstance, World.Level level) {
         this.jacksonrpg = jrpginstance;
+        player = new Player(jacksonrpg, Player.PlayerName.LESSERJACKSON);
         world = new World(jacksonrpg, level);
-        character = new Player(jacksonrpg.assets.lesserjacksonWalking);
+
+        world.addCharacter(player, 100, 200);
+
     }
 
     public Game(JacksonRPG jrpginstance) {
