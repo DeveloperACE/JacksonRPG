@@ -40,7 +40,9 @@ public class JacksonRPG extends ApplicationAdapter {
         assets.manager.finishLoading();
         assets.globalAssetsDone();
 
-        makeMenu();
+        //temp bypass main menu for game testing
+        //makeMenu();
+        makeGame();
 	}
 
 	public void makeMenu() {

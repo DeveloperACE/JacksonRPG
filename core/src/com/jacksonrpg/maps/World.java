@@ -2,6 +2,7 @@ package com.jacksonrpg.maps;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
@@ -22,9 +23,9 @@ public class World implements Screen {
     TiledMap map;
     TiledMapTileLayer backgroundLayer;
     MapLayer objectLayer;
-    OrthographicCamera camera;
+    public OrthographicCamera camera;
 
-    float unitScale = 1 / 32f;
+    float unitScale = 1.05f;
     OrthogonalTiledMapRenderer mapRenderer;
 
     public enum Level {
@@ -57,9 +58,13 @@ public class World implements Screen {
         objectLayer = map.getLayers().get("Sprite Layer");
 
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, backgroundLayer.getHeight(),backgroundLayer.getHeight());
+        camera = new OrthographicCamera(400, 400);
+       // camera.setToOrtho(false, backgroundLayer.getHeight(),backgroundLayer.getHeight());
+       // camera.position.set();
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
+
+
 
     }
 
@@ -76,9 +81,12 @@ public class World implements Screen {
 
 //        tmo.setX(player.getX());
 //        tmo.setY(player.getY());
-        tmo.setX(100);
-        tmo.setY(100);
-        objectLayer.getObjects().add(tmo);
+        tmo.setX(width);
+        tmo.setY(height);
+       // objectLayer.getObjects().add(tmo);
+        Sprite sprite = new Sprite(jacksonrpg.game.player.getTexture());
+        mapRenderer.addSprite
+
 
     }
 
@@ -94,6 +102,11 @@ public class World implements Screen {
         // camera sees, and render the map
         mapRenderer.setView(camera);
         mapRenderer.render();
+
+        mapRenderer.getBatch().begin();
+        mapRenderer.renderObjects(objectLayer);
+        //mapRenderer.renderObject(jacksonrpg.game.player);
+        mapRenderer.getBatch().end();
     }
 
     @Override

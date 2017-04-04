@@ -3,6 +3,7 @@ package com.jacksonrpg.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector3;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.World;
@@ -21,7 +22,11 @@ public class Game implements Screen {
         player = new Player(jacksonrpg, Player.PlayerName.LESSERJACKSON);
         world = new World(jacksonrpg, level);
 
+        player.setX(100);
+        player.setY(100);
+
         world.addCharacter(player, 100, 200);
+        System.out.println("Done");
 
     }
 
@@ -36,6 +41,11 @@ public class Game implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         world.render(delta);
+
+//        Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+//        world.camera.unproject(touchPoint);
+//        System.out.println(touchPoint);
+
     }
 
     @Override
