@@ -95,6 +95,10 @@ public class Player extends Entity {
         super.act(delta);
     }
 
+    @Override
+    public Texture getTexture() {
+        return walkingAnimation.getKeyFrame(0).getTexture();
+    }
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
