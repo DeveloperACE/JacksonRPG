@@ -68,29 +68,6 @@ public class World implements Screen {
 
     }
 
-    /** adds a player to the world
-     *
-     * @param player The player to add to the world
-     */
-    public void addCharacter(Player player, int width, int height) {
-        TextureMapObject tmo = new TextureMapObject(new TextureRegion(
-                player.getTexture(),
-                width,
-                height
-        ));
-
-//        tmo.setX(player.getX());
-//        tmo.setY(player.getY());
-        tmo.setX(width);
-        tmo.setY(height);
-       // objectLayer.getObjects().add(tmo);
-        Sprite sprite = new Sprite(player.getTexture());
-        mapRenderer.addSprite(sprite);
-
-
-    }
-
-
     @Override
     public void render(float delta) {
 

@@ -145,14 +145,14 @@ public class Player extends Entity {
     /** Gets the players current animation frame
      *
      */
-    private TextureRegion getAnimationFrame(float elapsedTime) {
+    public TextureRegion getAnimationFrame(float elapsedTime) {
        return walkingAnimation.getKeyFrame(elapsedTime, true);
     }
 
     /** Gets the players current animation frame
      *
      */
-    private TextureRegion getAnimationFrame() {
+    public TextureRegion getAnimationFrame() {
         elapsedTime += Gdx.graphics.getDeltaTime();
         return getAnimationFrame(this.elapsedTime);
     }

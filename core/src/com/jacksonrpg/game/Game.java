@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.World;
@@ -16,17 +18,20 @@ public class Game implements Screen {
     private JacksonRPG jacksonrpg;
     private World world;
     public Player player;
+    public Stage stage;
 
     public Game(JacksonRPG jrpginstance, World.Level level) {
         this.jacksonrpg = jrpginstance;
         player = new Player(jacksonrpg, Player.PlayerName.LESSERJACKSON);
         world = new World(jacksonrpg, level);
+        stage = new Stage(new ScreenViewport(world.camera));
 
         player.setX(100);
         player.setY(100);
+        player.setWidth(200);
+        player.setHeight(200);
 
-        world.addCharacter(player, 100, 200);
-        System.out.println("Done");
+        stage.addActor(player);
 
     }
 
@@ -41,6 +46,7 @@ public class Game implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         world.render(delta);
+        stage.draw();
 
 //        Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 //        world.camera.unproject(touchPoint);
@@ -50,7 +56,7 @@ public class Game implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 
     @Override
