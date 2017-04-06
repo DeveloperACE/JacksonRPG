@@ -162,11 +162,11 @@ public class Player extends Entity {
      */
     private void checkKeyPresses() {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
             this.movementState = MovementState.WALKING;
             this.graphicalState = GraphicalState.FACINGRIGHT;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
             this.movementState = MovementState.WALKING;
             this.graphicalState = GraphicalState.FACINGLEFT;
         }
