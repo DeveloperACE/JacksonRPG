@@ -46,6 +46,7 @@ public class Game implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         world.render(delta);
+        stage.act();
         stage.draw();
 
 //        Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);

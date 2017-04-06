@@ -72,7 +72,7 @@ public class World implements Screen {
     public void render(float delta) {
 
 // let the camera follow the koala, x-axis only
-      //  camera.position.x = koala.position.x;
+        camera.position.x = jacksonrpg.game.player.getX();
         camera.update();
 
         // set the TiledMapRenderer view based on what the

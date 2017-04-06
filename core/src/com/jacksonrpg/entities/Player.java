@@ -18,7 +18,7 @@ import java.util.AbstractMap;
 public class Player extends Entity {
 
     private JacksonRPG jacksonrpg;
-
+//jumping and stuf: https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/superkoalio/SuperKoalio.java
     private enum GraphicalState {
         FACINGRIGHT, FACINGLEFT
     }
@@ -36,7 +36,7 @@ public class Player extends Entity {
 
     private Integer movementSpeed = 4;
     private Integer leftBorder = 0;
-    private Integer rightBorder = 0;
+    private Integer rightBorder = 1000;
 
     private Integer healthLost = 0;//0-14, 0 = full, 14 = dead
     private Integer maxHealth = 14;
