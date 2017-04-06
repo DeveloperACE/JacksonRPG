@@ -26,7 +26,7 @@ public class World implements Screen {
     public OrthographicCamera camera;
 
     float unitScale = 1.05f;
-    OrthogonalTiledMapRenderer mapRenderer;
+    OrthoSpriteMapRenderer mapRenderer;
 
     public enum Level {
         TUTORIAL, MAIN
@@ -84,8 +84,8 @@ public class World implements Screen {
         tmo.setX(width);
         tmo.setY(height);
        // objectLayer.getObjects().add(tmo);
-        Sprite sprite = new Sprite(jacksonrpg.game.player.getTexture());
-        mapRenderer.addSprite
+        Sprite sprite = new Sprite(player.getTexture());
+        mapRenderer.addSprite(sprite);
 
 
     }
@@ -102,11 +102,6 @@ public class World implements Screen {
         // camera sees, and render the map
         mapRenderer.setView(camera);
         mapRenderer.render();
-
-        mapRenderer.getBatch().begin();
-        mapRenderer.renderObjects(objectLayer);
-        //mapRenderer.renderObject(jacksonrpg.game.player);
-        mapRenderer.getBatch().end();
     }
 
     @Override
