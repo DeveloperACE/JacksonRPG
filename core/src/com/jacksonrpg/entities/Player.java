@@ -36,7 +36,7 @@ public class Player extends Entity {
 
     private Integer movementSpeed = 4;
     private Integer leftBorder = 0;
-    private Integer rightBorder = 1000;
+    private Integer rightBorder = 2148;
 
     private Integer healthLost = 0;//0-14, 0 = full, 14 = dead
     private Integer maxHealth = 14;
