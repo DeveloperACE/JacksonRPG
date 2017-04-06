@@ -102,16 +102,18 @@ public class Player extends Entity {
 
         if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
 
-            batch.draw(walkingAnimation.getKeyFrame(elapsedTime, true), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+            batch.draw(getAnimationFrame(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
         } else if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
 
-            batch.draw(walkingAnimation.getKeyFrame(elapsedTime, true), this.getX()+this.getWidth(), this.getY(), -this.getWidth(), this.getHeight());
+            batch.draw(getAnimationFrame(), this.getX()+this.getWidth(), this.getY(), -this.getWidth(), this.getHeight());
 
         } else if (this.movementState == MovementState.STANDING) {
 
-            batch.draw(walkingAnimation.getKeyFrame(0), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+            batch.draw(getAnimationFrame(0), this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
+        } else {
+            elapsedTime += Gdx.graphics.getDeltaTime();
         }
 
 
@@ -135,6 +137,21 @@ public class Player extends Entity {
 //        }
     }
 
+
+    /** Gets the players current animation frame
+     *
+     */
+    private TextureRegion getAnimationFrame(float elapsedTime) {
+       return walkingAnimation.getKeyFrame(elapsedTime, true);
+    }
+
+    /** Gets the players current animation frame
+     *
+     */
+    private TextureRegion getAnimationFrame() {
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        return getAnimationFrame(this.elapsedTime);
+    }
 
     /** Checks for keys being pressed and updates the player state flags accordingly
      *
