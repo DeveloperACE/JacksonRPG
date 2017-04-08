@@ -81,7 +81,7 @@ public class Entity extends Actor {
      *
      * @param newTexture The new texture to update to
      */
-    public void updateTexture(Texture newTexture) {
+    public void changeTexture(Texture newTexture) {
         entityTexture = newTexture;
     }
 
