@@ -71,9 +71,9 @@ public class Player extends Entity {
 
     /** Sets the animation frame rate
      *
-     * @param rate The number of frames per second to set this characters anmations to
+     * @param animationFramerate The number of frames per second to set this characters animations to
      */
-    public void setFramerate(int rate) { this.animationFramerate = 1/rate;}
+    public void setFramerate(int animationFramerate) { this.animationFramerate = 1/animationFramerate;}
 
 
     @Override
