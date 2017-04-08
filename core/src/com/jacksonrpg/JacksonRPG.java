@@ -20,15 +20,14 @@ public class JacksonRPG extends ApplicationAdapter {
         MENU, GAME
     }
 
-	public SpriteBatch batch;
-    public GameScreen state = GameScreen.MENU;
-    //TODO: Move asset manager to its own class
-    public Assets assets = new Assets();
+	private SpriteBatch batch;
+    private GameScreen state = GameScreen.MAIN_MENU;
+
+
+    private Assets assets = new Assets();
 
 	private MainMenu gameMenu;
-	public Game game;
-
-    private float elapsedAnimationTime;
+	private Game game;
 
 
 	@Override

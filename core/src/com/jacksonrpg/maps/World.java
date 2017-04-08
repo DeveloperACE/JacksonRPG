@@ -19,14 +19,12 @@ import com.jacksonrpg.maps.other.OrthoSpriteMapRenderer;
  */
 public class World implements Screen {
 
-    JacksonRPG jacksonrpg;
-    TiledMap map;
-    TiledMapTileLayer backgroundLayer;
-    MapLayer objectLayer;
-    public OrthographicCamera camera;
+    private JacksonRPG jacksonrpg;
+    private TiledMap map;
+    private  OrthographicCamera camera;
 
-    float unitScale = 1.05f;
-    OrthoSpriteMapRenderer mapRenderer;
+    private float unitScale = 1.05f;
+    private OrthoSpriteMapRenderer mapRenderer;
 
     public enum Level {
         TUTORIAL, MAIN
@@ -54,9 +52,6 @@ public class World implements Screen {
                 break;
         }
         mapRenderer = new OrthoSpriteMapRenderer(map, unitScale);
-        backgroundLayer = (TiledMapTileLayer)map.getLayers().get(0);
-        objectLayer = map.getLayers().get("Sprite Layer");
-
 
         camera = new OrthographicCamera(400, 400);
        // camera.setToOrtho(false, backgroundLayer.getHeight(),backgroundLayer.getHeight());

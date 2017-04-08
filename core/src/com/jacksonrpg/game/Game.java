@@ -17,8 +17,8 @@ public class Game implements Screen {
 
     private JacksonRPG jacksonrpg;
     private World world;
-    public Player player;
-    public Stage stage;
+    private Player player;
+    private Stage stage;
 
     public Game(JacksonRPG jrpginstance, World.Level level) {
         this.jacksonrpg = jrpginstance;
