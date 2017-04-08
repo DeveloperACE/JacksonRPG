@@ -11,6 +11,7 @@ import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.World;
 
 /**
+ * Manages the creation and assembly of everything required to make the game, including maps, players, Entities .etc.
  * Created by Adrian on 3/14/17.
  */
 public class Game implements Screen {

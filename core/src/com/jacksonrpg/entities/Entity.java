@@ -85,8 +85,7 @@ public class Entity extends Actor {
         entityTexture = newTexture;
     }
 
-    /** Returns the entity texture
-     *
+    /**
      * @returns the entity's texture
      */
     public Texture getTexture() {

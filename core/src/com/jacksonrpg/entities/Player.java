@@ -142,7 +142,7 @@ public class Player extends Entity {
     }
 
 
-    /** Gets the players current animation frame
+    /** Gets the players animation frame for the given elapsed time
      *
      */
     public TextureRegion getAnimationFrame(float elapsedTime) {

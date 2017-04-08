@@ -12,7 +12,7 @@ import com.jacksonrpg.game.Game;
 import com.jacksonrpg.game.MainMenu;
 import com.jacksonrpg.game.Assets;
 
-/** Manages States, stages and screens for the game and provides save/load functionality
+/** Manages screens for the game
  */
 public class JacksonRPG extends ApplicationAdapter {
     
