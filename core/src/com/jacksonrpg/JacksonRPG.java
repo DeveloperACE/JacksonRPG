@@ -16,12 +16,12 @@ import com.jacksonrpg.game.Assets;
  */
 public class JacksonRPG extends ApplicationAdapter {
     
-    public enum GameScreen {
-        MENU, GAME
+    public enum ScreenState {
+        MAIN_MENU, GAME
     }
 
 	private SpriteBatch batch;
-    private GameScreen state = GameScreen.MAIN_MENU;
+    private ScreenState state = ScreenState.MAIN_MENU;
 
 
     private Assets assets = new Assets();
@@ -49,14 +49,14 @@ public class JacksonRPG extends ApplicationAdapter {
         //blocks until all assets are loaded, replace with loading screen
 
 //        loadUntilDone();
-        state = GameScreen.MENU;
+        state = ScreenState.MAIN_MENU;
     }
 
     public void makeGame() {
         game = new Game(this);
         //blocks until all assets are loaded
 
-        state = GameScreen.GAME;
+        state = ScreenState.GAME;
     }
 
 
@@ -68,7 +68,7 @@ public class JacksonRPG extends ApplicationAdapter {
 
 
         switch(state){
-            case MENU:
+            case MAIN_MENU:
 
                 batch.begin();
                 gameMenu.render(Gdx.graphics.getDeltaTime());
