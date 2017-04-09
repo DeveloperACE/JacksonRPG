@@ -1,3 +1,4 @@
+//big text made with: http://www.network-science.de/ascii/ using font "banner3"
 package com.jacksonrpg.game;
 
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -9,54 +10,44 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
+/**
+ * This is the class responsible for back-end loading of assets
+ */
+
 public class Assets {
+
+
+    //JacksonRPG jacksonrpg;
+
     private AssetManager manager = new AssetManager();
     
-    //GLOBAL/FREQUENTLY USED ASSETS
-    public TextureAtlas lesserjacksonWalking;
-    public TextureAtlas speechBubbleAtlas;
+
 
 
     //GLOBAL PATHS
-    private static final String LESSER_JACKSON_WALKING = "core/assets/images/entities/lesserjackson/walking.atlas";
-    private static final String SPEECHBUBBLE_ATLAS_PATH = "core/assets/images/other/speechbubble/speechbubble.atlas";
+    public final String LESSER_JACKSON_WALKING_ATLAS = "core/assets/images/entities/lesserjackson/walking.atlas";
+    public final String SPEECHBUBBLE_ATLAS_PATH = "core/assets/images/other/speechbubble/speechbubble.atlas";
 
-
-
-    //Main Menu assets
-    public Texture menuBackground;
-    public Texture gameBanner;
-    public Texture lesserjacksonSleepingTexture;
-    public Texture greaterJacksonSleepingTexture;
     
     //Main Menu Paths
-    private static final String MENU_BACKGROUND_PATH = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
-    private static final String BANNER_PATH = "core/assets/images/bannerlogo.png";
-    private static final String GJ_SLEEP_PATH = "core/assets/images/entities/greaterjackson/gj_sleeping.png";
-    private static final String LJ_SLEEP_PATH = "core/assets/images/entities/lesserjackson/lj_sleeping.png";
+    public final String MENU_BACKGROUND_TEXTURE = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
+    public final String BANNER_PATH_TEXTURE = "core/assets/images/bannerlogo.png";
+    public final String GAME_LOGO = "core/assets/images/game_logo.png";
+    public final String GAME_TEXT_BANNER = "core/assets/images/text_banner.png";
+    public final String GREATER_JACKSON_SLEEPING_TEXTURE = "core/assets/images/entities/greaterjackson/gj_sleeping.png";
+    public final String LESSER_JACKSON_SLEEPING_TEXTURE = "core/assets/images/entities/lesserjackson/lj_sleeping.png";
 
 
-
-    //Tutorial World Assets
-    public TiledMap tutorialMap;
 
     //Tutorial World Paths
-    private static final String TUTORIAL_MAP_PATH = "core/assets/maps/tutorialworld/tutorialworld.tmx";
+    public final String TUTORIAL_MAP_PATH = "core/assets/maps/tutorialworld/tutorialworld.tmx";
 
 
-
-
-    //Main World Assets
-    public TiledMap mainMap;
-    
-    
     //Main World Paths
 
 
 
-
-
-    //MISC Paths
+//    //MISC Paths
     public final String DEFAULT_ENTITY_TEXTURE_PATH = "core/assets/images/entities/defaulttexture.png";
 
 
