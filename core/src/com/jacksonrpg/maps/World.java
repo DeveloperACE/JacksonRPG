@@ -63,6 +63,7 @@ public class World implements Screen {
 
     }
 
+    public Camera getCamera() {return camera;}
     @Override
     public void render(float delta) {
 

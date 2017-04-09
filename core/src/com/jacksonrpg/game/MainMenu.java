@@ -26,7 +26,7 @@ public class MainMenu implements Screen {
 
     private Stage menuStage = new Stage();
 
-    private BitmapFont font = new BitmapFont();
+    private BitmapFont font;
     //used for checking font widths
     private GlyphLayout layout = new GlyphLayout();
 
@@ -81,8 +81,10 @@ public class MainMenu implements Screen {
         }
     };
 
-    public MainMenu(JacksonRPG jrpgInstance) {
-        this.jacksonrpg = jrpgInstance;
+
+    public MainMenu(JacksonRPG jacksonrpg) {
+        this.jacksonrpg = jacksonrpg;
+        this.font = this.jacksonrpg.getFont();
 
         font.getData().setScale(2);
 

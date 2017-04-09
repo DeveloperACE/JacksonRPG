@@ -40,6 +40,8 @@ public class Game implements Screen {
         this(jrpginstance, World.Level.TUTORIAL);
     }
 
+    public Player getPlayer() {return player;}
+    public Stage getStage() {return stage;}
 
     @Override
     public void render(float delta) {

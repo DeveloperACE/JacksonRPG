@@ -25,14 +25,18 @@ public class JacksonRPG extends ApplicationAdapter {
 
 
     private Assets assets = new Assets();
+    private BitmapFont font;
+
 
 	private MainMenu gameMenu;
 	private Game game;
 
+	private Float elapsedTime = 0f;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+        font = new BitmapFont();
 
 
         assets.queueGlobalAssets();
@@ -59,6 +63,19 @@ public class JacksonRPG extends ApplicationAdapter {
         state = ScreenState.GAME;
     }
 
+
+
+
+    public MainMenu getGameMenu() {return gameMenu;}
+    public SpriteBatch getBatch() {return batch;}
+    public BitmapFont getFont() {return font;}
+    public Float getElapsedTime() {return elapsedTime;}
+    public void updateElapsedTime() {elapsedTime += Gdx.graphics.getDeltaTime();}
+    public Game getGameInstance() {return game;}
+    public Assets getAssets() {return assets;}
+    public JacksonRPG getJacksonRPGInstance() {return this;}
+    public ScreenState getScreenState() {return state;}
+    public void setScreenState(ScreenState screen) {this.state = screen;}
 
     @Override
 	public void render () {
