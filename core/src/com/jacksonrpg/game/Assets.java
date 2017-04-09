@@ -10,8 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class Assets {
-    
-    public AssetManager manager = new AssetManager();
+    private AssetManager manager = new AssetManager();
     
     //GLOBAL/FREQUENTLY USED ASSETS
     public TextureAtlas lesserjacksonWalking;
