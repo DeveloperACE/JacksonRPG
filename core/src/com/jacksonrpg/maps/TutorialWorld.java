@@ -1,6 +1,7 @@
 package com.jacksonrpg.maps;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,7 +18,7 @@ import com.jacksonrpg.maps.other.OrthoSpriteMapRenderer;
 /**
  * Created by edwar12421 on 3/21/2017.
  */
-public class World implements Screen {
+public class TutorialWorld implements Screen {
 
     private JacksonRPG jacksonrpg;
     private TiledMap map;
@@ -32,25 +33,12 @@ public class World implements Screen {
 
 
 
-    public World(JacksonRPG jrpginstance, Level level) {
-        this.jacksonrpg = jrpginstance;
+    public TutorialWorld(JacksonRPG jacksonrpg) {
+        this.jacksonrpg = jacksonrpg;
 
-        switch (level){
-            case TUTORIAL:
-                jacksonrpg.assets.queueTutorialAssets();
-                //TODO: replace with loading screen
-                jacksonrpg.assets.manager.finishLoading();
-                jacksonrpg.assets.tutorialAssetsDone();
+        //get map here
 
-                map = jacksonrpg.assets.tutorialMap;
-                break;
-            case MAIN:
-                jacksonrpg.assets.queueMainGameAssets();
-                //TODO: replace with loading screen
-                jacksonrpg.assets.manager.finishLoading();
-                jacksonrpg.assets.mainGameAssetsDone();
-                break;
-        }
+
         mapRenderer = new OrthoSpriteMapRenderer(map, unitScale);
 
         camera = new OrthographicCamera(400, 400);

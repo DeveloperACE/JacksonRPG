@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Player;
-import com.jacksonrpg.maps.World;
+import com.jacksonrpg.maps.TutorialWorld;
 
 /**
  * Manages the creation and assembly of everything required to make the game, including maps, players, Entities .etc.
@@ -17,15 +17,15 @@ import com.jacksonrpg.maps.World;
 public class Game implements Screen {
 
     private JacksonRPG jacksonrpg;
-    private World world;
+    private TutorialWorld tutorialWorld;
     private Player player;
     private Stage stage;
 
-    public Game(JacksonRPG jrpginstance, World.Level level) {
+    public Game(JacksonRPG jrpginstance) {
         this.jacksonrpg = jrpginstance;
         player = new Player(jacksonrpg, Player.PlayerName.LESSERJACKSON);
-        world = new World(jacksonrpg, level);
-        stage = new Stage(new ScreenViewport(world.camera));
+        tutorialWorld = new TutorialWorld(jacksonrpg);
+        stage = new Stage(new ScreenViewport(tutorialWorld.camera));
 
         player.setX(100);
         player.setY(100);
@@ -36,10 +36,6 @@ public class Game implements Screen {
 
     }
 
-    public Game(JacksonRPG jrpginstance) {
-        this(jrpginstance, World.Level.TUTORIAL);
-    }
-
     public Player getPlayer() {return player;}
     public Stage getStage() {return stage;}
 
@@ -48,12 +44,12 @@ public class Game implements Screen {
         Gdx.gl.glClearColor(1,0,0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        world.render(delta);
+        tutorialWorld.render(delta);
         stage.act();
         stage.draw();
 
 //        Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-//        world.camera.unproject(touchPoint);
+//        tutorialWorld.camera.unproject(touchPoint);
 //        System.out.println(touchPoint);
 
     }
