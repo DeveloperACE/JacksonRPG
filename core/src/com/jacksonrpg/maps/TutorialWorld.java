@@ -4,6 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Vector3;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.maps.other.OrthoSpriteMapRenderer;
 
@@ -19,6 +20,7 @@ public class TutorialWorld /*extends World*/ implements Screen {
     private float unitScale = 1.05f;
     private OrthoSpriteMapRenderer mapRenderer;
 
+    private Integer mapMovementTriggerBuffer = 50;//if user gets this close to the edge of SCREEN, scroll the map.
 
 
 
@@ -51,8 +53,14 @@ public class TutorialWorld /*extends World*/ implements Screen {
     public void render(float delta) {
 
         if (camera != null) {
-            // let the camera follow the koala, x-axis only
-            camera.position.x = jacksonrpg.getGame().getPlayer().getX();
+
+            Vector3 playerScreenCoords = camera.unproject(new Vector3(jacksonrpg.getGame().getPlayer().getX(), 0, 0));
+            // let the camera follow the player, x-axis only
+            //TODO: Fix player movement for midsections of map
+            if (playerScreenCoords.x > 200 /*|| playerScreenCoords.x < 50*/) {
+
+                camera.position.x = jacksonrpg.getGame().getPlayer().getX();
+            }
             camera.update();
 
             if (mapRenderer != null) {

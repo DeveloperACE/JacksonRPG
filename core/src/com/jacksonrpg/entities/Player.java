@@ -38,6 +38,7 @@ public class Player extends Entity {
     private Integer movementSpeed = 4;
     private Integer leftBorder = 0;
     private Integer rightBorder = 2148;
+    private Integer sideBuffer = 100;//replacement for ^ and ^^
 
     private Integer healthLost = 0;//0-14, 0 = full, 14 = dead
     private Integer maxHealth = 14;
@@ -210,6 +211,13 @@ public class Player extends Entity {
             }
         }
     }
+
+    public Integer getSideBuffer() {return sideBuffer;}
+    public Integer getLeftBoundary() {return leftBorder;}
+    public Integer getRightBoundary() {return rightBorder;}
+    //public Integer getTopBoundary() {return topBorder;}
+    //public Integer getBottomBoundary() {return bottomBorder;}
+
 
     /** Sets the players movement boundaries on either side of the map
      *
