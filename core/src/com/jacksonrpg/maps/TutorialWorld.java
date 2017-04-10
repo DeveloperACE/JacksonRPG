@@ -1,5 +1,6 @@
 package com.jacksonrpg.maps;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -57,7 +58,7 @@ public class TutorialWorld /*extends World*/ implements Screen {
             Vector3 playerScreenCoords = camera.unproject(new Vector3(jacksonrpg.getGame().getPlayer().getX(), 0, 0));
             // let the camera follow the player, x-axis only
             //TODO: Fix player movement for midsections of map
-            if (playerScreenCoords.x > 200 /*|| playerScreenCoords.x < 50*/) {
+            if (/*playerScreenCoords.x < m ||*/ playerScreenCoords.x > Gdx.graphics.getWidth()-mapMovementTriggerBuffer) {
 
                 camera.position.x = jacksonrpg.getGame().getPlayer().getX();
             }
