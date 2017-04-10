@@ -33,7 +33,9 @@ public class Game implements Screen {
         player.setHeight(200);
 
         queueAssets();
-        this.jacksonrpg.checkLoad(true);
+        jacksonrpg.makeLoadingScreen(true);
+       // this.jacksonrpg.checkLoad(true);
+
 
 
     }

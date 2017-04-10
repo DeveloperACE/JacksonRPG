@@ -87,8 +87,8 @@ public class LoadingScreen implements Screen {
                     System.out.println(postLoadScreen);
                     break;
             }
-            jacksonrpg.setScreenState(postLoadScreen);
 
+            jacksonrpg.setScreenState(postLoadScreen);
             jacksonrpg.disposeLoadingScreen();
 
         }

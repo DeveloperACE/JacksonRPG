@@ -29,9 +29,13 @@ public class TutorialWorld /*extends World*/ implements Screen {
 
     public void queueAssets() {
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE);
+        jacksonrpg.getAssets().queueMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+
     }
 
     public void assetsLoaded() {
+        map = jacksonrpg.getAssets().getMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+
         mapRenderer = new OrthoSpriteMapRenderer(map, unitScale);
 
         camera = new OrthographicCamera(400, 400);
@@ -46,14 +50,18 @@ public class TutorialWorld /*extends World*/ implements Screen {
     @Override
     public void render(float delta) {
 
-// let the camera follow the koala, x-axis only
-        camera.position.x = jacksonrpg.getGame().getPlayer().getX();
-        camera.update();
+        if (camera != null) {
+            // let the camera follow the koala, x-axis only
+            camera.position.x = jacksonrpg.getGame().getPlayer().getX();
+            camera.update();
 
-        // set the TiledMapRenderer view based on what the
-        // camera sees, and render the map
-        mapRenderer.setView(camera);
-        mapRenderer.render();
+            if (mapRenderer != null) {
+                // set the TiledMapRenderer view based on what the
+                // camera sees, and render the map
+                mapRenderer.setView(camera);
+                mapRenderer.render();
+            }
+        }
     }
 
     @Override

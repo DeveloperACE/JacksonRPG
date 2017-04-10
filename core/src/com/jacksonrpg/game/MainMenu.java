@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -29,19 +30,18 @@ public class MainMenu implements Screen {
     private BitmapFont font;
     //used for checking font widths
     private GlyphLayout layout = new GlyphLayout();
-
+    private Batch batch;
 
 
     private Entity lesserJackson;
     private Entity greaterJackson;
 
-
+//used for the unused textButton()
     private ClickListener clickListener = new ClickListener() {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             System.out.println("Click");
             jacksonrpg.makeGame();
-            jacksonrpg.setScreenState(JacksonRPG.AppScreen.GAME);
             dispose();
         }
     };
@@ -85,14 +85,15 @@ public class MainMenu implements Screen {
     public MainMenu(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
         font = this.jacksonrpg.getFont();
-
+        this.batch = menuStage.getBatch();
         font.getData().setScale(2);
 
 
         Gdx.input.setInputProcessor(menuStage);
 
         queueAssets();
-        jacksonrpg.checkLoad();
+        jacksonrpg.makeLoadingScreen();
+        // jacksonrpg.checkLoad();
 
 
 
@@ -217,7 +218,7 @@ public class MainMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
 
-        menuStage.getBatch().begin();
+        batch.begin();
         if (jacksonrpg.getAssets().getManager().isLoaded(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE)) {
             menuStage.getBatch().draw(
                     jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE),
@@ -240,7 +241,8 @@ public class MainMenu implements Screen {
 
         drawHorizontallyCenteredText("Pick a Character To Start", 50);
 
-        menuStage.getBatch().end();
+
+        batch.end();
 
         menuStage.act();
         menuStage.draw();
@@ -252,7 +254,6 @@ public class MainMenu implements Screen {
     public void dispose() {
         font.dispose();
         menuStage.dispose();
-
 
     }
 
