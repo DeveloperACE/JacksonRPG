@@ -2,34 +2,33 @@ package com.jacksonrpg;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.jacksonrpg.game.Game;
+import com.jacksonrpg.game.LoadingScreen;
 import com.jacksonrpg.game.MainMenu;
 import com.jacksonrpg.game.Assets;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /** Manages screens for the game
  */
 public class JacksonRPG extends ApplicationAdapter {
-    
-    public enum ScreenState {
-        MAIN_MENU, GAME
+
+    public enum AppScreen {
+        MAIN_MENU, GAME, LOADING
     }
 
-	private SpriteBatch batch;
-    private ScreenState state = ScreenState.MAIN_MENU;
+    private SpriteBatch batch;
+    private AppScreen currentScreen = AppScreen.MAIN_MENU;
 
 
     private Assets assets = new Assets();
     private BitmapFont font;
 
-
-	private MainMenu gameMenu;
-	private Game game;
+    //game screens
+    private MainMenu gameMenu;
+    private Game game;
+    private LoadingScreen loadScreen;
 
 	private Float elapsedTime = 0f;
 
@@ -39,43 +38,61 @@ public class JacksonRPG extends ApplicationAdapter {
         font = new BitmapFont();
 
 
-        assets.queueGlobalAssets();
-        assets.manager.finishLoading();
-        assets.globalAssetsDone();
-
         //temp bypass main menu for game testing
-        //makeMenu();
-        makeGame();
-	}
+        makeMenu();
+        //makeGame();
+    }
 
-	public void makeMenu() {
+    public void makeMenu() {
         gameMenu = new MainMenu(this);
-        //blocks until all assets are loaded, replace with loading screen
-
-//        loadUntilDone();
-        state = ScreenState.MAIN_MENU;
     }
 
     public void makeGame() {
         game = new Game(this);
-        //blocks until all assets are loaded
+    }
 
-        state = ScreenState.GAME;
+    public void makeLoadingScreen() {
+        makeLoadingScreen(false);
+    }
+
+    public void makeLoadingScreen(Boolean showGameOnCompletion) {
+        if (showGameOnCompletion) {
+            loadScreen = new LoadingScreen(this, AppScreen.GAME);
+        } else {
+            loadScreen = new LoadingScreen(this);//2nd param defaults to main menu
+        }
+
+        setScreenState(AppScreen.LOADING);
+    }
+
+    public void disposeLoadingScreen() {
+        loadScreen = null;
+    }
+
+    /** Checks if there are any assets to load and pops up a loading screen if there are
+     *
+     */
+    public void checkLoad() {checkLoad(false);}
+
+    public void checkLoad(Boolean showGameOnCompletion) {
+        if (getAssets().getManager().getQueuedAssets() > 0) {
+            makeLoadingScreen(showGameOnCompletion);
+        }
     }
 
 
 
 
-    public MainMenu getGameMenu() {return gameMenu;}
+    public MainMenu getMenu() {return gameMenu;}
     public SpriteBatch getBatch() {return batch;}
     public BitmapFont getFont() {return font;}
     public Float getElapsedTime() {return elapsedTime;}
     public void updateElapsedTime() {elapsedTime += Gdx.graphics.getDeltaTime();}
-    public Game getGameInstance() {return game;}
+    public Game getGame() {return game;}
     public Assets getAssets() {return assets;}
-    public JacksonRPG getJacksonRPGInstance() {return this;}
-    public ScreenState getScreenState() {return state;}
-    public void setScreenState(ScreenState screen) {this.state = screen;}
+    //public JacksonRPG getJacksonRPGInstance() {return this;}
+    public AppScreen getScreenState() {return currentScreen;}
+    public void setScreenState(AppScreen screen) {this.currentScreen = screen;}
 
     @Override
 	public void render () {
@@ -84,7 +101,7 @@ public class JacksonRPG extends ApplicationAdapter {
 
 
 
-        switch(state){
+        switch(currentScreen){
             case MAIN_MENU:
 
                 batch.begin();
@@ -103,6 +120,11 @@ public class JacksonRPG extends ApplicationAdapter {
                 //gameStage.draw();
                 //gameStage.act(delta);
 
+                break;
+            case LOADING:
+                batch.begin();
+                loadScreen.render(Gdx.graphics.getDeltaTime());
+                batch.end();
                 break;
         }
 

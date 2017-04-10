@@ -29,6 +29,7 @@ public class Player extends Entity {
     public enum PlayerName {
         LESSERJACKSON, GREATERJACKSON
     }
+    private PlayerName player;
 
     private GraphicalState graphicalState = GraphicalState.FACINGRIGHT;
     private MovementState movementState = MovementState.STANDING;
@@ -50,19 +51,36 @@ public class Player extends Entity {
 
 
 
-    public Player(JacksonRPG jrpginstance, PlayerName player) {
+    public Player(JacksonRPG jacksonrpg, PlayerName player) {
 
-        super(/*jrpginstance,*/ new Texture(jrpginstance.assets.DEFAULT_ENTITY_TEXTURE_PATH), 0, 0, 1, 2, 0, false, false);
-        jacksonrpg = jrpginstance;
+        super(/*jrpginstance,*/ new Texture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH), 0, 0, 1, 2, 0, false, false);
+        this.jacksonrpg = jacksonrpg;
+        this.player = player;
+
+
+    }
+
+    public void queueAssets() {
+        switch (player){
+            case LESSERJACKSON:
+                jacksonrpg.getAssets().queueTextureAtlas(jacksonrpg.getAssets().LESSER_JACKSON_WALKING_ATLAS);
+                break;
+            case GREATERJACKSON:
+                //TODO: add greater jackson assets
+                break;
+        }
+    }
+
+    public void assetsLoaded() {
 
         switch (player){
             case LESSERJACKSON:
-                walkingAtlas = jacksonrpg.assets.lesserjacksonWalking;
+                walkingAtlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().LESSER_JACKSON_WALKING_ATLAS);
                 break;
             case GREATERJACKSON:
-                //TODO: add greater jackson walking stuffs
+                //TODO: add greater jackson assets
                 break;
-        }
+         }
 
         walkingAnimation = new Animation<TextureRegion>(animationFramerate, walkingAtlas.getRegions(), Animation.PlayMode.LOOP);
 

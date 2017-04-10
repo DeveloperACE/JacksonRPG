@@ -41,7 +41,7 @@ public class MainMenu implements Screen {
         public void clicked(InputEvent event, float x, float y) {
             System.out.println("Click");
             jacksonrpg.makeGame();
-            jacksonrpg.state = JacksonRPG.GameScreen.GAME;
+            jacksonrpg.setScreenState(JacksonRPG.AppScreen.GAME);
             dispose();
         }
     };
@@ -84,20 +84,31 @@ public class MainMenu implements Screen {
 
     public MainMenu(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
-        this.font = this.jacksonrpg.getFont();
+        font = this.jacksonrpg.getFont();
 
         font.getData().setScale(2);
 
 
         Gdx.input.setInputProcessor(menuStage);
 
-        jacksonrpg.assets.queueMenuAssets();
-        //TODO: replace with loading screen
-        jacksonrpg.assets.manager.finishLoading();
-        jacksonrpg.assets.menuAssetsDone();
+        queueAssets();
+        jacksonrpg.checkLoad();
 
+
+
+    }
+
+
+    public void queueAssets() {
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE);
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GREATER_JACKSON_SLEEPING_TEXTURE);
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().BANNER_PATH_TEXTURE);
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE);
+    }
+
+    public void assetsLoaded() {
         lesserJackson = new Entity(
-                jacksonrpg.assets.lesserjacksonSleepingTexture,
+                jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE),
                 120,
                 105,
                 100,
@@ -110,7 +121,7 @@ public class MainMenu implements Screen {
         menuStage.addActor(lesserJackson);
 
         greaterJackson = new Entity(
-                jacksonrpg.assets.greaterJacksonSleepingTexture,
+                jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GREATER_JACKSON_SLEEPING_TEXTURE),
                 310,
                 65,
                 100,
@@ -202,26 +213,30 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0,0,0, 1);
+        Gdx.gl.glClearColor(0,0,1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
 
         menuStage.getBatch().begin();
+        if (jacksonrpg.getAssets().getManager().isLoaded(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE)) {
             menuStage.getBatch().draw(
-                    jacksonrpg.assets.menuBackground,
+                    jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE),
                     0,
                     0,
                     menuStage.getWidth(),
                     menuStage.getHeight()
             );
+        }
 
+        if (jacksonrpg.getAssets().getManager().isLoaded(jacksonrpg.getAssets().BANNER_PATH_TEXTURE)) {
             menuStage.getBatch().draw(
-                    jacksonrpg.assets.gameBanner,
+                    jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().BANNER_PATH_TEXTURE),
                     0,
-                    menuStage.getHeight()-100,
+                    menuStage.getHeight() - 100,
                     400,//1536,
                     100 // 384*/
             );
+        }
 
         drawHorizontallyCenteredText("Pick a Character To Start", 50);
 

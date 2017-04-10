@@ -17,8 +17,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 public class Assets {
 
 
-    //JacksonRPG jacksonrpg;
-
     private AssetManager manager = new AssetManager();
     
 
@@ -51,55 +49,49 @@ public class Assets {
     public final String DEFAULT_ENTITY_TEXTURE_PATH = "core/assets/images/entities/defaulttexture.png";
 
 
-    public void queueGlobalAssets() {
 
-        manager.load(LESSER_JACKSON_WALKING, TextureAtlas.class);
-        manager.load(SPEECHBUBBLE_ATLAS_PATH, TextureAtlas.class);
 
+    public Boolean update() {return manager.update();}
+    public AssetManager getManager() {return manager;}
+    public float getProgress() {return manager.getProgress();}
+
+
+
+
+
+    public void queueTexture(String path) {
+        if (!manager.isLoaded(path)){
+            manager.load(path, Texture.class);
+        }
     }
-
-    public void queueMenuAssets() {
-        manager.load(MENU_BACKGROUND_PATH, Texture.class);
-        manager.load(BANNER_PATH, Texture.class);
-        manager.load(GJ_SLEEP_PATH, Texture.class);
-        manager.load(LJ_SLEEP_PATH, Texture.class);
-    }
-    
-    public void queueTutorialAssets() {
-        manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        manager.load(TUTORIAL_MAP_PATH, TiledMap.class);
-
-//        manager.load("myothergraphics.pack", TextureAtlas.class);
-    }
-
-    public void queueMainGameAssets() {
-//        manager.load("mygraphics.pack", TextureAtlas.class);
-//        manager.load("myothergraphics.pack", TextureAtlas.class);
+    public Texture getTexture(String path) {
+            return manager.get(path, Texture.class);
     }
 
 
-    public void globalAssetsDone() {
 
-        lesserjacksonWalking = manager.get(LESSER_JACKSON_WALKING, TextureAtlas.class);
+    public void queueTextureAtlas(String path) {
+        if (!manager.isLoaded(path)){
+            manager.load(path, TextureAtlas.class);
+        }
+    }
+    public TextureAtlas getTextureAtlas(String path) {
+        return manager.get(path, TextureAtlas.class);
     }
 
-    public void menuAssetsDone() {
-        menuBackground = manager.get(MENU_BACKGROUND_PATH, Texture.class);
-        gameBanner = manager.get(BANNER_PATH, Texture.class);
-        greaterJacksonSleepingTexture = manager.get(GJ_SLEEP_PATH, Texture.class);
-        lesserjacksonSleepingTexture = manager.get(LJ_SLEEP_PATH, Texture.class);
+
+
+    public void queueMap(String path) {
+        if (!manager.isLoaded(path)){
+            manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+            manager.load(path, TiledMap.class);
+        }
+    }
+    public TiledMap getMap(String path) {
+        return manager.get(path, TiledMap.class);
     }
 
-    public void tutorialAssetsDone() {
-        tutorialMap = manager.get(TUTORIAL_MAP_PATH, TiledMap.class);
-        speechBubbleAtlas = manager.get(SPEECHBUBBLE_ATLAS_PATH, TextureAtlas.class);
-        //myOtherGraphics = manager.get("myothergraphics.pack", TextureAtlas.class);
-    }
 
-    public void mainGameAssetsDone() {
-        tutorialMap = manager.get(TUTORIAL_MAP_PATH, TiledMap.class);
-        //        myOtherGraphics = manager.get("myothergraphics.pack", TextureAtlas.class);
-    }
 
 
 

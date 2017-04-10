@@ -3,7 +3,6 @@ package com.jacksonrpg.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
@@ -17,23 +16,42 @@ import com.jacksonrpg.maps.TutorialWorld;
 public class Game implements Screen {
 
     private JacksonRPG jacksonrpg;
-    private TutorialWorld tutorialWorld;
+    private TutorialWorld world;
     private Player player;
     private Stage stage;
 
-    public Game(JacksonRPG jrpginstance) {
-        this.jacksonrpg = jrpginstance;
-        player = new Player(jacksonrpg, Player.PlayerName.LESSERJACKSON);
-        tutorialWorld = new TutorialWorld(jacksonrpg);
-        stage = new Stage(new ScreenViewport(tutorialWorld.camera));
+    public Game(JacksonRPG jacksonrpg) {
+        this.jacksonrpg = jacksonrpg;
+        player = new Player(this.jacksonrpg, Player.PlayerName.LESSERJACKSON);
+
+        world = new TutorialWorld(this.jacksonrpg);
+
 
         player.setX(100);
         player.setY(100);
         player.setWidth(200);
         player.setHeight(200);
 
-        stage.addActor(player);
+        queueAssets();
+        this.jacksonrpg.checkLoad(true);
 
+
+    }
+
+    //pass the queueAssets() call to parts of world
+    public void queueAssets() {
+        player.queueAssets();
+        world.queueAssets();
+       // stage.queueAssets();
+    }
+
+    //pass the assetsLoaded() call to parts of world
+    public void assetsLoaded() {
+        player.assetsLoaded();
+        world.assetsLoaded();
+       // stage.assetsLoaded();
+        stage = new Stage(new ScreenViewport(world.getCamera()));
+        stage.addActor(player);
     }
 
     public Player getPlayer() {return player;}
@@ -44,13 +62,10 @@ public class Game implements Screen {
         Gdx.gl.glClearColor(1,0,0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        tutorialWorld.render(delta);
+        world.render(delta);
         stage.act();
         stage.draw();
 
-//        Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-//        tutorialWorld.camera.unproject(touchPoint);
-//        System.out.println(touchPoint);
 
     }
 
