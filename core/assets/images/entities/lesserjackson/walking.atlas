@@ -1,76 +1,75 @@
 
 walking.png
-size: 512,64
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-walking
+sprite
   rotate: false
-  xy: 2, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 2, 420
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 0
-walking
+sprite
   rotate: false
-  xy: 36, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 2, 2
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 1
-walking
+sprite
   rotate: false
-  xy: 70, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 212, 420
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 2
-walking
+sprite
   rotate: false
-  xy: 104, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 212, 2
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 3
-walking
+sprite
   rotate: false
-  xy: 138, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 422, 420
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 4
-walking
+sprite
   rotate: false
-  xy: 172, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 422, 2
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 5
-walking
+sprite
   rotate: false
-  xy: 206, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 632, 420
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 6
-walking
+sprite
   rotate: false
-  xy: 240, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 632, 2
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 7
-walking
+
+walking2.png
+size: 256,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sprite
   rotate: false
-  xy: 274, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 2, 2
+  size: 208, 416
+  orig: 208, 416
   offset: 0, 0
   index: 8
-walking
-  rotate: false
-  xy: 308, 2
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 9
