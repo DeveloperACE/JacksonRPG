@@ -5,9 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.jacksonrpg.JacksonRPG;
-import com.jacksonrpg.maps.other.OrthoSpriteMapRenderer;
 
 /**
  * Created by edwar12421 on 3/21/2017.
@@ -19,7 +19,7 @@ public class TutorialWorld /*extends World*/ implements Screen {
     private  OrthographicCamera camera;
 
     private float unitScale = 1.05f;
-    private OrthoSpriteMapRenderer mapRenderer;
+    private OrthogonalTiledMapRenderer mapRenderer;
 
     private Integer mapMovementTriggerBuffer = 50;//if user gets this close to the edge of SCREEN, scroll the map.
 
@@ -39,7 +39,7 @@ public class TutorialWorld /*extends World*/ implements Screen {
     public void assetsLoaded() {
         map = jacksonrpg.getAssets().getMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
 
-        mapRenderer = new OrthoSpriteMapRenderer(map, unitScale);
+        mapRenderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
         camera = new OrthographicCamera(400, 400);
         // camera.setToOrtho(false, backgroundLayer.getHeight(),backgroundLayer.getHeight());
