@@ -17,6 +17,8 @@ public class LoadingScreen implements Screen {
     private float elapsedTime = 0f;
     private float width = Gdx.graphics.getWidth();
     private float height = Gdx.graphics.getHeight();
+    private float loadIconWidth = 25;
+    private float loadIconHeight = 50;
     private float progress;
 
 
@@ -72,7 +74,7 @@ public class LoadingScreen implements Screen {
 
             TextureRegion currentFrame = loadingAnimation.getKeyFrame(elapsedTime);
 
-            jacksonrpg.getBatch().draw(currentFrame, (width - 25) * progress, (height / 2) - 25, 50, 50);
+            jacksonrpg.getBatch().draw(currentFrame, (width - loadIconWidth) * progress, (height / 2) - (loadIconHeight/2), loadIconWidth, loadIconHeight);
             jacksonrpg.getFont().draw(jacksonrpg.getBatch(), "Loading...", 175, 150);
         } else {
             switch (postLoadScreen) {
