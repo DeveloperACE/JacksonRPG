@@ -76,7 +76,6 @@ public class TutorialWorld /*extends World*/ implements Screen {
                 camera.position.x = jacksonrpg.getGame().getPlayer().getX();
 
             }
-            System.out.println(jacksonrpg.getGame().getPlayer().getX());
             camera.update();
 
             if (mapRenderer != null) {
