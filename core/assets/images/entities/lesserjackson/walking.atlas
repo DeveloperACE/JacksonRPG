@@ -1,74 +1,68 @@
 
 walking.png
-size: 1024,1024
+size: 2048,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 sprite
   rotate: false
-  xy: 2, 420
+  xy: 2, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 0
 sprite
   rotate: false
-  xy: 2, 2
+  xy: 212, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 1
 sprite
   rotate: false
-  xy: 212, 420
+  xy: 422, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 2
 sprite
   rotate: false
-  xy: 212, 2
+  xy: 632, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 3
 sprite
   rotate: false
-  xy: 422, 420
+  xy: 842, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 4
 sprite
   rotate: false
-  xy: 422, 2
+  xy: 1052, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 5
 sprite
   rotate: false
-  xy: 632, 420
+  xy: 1262, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 6
 sprite
   rotate: false
-  xy: 632, 2
+  xy: 1472, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
   index: 7
-
-walking2.png
-size: 256,512
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 sprite
   rotate: false
-  xy: 2, 2
+  xy: 1682, 2
   size: 208, 416
   orig: 208, 416
   offset: 0, 0
