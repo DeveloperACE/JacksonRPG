@@ -86,6 +86,11 @@ public class Player extends Entity {
 
     }
 
+    //called when the world is ready to receive function calls
+    public void worldReady() {
+        rightBorder = jacksonrpg.getGame().getWorld().getMapWidthInPixels();
+    }
+
 
     /** Sets the animation frame rate
      *

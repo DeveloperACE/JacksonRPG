@@ -55,8 +55,11 @@ public class Game implements Screen {
        // stage.assetsLoaded();
         stage = new Stage(new ScreenViewport(world.getCamera()));
         stage.addActor(player);
+
+        player.worldReady();
     }
 
+    public TutorialWorld getWorld() {return world;}
     public Player getPlayer() {return player;}
     public Stage getStage() {return stage;}
 
