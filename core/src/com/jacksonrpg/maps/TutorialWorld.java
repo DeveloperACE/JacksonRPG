@@ -67,7 +67,7 @@ public class TutorialWorld /*extends World*/ implements Screen {
             // let the camera follow the player, x-axis only
             //TODO: Fix player movement for midsections of map
             ///*playerScreenCoords.x < m ||*/ playerScreenCoords.x > Gdx.graphics.getWidth()-mapMovementTriggerBuffer
-            if (jacksonrpg.getGame().getPlayer().getX() > 200 && playerScreenCoords.x < mapMovementTriggerBuffer) {
+            if (jacksonrpg.getGame().getPlayer().getX() > 200 && jacksonrpg.getGame().getPlayer().getX() < getMapWidthInPixels() - 200) {
 
                 camera.position.x = jacksonrpg.getGame().getPlayer().getX();
             }
