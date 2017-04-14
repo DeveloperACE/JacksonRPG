@@ -26,11 +26,12 @@ public class Game implements Screen {
 
         world = new TutorialWorld(this.jacksonrpg);
 
-
-        player.setX(100);
-        player.setY(100);
-        player.setWidth(200);
-        player.setHeight(200);
+       if (player.checkSpawnPoint(100)){
+            player.setX(100);
+            player.setY(100);
+        }
+        player.setWidth(50);
+        player.setHeight(100);
 
         queueAssets();
         jacksonrpg.makeLoadingScreen(true);
