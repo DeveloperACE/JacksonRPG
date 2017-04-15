@@ -1,34 +1,76 @@
 
 speechbubble.png
-size: 128,32
+size: 256,16
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-speechbubble
+check
   rotate: false
-  xy: 2, 2
+  xy: 0, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-speechbubble
+check
   rotate: false
-  xy: 20, 2
+  xy: 16, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-speechbubble
+cross
   rotate: false
-  xy: 38, 2
+  xy: 32, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+danger
+  rotate: false
+  xy: 48, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ellipsis
+  rotate: false
+  xy: 64, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ellipsis
+  rotate: false
+  xy: 80, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ellipsis
+  rotate: false
+  xy: 96, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
-speechbubble
+ellipsis
   rotate: false
-  xy: 56, 2
+  xy: 112, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
+ok
+  rotate: false
+  xy: 128, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+warning
+  rotate: false
+  xy: 144, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
