@@ -1,14 +1,21 @@
 package com.jacksonrpg.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jacksonrpg.JacksonRPG;
 
 /** A simple non-movable entity that can be interacted with.
  *
  * Created by Adrian on 3/14/17.
  */
 public class Entity extends Actor {
+
+    private JacksonRPG jacksonrpg;
 
     private Texture entityTexture;
 
@@ -20,6 +27,9 @@ public class Entity extends Actor {
     private Boolean flipEntityX;
     private Boolean flipEntityY;
 
+    private boolean interactable = false;
+    private Integer interactionAnimationWidth = 25;
+    private Animation<TextureRegion> interactionAnimation;
     protected float elapsedTime = 0;//private access to only this and any clas that extends it
 
 
@@ -88,6 +98,39 @@ public class Entity extends Actor {
     public Entity(JacksonRPG jacksonrpg, Texture texture, float x, float y, float width, float height, float rotation, boolean flipEntityX, boolean flipEntityY) {
         this(jacksonrpg, texture, x, y, width, height, rotation, 0, 0, texture.getWidth(), texture.getHeight(), flipEntityX, flipEntityY);
     }
+
+    /** Creates a new entity with the x, y, width, height and rotation properties.
+     * Section properties default to the x, y, width and height values of the entire texture
+     * flipEntityX and flipEntityY properties default to false
+     *
+     * @param texture The texture for the entity
+     * @param x The X coordinate of the entity
+     * @param y The Y coordinate of the entity
+     * @param width The width of the entity. Texture will only be scaled to these dimensions if the aspect ratio
+     *              matches that of the texture
+     * @param height The height of the entity. Texture will only be scaled to these dimensions if the aspect ratio
+     *              matches that of the texture
+     * @param rotation The number of degrees to rotate the entity
+     */
+    public Entity(JacksonRPG jacksonrpg, Texture texture, float x, float y, float width, float height, float rotation) {
+        this(jacksonrpg, texture, x, y, width, height, rotation, 0, 0, texture.getWidth(), texture.getHeight(), false,false);
+    }
+
+    /** Creates a new entity with the x, y, width and height properties.
+     * Section properties default to the x, y, width and height values of the entire texture
+     * flipEntityX and flipEntityY properties default to false
+     * rotation defaults to 0
+     *
+     * @param texture The texture for the entity
+     * @param x The X coordinate of the entity
+     * @param y The Y coordinate of the entity
+     * @param width The width of the entity. Texture will only be scaled to these dimensions if the aspect ratio
+     *              matches that of the texture
+     * @param height The height of the entity. Texture will only be scaled to these dimensions if the aspect ratio
+     *              matches that of the texture
+     */
+    public Entity(JacksonRPG jacksonrpg, Texture texture, float x, float y, float width, float height) {
+        this(jacksonrpg, texture, x, y, width, height, 0);
     }
 
 
@@ -106,14 +149,9 @@ public class Entity extends Actor {
         return entityTexture;
     }
 
+    public final void setInteractable(boolean interactable) {this.interactable = interactable;}
 
-    public void showSpeechBubble() {
 
-    }
-
-    public void hideSpeechBubble() {
-
-    }
 
 
 
@@ -139,5 +177,11 @@ public class Entity extends Actor {
                 this.flipEntityX,
                 this.flipEntityY
         );
+
+
+        if (interactable && (interactionAnimation != null)) {
+
+            batch.draw(interactionAnimation.getKeyFrame(elapsedTime, true), this.getX()+this.getWidth(), this.getY()+this.getHeight(), interactionAnimationWidth, interactionAnimationWidth);
+        }
     }
 }
