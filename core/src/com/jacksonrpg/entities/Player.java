@@ -35,7 +35,7 @@ public class Player extends Entity {
     private MovementState movementState = MovementState.STANDING;
 
 
-    private Integer movementSpeed = 4;
+    private Integer movementSpeed = 3;
     private Integer leftBorder = 0;
     private Integer rightBorder = 2148;
 
@@ -46,7 +46,7 @@ public class Player extends Entity {
 
     private TextureAtlas walkingAtlas;
     private Animation<TextureRegion> walkingAnimation;
-    private float animationFramerate = 1/19;//default framerate 19fps
+    private float animationFramerate = 1f/18f;
     private float elapsedTime = 0;
 
 
@@ -109,26 +109,18 @@ public class Player extends Entity {
         checkKeyPresses();
         move();
 
-
-
-        //elapsedTime += Gdx.graphics.getDeltaTime();
-//        batch.begin();
-//        batch.draw(runningAnimation.getKeyFrame(delta, true), 0, 0);
-//        batch.end();
-
-
         super.act(delta);
     }
 
-    @Override
-    public Texture getTexture() {
-        return walkingAnimation.getKeyFrame(0).getTexture();
-    }
+//    @Override
+//    public Texture getTexture() {
+//        return walkingAnimation.getKeyFrame(0).getTexture();
+//    }
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        
+
         switch (movementState) {
             case WALKING:
 
