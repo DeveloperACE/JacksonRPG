@@ -23,22 +23,22 @@ public class Assets {
 
 
     //GLOBAL PATHS
-    public final String LESSER_JACKSON_WALKING_ATLAS = "core/assets/images/entities/lesserjackson/walking.atlas";
-    public final String SPEECHBUBBLE_ATLAS_PATH = "core/assets/images/other/speechbubble/speechbubble.atlas";
+    public final String LESSER_JACKSON_WALKING_ATLAS = "images/entities/lesserjackson/walking.atlas";
+    public final String SPEECHBUBBLE_ATLAS_PATH = "images/other/speechbubble/speechbubble.atlas";
 
     
     //Main Menu Paths
-    public final String MENU_BACKGROUND_TEXTURE = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
-    public final String BANNER_PATH_TEXTURE = "core/assets/images/bannerlogo.png";
-    public final String GAME_LOGO = "core/assets/images/game_logo.png";
-    public final String GAME_TEXT_BANNER = "core/assets/images/text_banner.png";
-    public final String GREATER_JACKSON_SLEEPING_TEXTURE = "core/assets/images/entities/greaterjackson/gj_sleeping.png";
-    public final String LESSER_JACKSON_SLEEPING_TEXTURE = "core/assets/images/entities/lesserjackson/lj_sleeping.png";
+    public final String MENU_BACKGROUND_TEXTURE = "images/backgrounds/TitleScreen-BusBack.png";
+    public final String BANNER_PATH_TEXTURE = "images/bannerlogo.png";
+    public final String GAME_LOGO = "images/game_logo.png";
+    public final String GAME_TEXT_BANNER = "images/text_banner.png";
+    public final String GREATER_JACKSON_SLEEPING_TEXTURE = "images/entities/greaterjackson/gj_sleeping.png";
+    public final String LESSER_JACKSON_SLEEPING_TEXTURE = "images/entities/lesserjackson/lj_sleeping.png";
 
 
 
     //Tutorial World Paths
-    public final String TUTORIAL_MAP_PATH = "core/assets/maps/tutorialworld/tutorialworld.tmx";
+    public final String TUTORIAL_MAP_PATH = "maps/tutorialworld/tutorialworld.tmx";
 
 
     //Main World Paths
@@ -46,7 +46,7 @@ public class Assets {
 
 
 //    //MISC Paths
-    public final String DEFAULT_ENTITY_TEXTURE_PATH = "core/assets/images/entities/defaulttexture.png";
+    public final String DEFAULT_ENTITY_TEXTURE_PATH = "images/entities/defaulttexture.png";
 
 
 
