@@ -102,7 +102,9 @@ public class Player extends Entity {
     @Override
     public void act(float delta) {
         //reset movement to standing in case no buttons are pressed
-        this.movementState = MovementState.STANDING;
+        if (movementState != MovementState.STANDING) {
+            this.movementState = MovementState.STANDING;
+        }
 
         checkKeyPresses();
         move();
@@ -126,42 +128,34 @@ public class Player extends Entity {
     @Override
     public void draw (Batch batch, float parentAlpha) {
         elapsedTime += Gdx.graphics.getDeltaTime();
+        
+        switch (movementState) {
+            case WALKING:
 
-        if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
+                TextureRegion currentFrame = walkingAnimation.getKeyFrame(elapsedTime, true);
 
-            batch.draw(getAnimationFrame(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
-
-        } else if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
-
-            batch.draw(getAnimationFrame(), this.getX()+this.getWidth(), this.getY(), -this.getWidth(), this.getHeight());
-
-        } else if (this.movementState == MovementState.STANDING) {
-
-            batch.draw(getAnimationFrame(0), this.getX(), this.getY(), this.getWidth(), this.getHeight());
-
-        } else {
-            elapsedTime += Gdx.graphics.getDeltaTime();
+                switch (graphicalState) {
+                    case FACINGLEFT:
+                        batch.draw(currentFrame, this.getX()+this.getWidth(), this.getY(), -this.getWidth(), this.getHeight());
+                        break;
+                    case FACINGRIGHT:
+                        batch.draw(currentFrame, this.getX(), this.getY(), this.getWidth(), this.getHeight());
+                        break;
+                }
+                break;
+            case STANDING:
+                switch (graphicalState) {
+                    case FACINGLEFT:
+                        batch.draw(getAnimationFrame(0), this.getX()+this.getWidth(), this.getY(), -this.getWidth(), this.getHeight());
+                        break;
+                    case FACINGRIGHT:
+                        batch.draw(getAnimationFrame(0), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+                        break;
+                }
+                break;
         }
 
 
-//        switch (movementState) {
-//            case WALKING:
-//                switch (graphicalState) {
-//                    case FACINGLEFT:
-//                        break;
-//                    case FACINGRIGHT:
-//                        break;
-//                }
-//                break;
-//            case STANDING:
-//                switch (graphicalState) {
-//                    case FACINGLEFT:
-//                        break;
-//                    case FACINGRIGHT:
-//                        break;
-//                }
-//                break;
-//        }
     }
 
 
