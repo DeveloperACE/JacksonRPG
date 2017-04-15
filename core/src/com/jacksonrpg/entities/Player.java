@@ -44,19 +44,19 @@ public class Player extends Entity {
     private TextureAtlas walkingAtlas;
     private Animation<TextureRegion> walkingAnimation;
     private float animationFramerate = 1f/18f;
-    private float elapsedTime = 0;
 
 
 
     public Player(JacksonRPG jacksonrpg, PlayerName player) {
 
-        super(new Texture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH), 0, 0, 1, 2, 0, false, false);
+        super(jacksonrpg, new Texture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH), 0, 0, 1, 2, 0, false, false);
         this.jacksonrpg = jacksonrpg;
         this.player = player;
 
 
     }
 
+    @Override
     public void queueAssets() {
         switch (player){
             case LESSERJACKSON:
@@ -68,6 +68,7 @@ public class Player extends Entity {
         }
     }
 
+    @Override
     public void assetsLoaded() {
 
         switch (player){
@@ -116,7 +117,7 @@ public class Player extends Entity {
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        super.draw(batch, parentAlpha);//updates deltatime and updates the position of the invisible texture given in players constructor
 
         switch (movementState) {
             case WALKING:

@@ -20,6 +20,8 @@ public class Entity extends Actor {
     private Boolean flipEntityX;
     private Boolean flipEntityY;
 
+    protected float elapsedTime = 0;//private access to only this and any clas that extends it
+
 
     /** Creates a new entity with the x, y, width, height, rotation, section, flipEntityX and flipEntityY properties
      *
@@ -40,8 +42,9 @@ public class Entity extends Actor {
      * @param flipEntityX Should the entity be flipped horizontally?
      * @param flipEntityY Should the entity be flipped vertically?
      */
-    public Entity(Texture texture, float x, float y, float width, float height, float rotation, int sectionX, int sectionY, int sectionWidth, int sectionHeight, boolean flipEntityX, boolean flipEntityY) {
+    public Entity(JacksonRPG jacksonrpg, Texture texture, float x, float y, float width, float height, float rotation, int sectionX, int sectionY, int sectionWidth, int sectionHeight, boolean flipEntityX, boolean flipEntityY) {
 
+        this.jacksonrpg = jacksonrpg;
         entityTexture = texture;
 
         this.setX(x);
@@ -58,6 +61,16 @@ public class Entity extends Actor {
 
     }
 
+    public void queueAssets() {
+        jacksonrpg.getAssets().queueTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
+
+    }
+
+    public void assetsLoaded() {
+        TextureAtlas atlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
+        interactionAnimation = new Animation<TextureRegion>(1f/3f, atlas.findRegions("ellipsis"));
+    }
+
     /** Creates a new entity with the x, y, width, height, rotation, flipEntityX and flipEntityY properties.
      * Section properties default to the x, y, width and height values of the entire texture
      *
@@ -72,8 +85,9 @@ public class Entity extends Actor {
      * @param flipEntityX Should the entity be flipped horizontally?
      * @param flipEntityY Should the entity be flipped vertically?
      */
-    public Entity(Texture texture, float x, float y, float width, float height, float rotation, boolean flipEntityX, boolean flipEntityY) {
-        this(texture, x, y, width, height, rotation, 0, 0, texture.getWidth(), texture.getHeight(), flipEntityX, flipEntityY);
+    public Entity(JacksonRPG jacksonrpg, Texture texture, float x, float y, float width, float height, float rotation, boolean flipEntityX, boolean flipEntityY) {
+        this(jacksonrpg, texture, x, y, width, height, rotation, 0, 0, texture.getWidth(), texture.getHeight(), flipEntityX, flipEntityY);
+    }
     }
 
 
@@ -105,6 +119,7 @@ public class Entity extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        elapsedTime += Gdx.graphics.getDeltaTime();
 
         batch.draw(
                 entityTexture,

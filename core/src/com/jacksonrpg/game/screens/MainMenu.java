@@ -109,6 +109,7 @@ public class MainMenu implements Screen {
 
     public void assetsLoaded() {
         lesserJackson = new Entity(
+                jacksonrpg,
                 jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE),
                 120,
                 105,
@@ -122,6 +123,7 @@ public class MainMenu implements Screen {
         menuStage.addActor(lesserJackson);
 
         greaterJackson = new Entity(
+                jacksonrpg,
                 jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GREATER_JACKSON_SLEEPING_TEXTURE),
                 310,
                 65,
