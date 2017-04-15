@@ -4,11 +4,10 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.jacksonrpg.game.Game;
-import com.jacksonrpg.game.LoadingScreen;
-import com.jacksonrpg.game.MainMenu;
+import com.jacksonrpg.game.screens.Game;
+import com.jacksonrpg.game.screens.LoadingScreen;
+import com.jacksonrpg.game.screens.MainMenu;
 import com.jacksonrpg.game.Assets;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /** Manages screens for the game
  */

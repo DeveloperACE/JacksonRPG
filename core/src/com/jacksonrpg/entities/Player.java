@@ -8,9 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jacksonrpg.JacksonRPG;
-import com.jacksonrpg.game.Game;
-
-import java.util.AbstractMap;
 
 /**
  * Created by edwar12421 on 3/23/2017.
