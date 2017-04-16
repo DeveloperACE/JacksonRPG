@@ -212,16 +212,15 @@ public class Player extends Entity {
      * @param left The leftmost x coordinate the player can go to
      * @param right The rightmost x coordinate the player can go to (auto-adjusted for player width)
      */
-    public void setMovementBorders(Integer left, Integer right) {
+    public void setMovementBorders(int left, int right) {
         leftBorder = left;
         rightBorder = right;
     }
 
-    /*
-    public void adjustMovementBorders(Integer left, Integer right) {
+    public void adjustMovementBorders(int left, int right) {
         leftBorder = leftBorder + left;
         rightBorder = rightBorder + right;
-    }*/
+    }
 
     /** checks if the given x coordinate is within the player's movement boundaries to prevent glitches
      *
@@ -262,7 +261,7 @@ public class Player extends Entity {
      *
      * @return Float value representing the players health remaining
      */
-    public float getHealthPointsRemaining() {
+    public int getHealthPointsRemaining() {
         return maxHealth-healthLost;
     }
 
