@@ -2,6 +2,7 @@ package com.jacksonrpg.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -269,8 +270,73 @@ public class Player extends Entity {
      *
      * @return Float value from 0 to 1 (percentage) representing the players health
      */
-    public float getHealth() {
-        return maxHealth-healthLost/maxHealth;
+    public float getHealthPercentage() {
+        return (maxHealth-healthLost)/maxHealth;
+    }
+
+
+    /** Returns players current health as a "Grade" A-F
+     *
+     * @return String value of the grade that the player has
+     */
+    public String getHealthGrade() {
+
+       float percentage = getHealthPercentage();
+       System.out.println(percentage);
+
+       /*grading scale
+        A+ 90-100%
+        A 80-90%
+        A- 70-80%
+
+        B+ 60-70%
+        B 50-60%
+        B- 40-50%
+
+        C+ 30-40%
+        C 20-30%
+        C- 10-20%
+
+        D 1%-10%
+
+        F 0%
+
+
+        */
+            if (percentage >= .9f && percentage <= 1f ) {return "A+";}
+        else if (percentage >= .8f && percentage < .9f ) {return "A";}
+        else if (percentage >= .7f && percentage < .8f ) {return "A-";}
+        else if (percentage >= .6f && percentage < .7f ) {return "B+";}
+        else if (percentage >= .5f && percentage < .6f ) {return "B";}
+        else if (percentage >= .4f && percentage < .5f ) {return "B-";}
+        else if (percentage >= .3f && percentage < .4f ) {return "C+";}
+        else if (percentage >= .2f && percentage < .3f ) {return "C";}
+        else if (percentage >= .1f && percentage < .2f ) {return "C-";}
+
+        else if (percentage > 0f && percentage < .1f ) {return "D";}
+
+        else if (percentage == 0f ) {return "F";}
+
+        else {return " ";}
+
+    }
+
+
+    public Color getHealthGradeColor() {
+
+        if (getHealthGrade().contains("A")) {
+            return Color.GREEN;
+        } else if (getHealthGrade().contains("B")) {
+            return Color.BLUE;
+        } else if (getHealthGrade().contains("C")) {
+            return Color.GOLDENROD;
+        } else if (getHealthGrade().contains("D")) {
+            return Color.BROWN;
+        } else if (getHealthGrade().contains("F")) {
+            return Color.RED;
+        } else {
+            return Color.PINK;
+        }
     }
 
     /** Returns the amount of health the player has lost

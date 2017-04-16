@@ -25,6 +25,7 @@ public class Assets {
     //GLOBAL PATHS
     public final String LESSER_JACKSON_WALKING_ATLAS = "core/assets/images/entities/lesserjackson/walking.atlas";
     public final String SPEECHBUBBLE_ATLAS_PATH = "core/assets/images/other/speechbubble/speechbubble.atlas";
+    public final String HEALTH_BAR_TEXTURE = "core/assets/images/HUD/healthbar.png";
 
     
     //Main Menu Paths
