@@ -71,11 +71,17 @@ public class Entity extends Actor {
 
     }
 
+    /** Queues the assets needed to construct the necessary variables for this screen
+     *
+     */
     public void queueAssets() {
         jacksonrpg.getAssets().queueTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
 
     }
 
+    /** Called when the assets requested in queueAssets() have been loaded successfully
+     *
+     */
     public void assetsLoaded() {
         TextureAtlas atlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
         interactionAnimation = new Animation<TextureRegion>(1f/3f, atlas.findRegions("ellipsis"));
@@ -149,6 +155,10 @@ public class Entity extends Actor {
         return entityTexture;
     }
 
+    /** Sets if the entity should just be a static entity or should be interactable
+     *
+     * @param interactable Boolean representing if the entity should be able to be interacted with or not
+     */
     public final void setInteractable(boolean interactable) {this.interactable = interactable;}
 
 

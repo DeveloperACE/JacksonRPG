@@ -47,7 +47,11 @@ public class Player extends Entity {
     private float animationFramerate = 1f/18f;
 
 
-
+    /** Creates a new player
+     *
+     * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
+     * @param player the {@link PlayerName} of the player to create. This determines which assets to use.
+     */
     public Player(JacksonRPG jacksonrpg, PlayerName player) {
 
         super(jacksonrpg, new Texture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH), 0, 0, 1, 2, 0, false, false);
@@ -85,7 +89,10 @@ public class Player extends Entity {
 
     }
 
-    //called when the world is ready to receive function calls
+    /** This is called when the current world (loaded in {@link com.jacksonrpg.game.screens.Game}) has loaded so the
+     * player can get the world dimensions and set its own movement boundaries
+     *
+     */
     public void worldReady() {
         rightBorder = jacksonrpg.getGame().getWorld().getMapWidthInPixels();
     }
@@ -201,7 +208,16 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @return The left boundary of player movement
+     */
     public Integer getLeftBoundary() {return leftBorder;}
+
+    /**
+     *
+     * @return The right boundary of player movement
+     */
     public Integer getRightBoundary() {return rightBorder;}
     //public Integer getTopBoundary() {return topBorder;}
     //public Integer getBottomBoundary() {return bottomBorder;}
@@ -217,6 +233,11 @@ public class Player extends Entity {
         rightBorder = right;
     }
 
+    /** increases or decreases the players movement boundaries
+     *
+     * @param left the amount to increase or decrease the left boundary by
+     * @param right the amount to increase or decrease the right boundary by
+     */
     public void adjustMovementBorders(int left, int right) {
         leftBorder = leftBorder + left;
         rightBorder = rightBorder + right;
@@ -237,7 +258,7 @@ public class Player extends Entity {
     }
 
 
-    /** Gives health to the player
+    /** Gives a single health point back to the player
      *
      */
     public void addHealth() {
@@ -247,7 +268,7 @@ public class Player extends Entity {
         }
     }
 
-    /** Removes health from the player
+    /** Removes a single health point from the player
      *
      */
     public void subtractHealth() {
@@ -387,7 +408,7 @@ public class Player extends Entity {
 
     /**
      *
-     * @return The players current balance
+     * @return The players current balance as a string
      */
     public String getBalance() {return "" + monetaryBalance;}
 

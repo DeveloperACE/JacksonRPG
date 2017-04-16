@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jacksonrpg.JacksonRPG;
 
-/**
+/** Displays a graphical loading screen while loading assets in the background
+ *
  * Created by Adrian on 4/8/17.
  */
 public class LoadingScreen implements Screen {
@@ -26,10 +27,20 @@ public class LoadingScreen implements Screen {
 
     private JacksonRPG.AppScreen postLoadScreen;
 
+
+    /** Creates the Loading Screen with the main menu as the default screen to display after loading
+     *
+     * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
+     */
    public LoadingScreen(JacksonRPG jacksonrpg) {
         this(jacksonrpg, JacksonRPG.AppScreen.MAIN_MENU);
     }
 
+    /** Creates the Loading Screen
+     *
+     * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
+     * @param postLoadScreen
+     */
     public LoadingScreen(JacksonRPG jacksonrpg, JacksonRPG.AppScreen postLoadScreen) {
         this.jacksonrpg = jacksonrpg;
         this.postLoadScreen = postLoadScreen;
@@ -43,6 +54,12 @@ public class LoadingScreen implements Screen {
         loadingAnimation = new Animation<TextureRegion>(1f/19f, atlas.getRegions(), Animation.PlayMode.LOOP);
     }
 
+    /** Continually calls the asset manager's update() function to actually load the queued assets (asynchronously)
+     *  and updates the progress variable
+     *
+     * @return Boolean value indicating if the assetManager has completed loading or not
+     * @see com.jacksonrpg.game.Assets
+     */
     public Boolean update() {
         if (!jacksonrpg.getAssets().update()) {
             progress = jacksonrpg.getAssets().getProgress();
@@ -57,6 +74,11 @@ public class LoadingScreen implements Screen {
 
    // public float getProgress() {return jacksonrpg.getAssets().getProgress();}
 
+    /** Sets the screen to display after the loading screen is no longer needed
+     *
+     * @param postLoadScreen the screen to display after loading
+     * @see JacksonRPG.AppScreen
+     */
     public void setPostLoadScreen(JacksonRPG.AppScreen postLoadScreen) {this.postLoadScreen = postLoadScreen;}
 
     @Override

@@ -27,18 +27,26 @@ public class TutorialWorld /*extends World*/ implements Screen {
     private Integer mapTileSize;
     private TiledMapTileLayer mainLayer;
 
-
+    /** Creates the TutorialWorld
+     *
+     * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
+     */
     public TutorialWorld(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
     }
 
-
+    /** Queues the assets needed to construct the necessary variables for this screen
+     *
+     */
     public void queueAssets() {
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE);
         jacksonrpg.getAssets().queueMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
 
     }
 
+    /** Called when the assets requested in queueAssets() have been loaded successfully
+     *
+     */
     public void assetsLoaded() {
         map = jacksonrpg.getAssets().getMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
         mainLayer = (TiledMapTileLayer) map.getLayers().get(0);
@@ -53,9 +61,23 @@ public class TutorialWorld /*extends World*/ implements Screen {
 
     }
 
+    /** Returns the {@link OrthographicCamera} used in this world
+     *
+     * @return An {@link OrthographicCamera} object
+     */
     public Camera getCamera() {return camera;}
-    public Integer getMapWidthInPixels() {return mainLayer.getWidth() * mapTileSize; }
-    public Integer getMapHeightInPixels() {return mainLayer.getHeight() * mapTileSize; }
+
+    /** calculates the width of the current world's map using the methods provided by the {@link TiledMap} class
+     *
+     * @return the number of pixels the map takes up along its X axis as an integer
+     */
+    public int getMapWidthInPixels() {return mainLayer.getWidth() * mapTileSize; }
+
+    /** calculates the height of the current world's map using the methods provided by the {@link TiledMap} class
+     *
+     * @return the number of pixels the map takes up along its Y axis as an integer
+     */
+    public int getMapHeightInPixels() {return mainLayer.getHeight() * mapTileSize; }
 
 
     @Override

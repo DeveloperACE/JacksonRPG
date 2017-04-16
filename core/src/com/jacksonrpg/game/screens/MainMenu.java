@@ -81,7 +81,10 @@ public class MainMenu implements Screen {
         }
     };
 
-
+    /** Creates a Main Menu
+     *
+     * @param jacksonrpg the jacksonRPG instance from which to use for asset loading .etc
+     */
     public MainMenu(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
         font = this.jacksonrpg.getFont();
@@ -99,7 +102,9 @@ public class MainMenu implements Screen {
 
     }
 
-
+    /** Queues the assets needed to construct the necessary variables for this screen
+     *
+     */
     public void queueAssets() {
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GREATER_JACKSON_SLEEPING_TEXTURE);
@@ -107,6 +112,9 @@ public class MainMenu implements Screen {
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE);
     }
 
+    /** Called when the assets requested in queueAssets() have been loaded successfully
+     *
+     */
     public void assetsLoaded() {
         lesserJackson = new Entity(
                 jacksonrpg,

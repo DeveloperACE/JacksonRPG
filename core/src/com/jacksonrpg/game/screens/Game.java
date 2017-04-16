@@ -48,16 +48,22 @@ public class Game implements Screen {
 
     }
 
-    //pass the queueAssets() call to parts of world
+    /** Queues the assets needed to construct the necessary variables for this screen
+     *
+     */
     public void queueAssets() {
+        //pass the queueAssets() call to parts of world
         player.queueAssets();
         world.queueAssets();
 
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE);
     }
 
-    //pass the assetsLoaded() call to parts of world
+    /** Called when the assets requested in queueAssets() have been loaded successfully
+     *
+     */
     public void assetsLoaded() {
+        //pass the assetsLoaded() call to parts of world
         player.assetsLoaded();
         world.assetsLoaded();
 
@@ -97,8 +103,22 @@ public class Game implements Screen {
         player.worldReady();
     }
 
+    /** Returns the world for the current Game() instance
+     *
+     * @return the world for the current Game() instance
+     */
     public TutorialWorld getWorld() {return world;}
+
+    /** Returns the player for the current Game() instance
+     *
+     * @return the player for the current Game() instance
+     */
     public Player getPlayer() {return player;}
+
+    /** Returns the stage for the current Game() instance
+     *
+     * @return the stage for the current Game() instance
+     */
     public Stage getStage() {return stage;}
 
     @Override
