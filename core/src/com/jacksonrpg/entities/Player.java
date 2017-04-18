@@ -302,7 +302,6 @@ public class Player extends Entity {
     public String getHealthGrade() {
 
        float percentage = getHealthPercentage();
-       System.out.println(percentage);
 
        /*grading scale
         A+ 90-100%
