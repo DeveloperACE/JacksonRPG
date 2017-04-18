@@ -109,6 +109,8 @@ public class MainMenu implements Screen {
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GREATER_JACKSON_SLEEPING_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().BANNER_PATH_TEXTURE);
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_LOGO);
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE);
     }
 
@@ -239,13 +241,23 @@ public class MainMenu implements Screen {
             );
         }
 
-        if (jacksonrpg.getAssets().getManager().isLoaded(jacksonrpg.getAssets().BANNER_PATH_TEXTURE)) {
+        if (jacksonrpg.getAssets().getManager().isLoaded(jacksonrpg.getAssets().GAME_TEXT_BANNER)) {
             menuStage.getBatch().draw(
-                    jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().BANNER_PATH_TEXTURE),
+                    jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER),
                     0,
                     menuStage.getHeight() - 100,
                     400,//1536,
                     100 // 384*/
+            );
+        }
+
+        if (jacksonrpg.getAssets().getManager().isLoaded(jacksonrpg.getAssets().GAME_LOGO)) {
+            menuStage.getBatch().draw(
+                    jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GAME_LOGO),
+                    109,//420
+                    menuStage.getHeight() - 100 + 16,//59 bottom left 72 top left
+                    165,//1536,
+                    65 // 384*/
             );
         }
 
