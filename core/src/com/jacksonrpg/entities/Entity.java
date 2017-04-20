@@ -161,8 +161,12 @@ public class Entity extends Actor {
      */
     public final void setInteractable(boolean interactable) {this.interactable = interactable;}
 
+    public final void onInteraction(){
 
+    }
+    public final void say(String whatToSay){
 
+    }
 
 
     @Override

@@ -3,6 +3,7 @@ package com.jacksonrpg.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -25,6 +26,9 @@ public class Game implements Screen {
     private Stage stage;
     private Stage hudStage;
     private Table hudTable;
+
+    private boolean textboxVisible = false;
+    private Texture textBox;
 
     public Game(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
@@ -57,6 +61,7 @@ public class Game implements Screen {
         world.queueAssets();
 
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE);
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
     }
 
     /** Called when the assets requested in queueAssets() have been loaded successfully
@@ -68,7 +73,7 @@ public class Game implements Screen {
         world.assetsLoaded();
 
 
-        //hud.add()
+        textBox = jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
 
         //create a skin to hold the styles for the button
         Image image = new Image(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE));
@@ -121,6 +126,10 @@ public class Game implements Screen {
      */
     public Stage getStage() {return stage;}
 
+
+    public void setTextBoxVisible(boolean visible) {this.textboxVisible = visible;}
+
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1,0,0, 1);
@@ -132,6 +141,10 @@ public class Game implements Screen {
 
         hudStage.act();
         hudStage.draw();
+
+        if (textboxVisible) {
+
+        }
 
 
     }
