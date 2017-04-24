@@ -25,9 +25,9 @@ public class Game implements Screen {
     private Player player;
     private Stage stage;
     private Stage hudStage;
-    private Table hudTable;
+    private Table statsTable;
+    private Table textboxTable;
 
-    private boolean textboxVisible = false;
     private Texture textBox;
 
     public Game(JacksonRPG jacksonrpg) {
@@ -35,7 +35,8 @@ public class Game implements Screen {
         player = new Player(this.jacksonrpg, Player.PlayerName.LESSERJACKSON);
 
         world = new TutorialWorld(this.jacksonrpg);
-        hudTable = new Table();
+        statsTable = new Table();
+        textboxTable = new Table();
 
        if (player.checkSpawnPoint(100)){
             player.setX(100);
@@ -75,9 +76,9 @@ public class Game implements Screen {
 
         textBox = jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
 
-        //create a skin to hold the styles for the button
         Image image = new Image(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE));
 
+        //create a skin to hold the styles for the button
         Skin skin =  new Skin();
         Label.LabelStyle lstyle = new Label.LabelStyle();
         lstyle.font = jacksonrpg.getFont();
@@ -86,15 +87,23 @@ public class Game implements Screen {
         Label nameLabel = new Label(player.getHealthGrade(), skin);
         nameLabel.setColor(player.getHealthGradeColor());
 
-        hudTable.setBackground(image.getDrawable());
-        hudTable.add(nameLabel).pad(10);
-        hudTable.left();
+        statsTable.setBackground(image.getDrawable());
+        statsTable.add(nameLabel).pad(10);
+        statsTable.left();
         //hud.add(image);
-        hudTable.setWidth(200);
-        hudTable.setHeight(50);
-        hudTable.setX(5);
-        hudTable.setY(350);
+        statsTable.setWidth(200);
+        statsTable.setHeight(50);
+        statsTable.setX(5);
+        statsTable.setY(350);
        // hud.setDebug(true);
+
+
+        textboxTable.setBackground(new Image(textBox).getDrawable());
+        textboxTable.setX(0);
+        textboxTable.setY(0);
+        textboxTable.setWidth(400);
+        textboxTable.setHeight(100);
+        textboxTable.setVisible(false);
 
 
 
@@ -103,7 +112,8 @@ public class Game implements Screen {
         stage.addActor(player);
 
         hudStage = new Stage(new ScreenViewport());
-        hudStage.addActor(hudTable);
+        hudStage.addActor(statsTable);
+        hudStage.addActor(textboxTable);
 
         player.worldReady();
     }
@@ -127,7 +137,7 @@ public class Game implements Screen {
     public Stage getStage() {return stage;}
 
 
-    public void setTextBoxVisible(boolean visible) {this.textboxVisible = visible;}
+    public void setTextBoxVisible(boolean visible) {textboxTable.setVisible(visible);}
 
 
     @Override
@@ -142,9 +152,6 @@ public class Game implements Screen {
         hudStage.act();
         hudStage.draw();
 
-        if (textboxVisible) {
-
-        }
 
 
     }
