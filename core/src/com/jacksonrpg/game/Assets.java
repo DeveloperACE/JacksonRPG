@@ -40,6 +40,7 @@ public class Assets {
 
     //Tutorial World Paths
     public final String TUTORIAL_MAP_PATH = "core/assets/maps/tutorialworld/tutorialworld.tmx";
+    public final String FREDDIE_MAC_TEXTURE = "core/assets/images/entities/freddiemac.png";
 
 
     //Main World Paths
