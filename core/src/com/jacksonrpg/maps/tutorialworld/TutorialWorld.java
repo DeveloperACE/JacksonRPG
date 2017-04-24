@@ -1,14 +1,17 @@
-package com.jacksonrpg.maps;
+package com.jacksonrpg.maps.tutorialworld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.jacksonrpg.JacksonRPG;
+
+import java.lang.reflect.Array;
 
 /**
  * Created by edwar12421 on 3/21/2017.

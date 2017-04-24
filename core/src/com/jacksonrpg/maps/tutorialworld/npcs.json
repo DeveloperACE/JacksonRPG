@@ -1,0 +1,13 @@
+{
+  "tutorialWorldNpcs" : {
+    "freddiemac" : {
+      "name": "Freddie Mac",
+      "texture" : "core/assets/images/entities/freddiemac.png",
+      "x" : 300,
+      "y" : 100,
+      "speechphases" : 1,
+      "says" : "Hello! You must be one of the new freshmen. Would you like to practice your skills before we get to school?"
+
+    }
+  }
+}
