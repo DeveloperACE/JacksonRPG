@@ -2,17 +2,18 @@ package com.jacksonrpg.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Player;
-import com.jacksonrpg.maps.TutorialWorld;
+import com.jacksonrpg.maps.tutorialworld.TutorialWorld;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Manages the creation and assembly of everything required to make the game, including maps, players, Entities .etc.
@@ -41,7 +42,7 @@ public class Game implements Screen {
        if (player.checkSpawnPoint(100)){
             player.setX(100);
             player.setY(100);
-        }
+        }//TODO: Error handling
         player.setWidth(50);
         player.setHeight(100);
 
@@ -138,7 +139,19 @@ public class Game implements Screen {
 
 
     public void setTextBoxVisible(boolean visible) {textboxTable.setVisible(visible);}
+    public void setTextBoxText(String text) {textboxTable.add(text, "Times New Roman", Color.BLACK );}
+    public void addTextBoxButton(String text) {textboxTable.add(text, "Times New Roman", Color.BLACK );}
+    public void resetTextBox() {
 
+        while (textboxTable.getCells().size >= 1) {
+
+        int size = textboxTable.getCells().size;
+
+        //Remove the last row
+        textboxTable.getCells().removeIndex(size-1);
+
+        }
+    }
 
     @Override
     public void render(float delta) {

@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.jacksonrpg.JacksonRPG;
 
+import java.util.ArrayList;
+
 /** A simple non-movable entity that can be interacted with.
  *
  * Created by Adrian on 3/14/17.
@@ -31,6 +33,8 @@ public class Entity extends Actor {
     private Integer interactionAnimationWidth = 25;
     private Animation<TextureRegion> interactionAnimation;
     protected float elapsedTime = 0;//private access to only this and any clas that extends it
+
+    protected ArrayList<String> speech;
 
 
     /** Creates a new entity with the x, y, width, height, rotation, section, flipEntityX and flipEntityY properties
@@ -165,7 +169,9 @@ public class Entity extends Actor {
 
     }
     public final void say(String whatToSay){
-
+        jacksonrpg.getGame().setTextBoxVisible(true);
+        jacksonrpg.getGame().setTextBoxText(whatToSay);
+        //TODO: add action to run setTextBoxVisible(false); jacksonrpg.getGame().resetTextBox(); when button clicked
     }
 
 
