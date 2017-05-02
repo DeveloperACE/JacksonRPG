@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
+import com.jacksonrpg.entities.Entity;
 import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.tutorialworld.TutorialWorld;
 
@@ -34,6 +35,7 @@ public class Game implements Screen {
     public Game(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
         player = new Player(this.jacksonrpg, Player.PlayerName.LESSERJACKSON);
+
 
         world = new TutorialWorld(this.jacksonrpg);
         statsTable = new Table();
@@ -64,6 +66,7 @@ public class Game implements Screen {
 
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH);
     }
 
     /** Called when the assets requested in queueAssets() have been loaded successfully
@@ -117,6 +120,7 @@ public class Game implements Screen {
         hudStage.addActor(textboxTable);
 
         player.worldReady();
+        addEntity(world.getFreddie());
     }
 
     /** Returns the world for the current Game() instance
@@ -137,6 +141,7 @@ public class Game implements Screen {
      */
     public Stage getStage() {return stage;}
 
+    public void addEntity(Entity entity) {stage.addActor(entity);}
 
     public void setTextBoxVisible(boolean visible) {textboxTable.setVisible(visible);}
     public void setTextBoxText(String text) {textboxTable.add(text, "Times New Roman", Color.BLACK );}
@@ -145,10 +150,9 @@ public class Game implements Screen {
 
         while (textboxTable.getCells().size >= 1) {
 
-        int size = textboxTable.getCells().size;
-
-        //Remove the last row
-        textboxTable.getCells().removeIndex(size-1);
+         int size = textboxTable.getCells().size;
+         //Remove the last row
+         textboxTable.getCells().removeIndex(size-1);
 
         }
     }

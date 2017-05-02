@@ -89,6 +89,8 @@ public class Entity extends Actor {
     public void assetsLoaded() {
         TextureAtlas atlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
         interactionAnimation = new Animation<TextureRegion>(1f/3f, atlas.findRegions("ellipsis"));
+
+
     }
 
     /** Creates a new entity with the x, y, width, height, rotation, flipEntityX and flipEntityY properties.
@@ -172,6 +174,15 @@ public class Entity extends Actor {
         jacksonrpg.getGame().setTextBoxVisible(true);
         jacksonrpg.getGame().setTextBoxText(whatToSay);
         //TODO: add action to run setTextBoxVisible(false); jacksonrpg.getGame().resetTextBox(); when button clicked
+    }
+    public final void addSpeech(String speech) {
+        this.speech.add(speech);
+    }
+
+    public final String saySpeechLine(int index) {
+        String line = this.speech.get(index);
+        this.speech.remove(index);
+        return line;
     }
 
 

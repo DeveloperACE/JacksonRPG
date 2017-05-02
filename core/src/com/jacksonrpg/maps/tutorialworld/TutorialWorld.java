@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.jacksonrpg.JacksonRPG;
+import com.jacksonrpg.entities.Entity;
 
 import java.lang.reflect.Array;
 
@@ -30,19 +31,25 @@ public class TutorialWorld /*extends World*/ implements Screen {
     private Integer mapTileSize;
     private TiledMapTileLayer mainLayer;
 
+
+    private Entity freddiemac = makeFreddie();
+
+
     /** Creates the TutorialWorld
      *
      * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
      */
     public TutorialWorld(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
+
     }
 
     /** Queues the assets needed to construct the necessary variables for this screen
      *
      */
     public void queueAssets() {
-        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE);
+        freddiemac.queueAssets();
+        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE);
         jacksonrpg.getAssets().queueMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
 
     }
@@ -62,8 +69,25 @@ public class TutorialWorld /*extends World*/ implements Screen {
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
 
+        freddiemac.assetsLoaded();
+        freddiemac.changeTexture(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE));
     }
 
+    private Entity makeFreddie() {
+        Entity freddie = new Entity(
+                jacksonrpg,
+                jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH),
+                600,
+                100,
+                100,
+                100
+        );
+        freddie.setInteractable(true);
+
+        return freddie;
+    }
+
+    public Entity getFreddie() {return freddiemac;}
     /** Returns the {@link OrthographicCamera} used in this world
      *
      * @return An {@link OrthographicCamera} object
