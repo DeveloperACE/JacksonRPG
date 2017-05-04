@@ -13,9 +13,6 @@ import com.jacksonrpg.entities.Entity;
 import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.tutorialworld.TutorialWorld;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 /**
  * Manages the creation and assembly of everything required to make the game, including maps, players, Entities .etc.
  * Created by Adrian on 3/14/17.
@@ -27,27 +24,20 @@ public class Game implements Screen {
     private Player player;
     private Stage stage;
     private Stage hudStage;
-    private Table statsTable;
-    private Table textboxTable;
+    private Table statsTable = new Table();
+    private Table textboxTable = new Table();
 
     private Texture textBox;
 
     public Game(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
-        player = new Player(this.jacksonrpg, Player.PlayerName.LESSERJACKSON);
-
 
         world = new TutorialWorld(this.jacksonrpg);
-        statsTable = new Table();
-        textboxTable = new Table();
 
-       if (player.checkSpawnPoint(100)){
-            player.setX(100);
-            player.setY(100);
-        }//TODO: Error handling
-        player.setWidth(50);
-        player.setHeight(100);
+        setupPlayer();
 
+        //queue all assets and load them
+        //this is where the queueAssets() and assetsLoaded() calls originate from for the game
         queueAssets();
         jacksonrpg.makeLoadingScreen(true);
        // this.jacksonrpg.checkLoad(true);
@@ -60,13 +50,15 @@ public class Game implements Screen {
      *
      */
     public void queueAssets() {
-        //pass the queueAssets() call to parts of world
-        player.queueAssets();
-        world.queueAssets();
+
 
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
-        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH);
+
+        //pass the queueAssets() call to parts of world
+
+        world.queueAssets();
+        player.queueAssets();
     }
 
     /** Called when the assets requested in queueAssets() have been loaded successfully
@@ -78,8 +70,32 @@ public class Game implements Screen {
         world.assetsLoaded();
 
 
-        textBox = jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
+        setupHUD();
+        setupTextbox();
 
+       // stage.assetsLoaded();
+        stage = new Stage(new ScreenViewport(world.getCamera()));
+        stage.addActor(player);
+
+        hudStage = new Stage(new ScreenViewport());
+        hudStage.addActor(statsTable);
+        hudStage.addActor(textboxTable);
+
+    }
+
+    private void setupPlayer() {
+        player = new Player(this.jacksonrpg, Player.PlayerName.LESSERJACKSON);
+
+        if (player.checkSpawnPoint(100)){
+            player.setX(100);
+            player.setY(100);
+        }//TODO: Error handling
+
+        player.setWidth(50);
+        player.setHeight(100);
+    }
+
+    private void setupHUD() {
         Image image = new Image(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE));
 
         //create a skin to hold the styles for the button
@@ -99,28 +115,17 @@ public class Game implements Screen {
         statsTable.setHeight(50);
         statsTable.setX(5);
         statsTable.setY(350);
-       // hud.setDebug(true);
+        // hud.setDebug(true);
+    }
 
-
+    private void setupTextbox() {
+        textBox = jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
         textboxTable.setBackground(new Image(textBox).getDrawable());
         textboxTable.setX(0);
         textboxTable.setY(0);
         textboxTable.setWidth(400);
         textboxTable.setHeight(100);
         textboxTable.setVisible(false);
-
-
-
-       // stage.assetsLoaded();
-        stage = new Stage(new ScreenViewport(world.getCamera()));
-        stage.addActor(player);
-
-        hudStage = new Stage(new ScreenViewport());
-        hudStage.addActor(statsTable);
-        hudStage.addActor(textboxTable);
-
-        player.worldReady();
-        addEntity(world.getFreddie());
     }
 
     /** Returns the world for the current Game() instance

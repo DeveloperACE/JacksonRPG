@@ -27,7 +27,8 @@ public class Player extends Entity {
     public enum PlayerName {
         LESSERJACKSON, GREATERJACKSON
     }
-    private PlayerName player;
+
+    private PlayerName playerName;
 
     private GraphicalState graphicalState = GraphicalState.FACINGRIGHT;
     private MovementState movementState = MovementState.STANDING;
@@ -35,7 +36,7 @@ public class Player extends Entity {
 
     private Integer movementSpeed = 3;
     private Integer leftBorder = 0;
-    private Integer rightBorder = 2148;
+    private Integer rightBorder = 2048;//value of jacksonrpg.getGame().getWorld().getMapWidthInPixels()
 
     private Integer healthLost = 0;//0-14, 0 = full, 14 = dead
     private Integer maxHealth = 14;
@@ -47,28 +48,38 @@ public class Player extends Entity {
     private float animationFramerate = 1f/18f;
 
 
-    /** Creates a new player
+    /** Creates a new playerName
      *
      * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
-     * @param player the {@link PlayerName} of the player to create. This determines which assets to use.
+     * @param playerName the {@link PlayerName} of the playerName to create. This determines which assets to use.
      */
-    public Player(JacksonRPG jacksonrpg, PlayerName player) {
+    public Player(JacksonRPG jacksonrpg, PlayerName playerName) {
 
-        super(jacksonrpg, new Texture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH), 0, 0, 1, 2, 0, false, false);
+
+        super(
+                jacksonrpg,
+                new Texture(jacksonrpg.getAssets().DEFAULT_ENTITY_TEXTURE_PATH),
+                0,
+                0,
+                1,
+                2,
+                0,
+                false,
+                false
+        );
+
         this.jacksonrpg = jacksonrpg;
-        this.player = player;
-
-
+        this.playerName = playerName;
     }
 
     @Override
     public void queueAssets() {
-        switch (player){
+        switch (playerName){
             case LESSERJACKSON:
                 jacksonrpg.getAssets().queueTextureAtlas(jacksonrpg.getAssets().LESSER_JACKSON_WALKING_ATLAS);
                 break;
             case GREATERJACKSON:
-                //TODO: add greater jackson assets
+               // jacksonrpg.getAssets().queueTextureAtlas(jacksonrpg.getAssets().GREATER_JACKSON_WALKING_ATLAS);
                 break;
         }
     }
@@ -76,25 +87,17 @@ public class Player extends Entity {
     @Override
     public void assetsLoaded() {
 
-        switch (player){
+        switch (playerName){
             case LESSERJACKSON:
                 walkingAtlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().LESSER_JACKSON_WALKING_ATLAS);
                 break;
             case GREATERJACKSON:
-                //TODO: add greater jackson assets
+               // walkingAtlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().GREATER_JACKSON_WALKING_ATLAS);
                 break;
          }
 
         walkingAnimation = new Animation<TextureRegion>(animationFramerate, walkingAtlas.getRegions(), Animation.PlayMode.LOOP);
 
-    }
-
-    /** This is called when the current world (loaded in {@link com.jacksonrpg.game.screens.Game}) has loaded so the
-     * player can get the world dimensions and set its own movement boundaries
-     *
-     */
-    public void worldReady() {
-        rightBorder = jacksonrpg.getGame().getWorld().getMapWidthInPixels();
     }
 
 
@@ -172,7 +175,7 @@ public class Player extends Entity {
         return getAnimationFrame(this.elapsedTime);
     }
 
-    /** Checks for keys being pressed and updates the player state flags accordingly
+    /** Checks for keys being pressed and updates the playerName state flags accordingly
      *
      */
     private void checkKeyPresses() {
@@ -187,11 +190,11 @@ public class Player extends Entity {
         }
     }
 
-    /** Updates player position based on state flags. If the player hits the border, they will keep animating, just without moving
+    /** Updates playerName position based on state flags. If the playerName hits the border, they will keep animating, just without moving
      *
      */
     private void move() {
-        //if player is more than one "movement" right of leftmost world border
+        //if playerName is more than one "movement" right of leftmost world border
         if (getX() > leftBorder + movementSpeed) {
             //allow movement left
             if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGLEFT) {
@@ -199,7 +202,7 @@ public class Player extends Entity {
             }
         }
 
-        //if player is more than one "movement" left of rightmost world border
+        //if playerName is more than one "movement" left of rightmost world border
         if (getX() < (rightBorder - movementSpeed)-getWidth()) {
             //allow movement right
             if (this.movementState == MovementState.WALKING && this.graphicalState == GraphicalState.FACINGRIGHT) {
@@ -210,13 +213,13 @@ public class Player extends Entity {
 
     /**
      *
-     * @return The left boundary of player movement
+     * @return The left boundary of playerName movement
      */
     public Integer getLeftBoundary() {return leftBorder;}
 
     /**
      *
-     * @return The right boundary of player movement
+     * @return The right boundary of playerName movement
      */
     public Integer getRightBoundary() {return rightBorder;}
     //public Integer getTopBoundary() {return topBorder;}
@@ -225,8 +228,8 @@ public class Player extends Entity {
 
     /** Sets the players movement boundaries on either side of the map
      *
-     * @param left The leftmost x coordinate the player can go to
-     * @param right The rightmost x coordinate the player can go to (auto-adjusted for player width)
+     * @param left The leftmost x coordinate the playerName can go to
+     * @param right The rightmost x coordinate the playerName can go to (auto-adjusted for playerName width)
      */
     public void setMovementBorders(int left, int right) {
         leftBorder = left;
@@ -243,7 +246,7 @@ public class Player extends Entity {
         rightBorder = rightBorder + right;
     }
 
-    /** checks if the given x coordinate is within the player's movement boundaries to prevent glitches
+    /** checks if the given x coordinate is within the playerName's movement boundaries to prevent glitches
      *
      * @param x The x coordinate to check
      * @return A boolean depicting whether the coordinate is within the boundaries or not
@@ -258,7 +261,7 @@ public class Player extends Entity {
     }
 
 
-    /** Gives a single health point back to the player
+    /** Gives a single health point back to the playerName
      *
      */
     public void addHealth() {
@@ -268,17 +271,17 @@ public class Player extends Entity {
         }
     }
 
-    /** Removes a single health point from the player
+    /** Removes a single health point from the playerName
      *
      */
     public void subtractHealth() {
         if (healthLost < maxHealth) {
-            //add one health lost, making the player "less healthy"
+            //add one health lost, making the playerName "less healthy"
             healthLost = healthLost + 1;
         }
     }
 
-    /** Returns the amount of health the player has left
+    /** Returns the amount of health the playerName has left
      *
      * @return Float value representing the players health remaining
      */
@@ -297,7 +300,7 @@ public class Player extends Entity {
 
     /** Returns players current health as a "Grade" A-F
      *
-     * @return String value of the grade that the player has
+     * @return String value of the grade that the playerName has
      */
     public String getHealthGrade() {
 
@@ -358,9 +361,9 @@ public class Player extends Entity {
         }
     }
 
-    /** Returns the amount of health the player has lost
+    /** Returns the amount of health the playerName has lost
      *
-     * @return The amount of health the player has lost
+     * @return The amount of health the playerName has lost
      */
     public int getHealthLost() {
         return healthLost;
@@ -379,10 +382,10 @@ public class Player extends Entity {
         monetaryBalance = monetaryBalance + amount;
     }
 
-    /** Checks to see if the player has enough money to afford something
+    /** Checks to see if the playerName has enough money to afford something
      *
      * @param amount The amount of the purchase that is being checked
-     * @return boolean value depicting if the player has enough balance for the purchace
+     * @return boolean value depicting if the playerName has enough balance for the purchace
      */
     public Boolean canSpend(double amount) {
         if (monetaryBalance - amount > 0) {

@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class Entity extends Actor {
 
+
     private JacksonRPG jacksonrpg;
 
     private Texture entityTexture;
