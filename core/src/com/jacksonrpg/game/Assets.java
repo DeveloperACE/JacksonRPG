@@ -30,7 +30,6 @@ public class Assets {
     
     //Main Menu Paths
     public final String MENU_BACKGROUND_TEXTURE = "core/assets/images/backgrounds/TitleScreen-BusBack.png";
-    public final String BANNER_PATH_TEXTURE = "core/assets/images/bannerlogo.png";
     public final String GAME_LOGO = "core/assets/images/game_logo.png";
     public final String GAME_TEXT_BANNER = "core/assets/images/text_banner.png";
     public final String GREATER_JACKSON_SLEEPING_TEXTURE = "core/assets/images/entities/greaterjackson/gj_sleeping.png";

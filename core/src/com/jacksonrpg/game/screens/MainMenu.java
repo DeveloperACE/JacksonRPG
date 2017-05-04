@@ -108,7 +108,6 @@ public class MainMenu implements Screen {
     public void queueAssets() {
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().LESSER_JACKSON_SLEEPING_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GREATER_JACKSON_SLEEPING_TEXTURE);
-        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().BANNER_PATH_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_LOGO);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().MENU_BACKGROUND_TEXTURE);
