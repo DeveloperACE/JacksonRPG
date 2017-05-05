@@ -14,7 +14,8 @@ import com.jacksonrpg.entities.Player;
 import com.jacksonrpg.maps.Map;
 
 /**
- * Manages the creation and assembly of everything required to make the game, including maps, players, Entities .etc.
+ * Manages the interactions between game levels, saving progress and the in-game menu
+ * TODO
  * Created by Adrian on 3/14/17.
  */
 public class Game implements Screen {
