@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Entity;
 import com.jacksonrpg.entities.Player;
-import com.jacksonrpg.maps.tutorialworld.TutorialWorld;
+import com.jacksonrpg.maps.Map;
 
 /**
  * Manages the creation and assembly of everything required to make the game, including maps, players, Entities .etc.
@@ -20,7 +20,7 @@ import com.jacksonrpg.maps.tutorialworld.TutorialWorld;
 public class Game implements Screen {
 
     private JacksonRPG jacksonrpg;
-    private TutorialWorld world;
+    private Map world;
     private Player player;
     private Stage stage;
     private Stage hudStage;
@@ -32,7 +32,7 @@ public class Game implements Screen {
     public Game(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
 
-        world = new TutorialWorld(this.jacksonrpg);
+        world = new Map(this.jacksonrpg);
 
         setupPlayer();
 
@@ -132,7 +132,7 @@ public class Game implements Screen {
      *
      * @return the world for the current Game() instance
      */
-    public TutorialWorld getWorld() {return world;}
+    public Map getWorld() {return world;}
 
     /** Returns the player for the current Game() instance
      *

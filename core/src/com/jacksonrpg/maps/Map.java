@@ -1,4 +1,4 @@
-package com.jacksonrpg.maps.tutorialworld;
+package com.jacksonrpg.maps;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
@@ -14,9 +14,14 @@ import com.jacksonrpg.entities.Entity;
 /**
  * Created by edwar12421 on 3/21/2017.
  */
-public class TutorialWorld /*extends World*/ implements Screen {
+public class Map /*extends World*/ implements Screen {
+
+    enum Level {
+        TUTORIAL, MAIN
+    }
 
     private JacksonRPG jacksonrpg;
+    private Level level;
     private TiledMap map;
     private OrthographicCamera camera;
 
@@ -31,14 +36,24 @@ public class TutorialWorld /*extends World*/ implements Screen {
 
 
 
-    /** Creates the TutorialWorld
+    /** Creates the Map
+     *
+     * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
+     * @param level the name of the level to render. this determines the assets to load
+     */
+    public Map(JacksonRPG jacksonrpg, Level level) {
+        this.jacksonrpg = jacksonrpg;
+        this.level = level;
+
+        setupCamera();
+    }
+
+    /** Creates the Map
      *
      * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
      */
-    public TutorialWorld(JacksonRPG jacksonrpg) {
-        this.jacksonrpg = jacksonrpg;
-
-        setupCamera();
+    public Map(JacksonRPG jacksonrpg) {
+        this(jacksonrpg, Level.TUTORIAL);
     }
 
     /** Queues the assets needed to construct the necessary variables for this screen
@@ -48,8 +63,15 @@ public class TutorialWorld /*extends World*/ implements Screen {
        // freddiemac.queueAssets();
        // jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE);
 
-        //get world map
-        jacksonrpg.getAssets().queueMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+        //queue world map
+        switch (level){
+            case TUTORIAL:
+                jacksonrpg.getAssets().queueMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+                break;
+            case MAIN:
+                //jacksonrpg.getAssets().queueMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+                break;
+        }
 
     }
 
@@ -81,7 +103,15 @@ public class TutorialWorld /*extends World*/ implements Screen {
 //    }
 
     private void setupMap() {
-        map = jacksonrpg.getAssets().getMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+        switch (level){
+            case TUTORIAL:
+                map = jacksonrpg.getAssets().getMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+                break;
+            case MAIN:
+                //map = jacksonrpg.getAssets().getMap(jacksonrpg.getAssets().TUTORIAL_MAP_PATH);
+                break;
+        }
+
         mainLayer = (TiledMapTileLayer) map.getLayers().get(0);
         mapTileSize = (int) mainLayer.getTileWidth();
         mapRenderer = new OrthogonalTiledMapRenderer(map, unitScale);
