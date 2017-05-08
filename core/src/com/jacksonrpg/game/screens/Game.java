@@ -11,8 +11,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Entity;
 import com.jacksonrpg.entities.Player;
-import com.jacksonrpg.maps.Map;
-
+import com.jacksonrpg.maps.*;
 /**
  * Manages the interactions between game levels, saving progress and the in-game menu
  * TODO
@@ -21,9 +20,7 @@ import com.jacksonrpg.maps.Map;
 public class Game implements Screen {
 
     private JacksonRPG jacksonrpg;
-    private Map world;
-    private Player player;
-    private Stage stage;
+    private World world;
     private Stage hudStage;
     private Table statsTable = new Table();
     private Table textboxTable = new Table();
@@ -33,9 +30,9 @@ public class Game implements Screen {
     public Game(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
 
-        world = new Map(this.jacksonrpg);
+        world = new World(jacksonrpg, World.Level.TUTORIAL);
 
-        setupPlayer();
+
 
         //queue all assets and load them
         //this is where the queueAssets() and assetsLoaded() calls originate from for the game
@@ -56,27 +53,23 @@ public class Game implements Screen {
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE);
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
 
-        //pass the queueAssets() call to parts of world
+        //pass the queueAssets() call to parts of map
 
-        world.queueAssets();
-        player.queueAssets();
+       world.queueAssets();
     }
 
     /** Called when the assets requested in queueAssets() have been loaded successfully
      *
      */
     public void assetsLoaded() {
-        //pass the assetsLoaded() call to parts of world
-        player.assetsLoaded();
-        world.assetsLoaded();
+        //pass the assetsLoaded() call to parts of map
+       world.assetsLoaded();
 
 
         setupHUD();
         setupTextbox();
 
-       // stage.assetsLoaded();
-        stage = new Stage(new ScreenViewport(world.getCamera()));
-        stage.addActor(player);
+
 
         hudStage = new Stage(new ScreenViewport());
         hudStage.addActor(statsTable);
@@ -84,17 +77,7 @@ public class Game implements Screen {
 
     }
 
-    private void setupPlayer() {
-        player = new Player(this.jacksonrpg, Player.PlayerName.LESSERJACKSON);
 
-        if (player.checkSpawnPoint(100)){
-            player.setX(100);
-            player.setY(100);
-        }//TODO: Error handling
-
-        player.setWidth(50);
-        player.setHeight(100);
-    }
 
     private void setupHUD() {
         Image image = new Image(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE));
@@ -105,8 +88,8 @@ public class Game implements Screen {
         lstyle.font = jacksonrpg.getFont();
         skin.add("default", lstyle);
 
-        Label nameLabel = new Label(player.getHealthGrade(), skin);
-        nameLabel.setColor(player.getHealthGradeColor());
+        Label nameLabel = new Label(world.getPlayer().getHealthGrade(), skin);
+        nameLabel.setColor(world.getPlayer().getHealthGradeColor());
 
         statsTable.setBackground(image.getDrawable());
         statsTable.add(nameLabel).pad(10);
@@ -129,26 +112,8 @@ public class Game implements Screen {
         textboxTable.setVisible(false);
     }
 
-    /** Returns the world for the current Game() instance
-     *
-     * @return the world for the current Game() instance
-     */
-    public Map getWorld() {return world;}
 
-    /** Returns the player for the current Game() instance
-     *
-     * @return the player for the current Game() instance
-     */
-    public Player getPlayer() {return player;}
-
-    /** Returns the stage for the current Game() instance
-     *
-     * @return the stage for the current Game() instance
-     */
-    public Stage getStage() {return stage;}
-
-    public void addEntity(Entity entity) {stage.addActor(entity);}
-
+    public World getWorld() {return world;}
     public void setTextBoxVisible(boolean visible) {textboxTable.setVisible(visible);}
     public void setTextBoxText(String text) {textboxTable.add(text, "Times New Roman", Color.BLACK );}
     public void addTextBoxButton(String text) {textboxTable.add(text, "Times New Roman", Color.BLACK );}
@@ -169,8 +134,6 @@ public class Game implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         world.render(delta);
-        stage.act();
-        stage.draw();
 
         hudStage.act();
         hudStage.draw();
@@ -181,7 +144,7 @@ public class Game implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
+        world.dispose();
     }
 
     @Override

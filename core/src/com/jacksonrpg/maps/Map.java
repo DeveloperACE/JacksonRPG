@@ -9,19 +9,19 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Entity;
+import com.jacksonrpg.maps.World.Level;
 
 
 /**
  * Created by edwar12421 on 3/21/2017.
  */
-public class Map /*extends World*/ implements Screen {
-
-    enum Level {
-        TUTORIAL, MAIN
-    }
+public class Map/*extends World*/ implements Screen {
 
     private JacksonRPG jacksonrpg;
+
     private Level level;
+
+
     private TiledMap map;
     private OrthographicCamera camera;
 
@@ -49,12 +49,11 @@ public class Map /*extends World*/ implements Screen {
     }
 
     /** Creates the Map
+     * level defaults to TUTORIAL
      *
      * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
      */
-    public Map(JacksonRPG jacksonrpg) {
-        this(jacksonrpg, Level.TUTORIAL);
-    }
+    public Map(JacksonRPG jacksonrpg) {this(jacksonrpg, Level.TUTORIAL);}
 
     /** Queues the assets needed to construct the necessary variables for this screen
      *
@@ -81,8 +80,6 @@ public class Map /*extends World*/ implements Screen {
     public void assetsLoaded() {
 
         setupMap();
-
-
 
         //freddiemac.assetsLoaded();
        // freddiemac.changeTexture(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE));
@@ -150,17 +147,17 @@ public class Map /*extends World*/ implements Screen {
 
         if (camera != null) {
 
-            Vector3 playerScreenCoords = camera.unproject(new Vector3(jacksonrpg.getGame().getPlayer().getX(), 0, 0));
+            Vector3 playerScreenCoords = camera.unproject(new Vector3(jacksonrpg.getGame().getWorld().getPlayer().getX(), 0, 0));
             // let the camera follow the player, x-axis only
             //TODO: Fix player movement for midsections of map
             ///*playerScreenCoords.x < m ||*/ playerScreenCoords.x > Gdx.graphics.getWidth()-mapMovementTriggerBuffer
-            if (jacksonrpg.getGame().getPlayer().getX() > 200 && jacksonrpg.getGame().getPlayer().getX() < getMapWidthInPixels() - 200) {
+            if (jacksonrpg.getGame().getWorld().getPlayer().getX() > 200 && jacksonrpg.getGame().getWorld().getPlayer().getX() < getMapWidthInPixels() - 200) {
 
-                camera.position.x = jacksonrpg.getGame().getPlayer().getX();
+                camera.position.x = jacksonrpg.getGame().getWorld().getPlayer().getX();
             }
 
-            if (jacksonrpg.getGame().getPlayer().getX() < getMapWidthInPixels() - 200 && playerScreenCoords.x > getMapWidthInPixels() - mapMovementTriggerBuffer ) {
-                camera.position.x = jacksonrpg.getGame().getPlayer().getX();
+            if (jacksonrpg.getGame().getWorld().getPlayer().getX() < getMapWidthInPixels() - 200 && playerScreenCoords.x > getMapWidthInPixels() - mapMovementTriggerBuffer ) {
+                camera.position.x = jacksonrpg.getGame().getWorld().getPlayer().getX();
 
             }
             camera.update();

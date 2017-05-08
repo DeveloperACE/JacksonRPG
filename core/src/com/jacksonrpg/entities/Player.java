@@ -36,7 +36,7 @@ public class Player extends Entity {
 
     private Integer movementSpeed = 3;
     private Integer leftBorder = 0;
-    private Integer rightBorder = 2048;//value of jacksonrpg.getGame().getWorld().getMapWidthInPixels()
+    private Integer rightBorder = 2048;//value of jacksonrpg.getGame().getMap().getMapWidthInPixels()
 
     private Integer healthLost = 0;//0-14, 0 = full, 14 = dead
     private Integer maxHealth = 14;
