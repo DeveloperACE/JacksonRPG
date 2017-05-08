@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.jacksonrpg.JacksonRPG;
+import com.sun.istack.internal.Nullable;
 
 import java.util.ArrayList;
 
@@ -60,6 +61,7 @@ public class Entity extends Actor {
     public Entity(JacksonRPG jacksonrpg, Texture texture, float x, float y, float width, float height, float rotation, int sectionX, int sectionY, int sectionWidth, int sectionHeight, boolean flipEntityX, boolean flipEntityY) {
 
         this.jacksonrpg = jacksonrpg;
+
         entityTexture = texture;
 
         this.setX(x);
@@ -76,23 +78,6 @@ public class Entity extends Actor {
 
     }
 
-    /** Queues the assets needed to construct the necessary variables for this screen
-     *
-     */
-    public void queueAssets() {
-        jacksonrpg.getAssets().queueTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
-
-    }
-
-    /** Called when the assets requested in queueAssets() have been loaded successfully
-     *
-     */
-    public void assetsLoaded() {
-        TextureAtlas atlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
-        interactionAnimation = new Animation<TextureRegion>(1f/3f, atlas.findRegions("ellipsis"));
-
-
-    }
 
     /** Creates a new entity with the x, y, width, height, rotation, flipEntityX and flipEntityY properties.
      * Section properties default to the x, y, width and height values of the entire texture
@@ -147,12 +132,39 @@ public class Entity extends Actor {
     }
 
 
+    /** Queues the assets needed to construct the necessary variables for this screen
+     *
+     */
+    public void queueAssets() {
+        jacksonrpg.getAssets().queueTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
+
+    }
+
+    /** Called when the assets requested in queueAssets() have been loaded successfully
+     *
+     */
+    public void assetsLoaded() {
+        TextureAtlas atlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
+        interactionAnimation = new Animation<TextureRegion>(1f/3f, atlas.findRegions("ellipsis"));
+
+        System.out.println(atlas);
+    }
+
+
     /** Updates the Entity texture
      *
-     * @param newTexture The new texture to update to
+     * @param newEntityTexture The new texture to update to
      */
-    public void changeTexture(Texture newTexture) {
-        entityTexture = newTexture;
+    public void changeTexture(Texture newEntityTexture) {
+        entityTexture = newEntityTexture;
+        setSectionBoundaries(0, 0, newEntityTexture.getWidth(), newEntityTexture.getHeight());
+    }
+
+    public void setSectionBoundaries(int sectionX, int sectionY, int sectionWidth, int sectionHeight) {
+        this.sectionX = sectionX;
+        this.sectionY = sectionY;
+        this.sectionWidth = sectionWidth;
+        this.sectionHeight = sectionHeight;
     }
 
     /**
@@ -191,25 +203,26 @@ public class Entity extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         elapsedTime += Gdx.graphics.getDeltaTime();
 
-        batch.draw(
-                entityTexture,
-                this.getX(),
-                this.getY(),
-                this.getOriginX(),
-                this.getOriginY(),
-                this.getWidth(),
-                this.getHeight(),
-                this.getScaleX(),
-                this.getScaleY(),
-                this.getRotation(),
-                this.sectionX,
-                this.sectionY,
-                this.sectionWidth,
-                this.sectionHeight,
-                this.flipEntityX,
-                this.flipEntityY
-        );
-
+        if (entityTexture != null) {
+            batch.draw(
+                    entityTexture,
+                    this.getX(),
+                    this.getY(),
+                    this.getOriginX(),
+                    this.getOriginY(),
+                    this.getWidth(),
+                    this.getHeight(),
+                    this.getScaleX(),
+                    this.getScaleY(),
+                    this.getRotation(),
+                    this.sectionX,
+                    this.sectionY,
+                    this.sectionWidth,
+                    this.sectionHeight,
+                    this.flipEntityX,
+                    this.flipEntityY
+            );
+        }
 
         if (interactable && (interactionAnimation != null)) {
 

@@ -55,7 +55,7 @@ public class Game implements Screen {
 
         //pass the queueAssets() call to parts of map
 
-       world.queueAssets();
+        world.queueAssets();
     }
 
     /** Called when the assets requested in queueAssets() have been loaded successfully

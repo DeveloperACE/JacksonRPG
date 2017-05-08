@@ -7,6 +7,8 @@ import com.jacksonrpg.JacksonRPG;
 import com.jacksonrpg.entities.Entity;
 import com.jacksonrpg.entities.Player;
 
+import java.util.ArrayList;
+
 /** the world is what manages all the subobjects fo the World/level.
  * Created by edwar12421 on 5/8/2017.
  */
@@ -23,6 +25,8 @@ public class World implements Screen {
     private Player player;
     private Stage stage;
 
+   private Entity freddie;
+
     /** Creates the World
      *
      * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
@@ -32,15 +36,47 @@ public class World implements Screen {
         this.jacksonrpg = jacksonrpg;
         this.level = level;
 
-        map = new Map(this.jacksonrpg);
-
+        freddie = new Entity(
+                jacksonrpg,
+                null,
+                600,
+                100,
+                100,
+                100,
+                0,
+                0,
+                0,
+                0,
+                0,
+                false,
+                false
+        );
+        map = new Map(this.jacksonrpg, level);
+        freddie.setInteractable(true);
         setupPlayer();
 
+    }
+
+    /** Creates the World
+     * Level Defaults to TUORIAL
+     *
+     * @param jacksonrpg the jacksonRPG instance from which to ue for asset loading .etc
+     */
+    public World(JacksonRPG jacksonrpg) {
+        this(jacksonrpg, Level.TUTORIAL);
     }
 
     public void queueAssets() {
         map.queueAssets();
         player.queueAssets();
+
+        switch (level) {
+            case TUTORIAL:
+                jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE);
+                break;
+            case MAIN:
+                break;
+        }
     }
 
     public void assetsLoaded() {
@@ -50,6 +86,27 @@ public class World implements Screen {
         // stage.assetsLoaded();
         stage = new Stage(new ScreenViewport(map.getCamera()));
         stage.addActor(player);
+
+        switch (level) {
+            case TUTORIAL:
+
+
+
+                //jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE),
+               // freddie.setInteractable(true);
+                //entities.add(freddie);
+
+
+               // Entity freddie = entities.get(0);
+                freddie.changeTexture(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE));
+
+                stage.addActor(freddie);
+                player.setMovementBorders(player.getLeftBoundary(), 600);
+
+                break;
+            case MAIN:
+                break;
+        }
     }
 
 
@@ -89,6 +146,8 @@ public class World implements Screen {
 
     @Override
     public void render(float delta) {
+
+
         map.render(delta);
         stage.act();
         stage.draw();
