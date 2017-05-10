@@ -69,6 +69,7 @@ public class World implements Screen {
     public void queueAssets() {
         map.queueAssets();
         player.queueAssets();
+        freddie.queueAssets();
 
         switch (level) {
             case TUTORIAL:
@@ -82,6 +83,7 @@ public class World implements Screen {
     public void assetsLoaded() {
         player.assetsLoaded();
         map.assetsLoaded();
+        freddie.assetsLoaded();
 
         // stage.assetsLoaded();
         stage = new Stage(new ScreenViewport(map.getCamera()));
@@ -101,7 +103,7 @@ public class World implements Screen {
                 freddie.changeTexture(jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().FREDDIE_MAC_TEXTURE));
 
                 stage.addActor(freddie);
-                player.setMovementBorders(player.getLeftBoundary(), 600);
+                player.setMovementBorders(player.getLeftBoundary(), 900);
 
                 break;
             case MAIN:

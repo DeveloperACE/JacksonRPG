@@ -211,6 +211,7 @@ public class Player extends Entity {
         }
     }
 
+
     /**
      *
      * @return The left boundary of playerName movement

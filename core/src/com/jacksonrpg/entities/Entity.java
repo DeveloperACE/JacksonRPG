@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.jacksonrpg.JacksonRPG;
-import com.sun.istack.internal.Nullable;
 
 import java.util.ArrayList;
 
@@ -32,8 +31,12 @@ public class Entity extends Actor {
     private Boolean flipEntityY;
 
     private boolean interactable = false;
+    private boolean interacted = false;
+    private int closenessBuffer = 75;
+
     private Integer interactionAnimationWidth = 25;
     private Animation<TextureRegion> interactionAnimation;
+    private TextureRegion checkBubble;
     protected float elapsedTime = 0;//private access to only this and any clas that extends it
 
     protected ArrayList<String> speech;
@@ -146,10 +149,30 @@ public class Entity extends Actor {
     public void assetsLoaded() {
         TextureAtlas atlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().SPEECHBUBBLE_ATLAS_PATH);
         interactionAnimation = new Animation<TextureRegion>(1f/3f, atlas.findRegions("ellipsis"));
+        checkBubble = atlas.findRegion("ok");
 
         System.out.println(atlas);
     }
 
+
+    /** Gets the players horizontal midpoint/center along the X axis. Together with getPositionX(), this function
+     *  returns the bottom middle point of the player
+     *
+     * @return the characters horizontal midpoint
+     */
+    public float getPositionX() {
+        float midpoint = getX() + (getWidth()/2);
+        return midpoint;
+    }
+
+    /** gets the characters current Y position. Together with getPositionX(), this function
+     *  returns the bottom middle point of the player
+     *
+     * @return the y coordinate of the bottom of the character
+     */
+    public float getPositionY() {
+        return getY();
+    }
 
     /** Updates the Entity texture
      *
@@ -168,8 +191,28 @@ public class Entity extends Actor {
     }
 
     /**
-     * @returns the entity's texture
+     *
+     * @return the closeness buffer trigger
      */
+    public int getClosenessBuffer() {
+        return closenessBuffer;
+    }
+
+    public boolean isCloseTo(float xCoordinate, int closenessBuffer) {
+        //if given X coordinate is within the closenessBuffer of the current entity
+        if (xCoordinate < getPositionX() + closenessBuffer && xCoordinate > getPositionX() - closenessBuffer){
+            return true;
+        } else {return false;}
+    }
+
+    public boolean isCloseTo(float xCoordinate) {
+        return isCloseTo(xCoordinate, this.closenessBuffer);
+    }
+
+
+        /**
+         * @returns the entity's texture
+         */
     public Texture getTexture() {
         return entityTexture;
     }
@@ -180,7 +223,7 @@ public class Entity extends Actor {
      */
     public final void setInteractable(boolean interactable) {this.interactable = interactable;}
 
-    public final void onInteraction(){
+    public final void interacted(){
 
     }
     public final void say(String whatToSay){
@@ -224,9 +267,19 @@ public class Entity extends Actor {
             );
         }
 
-        if (interactable && (interactionAnimation != null)) {
+        //checks if characer is interactable, has an interaction animation, hasnt been interacted with and the player is close to the entity
+        if (interactable && (interactionAnimation != null) && !interacted && isCloseTo(jacksonrpg.getGame().getWorld().getPlayer().getPositionX())) {
 
             batch.draw(interactionAnimation.getKeyFrame(elapsedTime, true), this.getX()+this.getWidth(), this.getY()+this.getHeight(), interactionAnimationWidth, interactionAnimationWidth);
+           //TODO: maybe replace with "E" icon to suggest how to interact without having to center text
+            jacksonrpg.getFont().draw(batch, "Press E to interact", getX(), 75);
+
+
+
+        } else if (interactable && (checkBubble != null) && interacted) {
+
+            batch.draw(checkBubble, this.getX()+this.getWidth(), this.getY()+this.getHeight(), interactionAnimationWidth, interactionAnimationWidth);
+
         }
     }
 }
