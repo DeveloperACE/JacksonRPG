@@ -51,7 +51,7 @@ public class LoadingScreen implements Screen {
 
         //make animation
         TextureAtlas atlas = jacksonrpg.getAssets().getTextureAtlas(jacksonrpg.getAssets().LESSER_JACKSON_WALKING_ATLAS);
-        loadingAnimation = new Animation<TextureRegion>(1f/19f, atlas.getRegions(), Animation.PlayMode.LOOP);
+        loadingAnimation = new Animation<TextureRegion>(1f/9f, atlas.getRegions(), Animation.PlayMode.LOOP);
     }
 
     /** Continually calls the asset manager's update() function to actually load the queued assets (asynchronously)
