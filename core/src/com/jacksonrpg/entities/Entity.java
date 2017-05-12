@@ -37,7 +37,7 @@ public class Entity extends Actor {
     private Integer interactionAnimationWidth = 25;
     private Animation<TextureRegion> interactionAnimation;
     private TextureRegion checkBubble;
-    protected float elapsedTime = 0;//private access to only this and any clas that extends it
+    protected float elapsedTime = 0;//private access to only this and any class that extends it
 
     protected ArrayList<String> speech;
 
@@ -272,7 +272,7 @@ public class Entity extends Actor {
 
             batch.draw(interactionAnimation.getKeyFrame(elapsedTime, true), this.getX()+this.getWidth(), this.getY()+this.getHeight(), interactionAnimationWidth, interactionAnimationWidth);
            //TODO: maybe replace with "E" icon to suggest how to interact without having to center text
-            jacksonrpg.getFont().draw(batch, "Press E to interact", getX(), 75);
+            jacksonrpg.getFont().draw(batch, "Press E to interact", getX()-50, 75);
 
 
 
