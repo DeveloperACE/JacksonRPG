@@ -1,5 +1,7 @@
 package com.jacksonrpg;
 
+import com.jacksonrpg.game.screens.Game;
+import com.jacksonrpg.game.screens.MainMenu;
 import org.junit.jupiter.api.Test;
 
 import org.junit.*;
@@ -11,10 +13,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class UnitTests {
 
+    JacksonRPG jacksonRPG = new JacksonRPG();
+
     @Test
-    public void test1()
+    public void testJacksonRPGMenu()
     {
-        assertEquals(1, 1);
+        jacksonRPG.makeMenu();
+
+        assertEquals(new MainMenu(jacksonRPG), jacksonRPG.getMenu());
+
+    }
+
+    @Test
+    public void testJacksonRPGGame()
+    {
+        jacksonRPG.makeGame();
+
+        assertEquals(new Game(jacksonRPG), jacksonRPG.getGame());
+
+    }
+    @Test
+    public void ()
+    {
+        jacksonRPG.makeMenu();
+
+        assertEquals(new MainMenu(jacksonRPG), jacksonRPG.getMenu());
 
     }
 }
