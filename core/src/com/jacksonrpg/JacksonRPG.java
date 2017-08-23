@@ -134,7 +134,9 @@ public class JacksonRPG extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		gameMenu.dispose();
+		if (gameMenu != null) {
+            gameMenu.dispose();
+        }
 		assets.dispose();
 
 	}
