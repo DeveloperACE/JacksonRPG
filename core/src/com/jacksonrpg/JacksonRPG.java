@@ -35,6 +35,7 @@ public class JacksonRPG extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
         font = new BitmapFont();
+        font.getData().setScale(2);
 
 
         //temp bypass main menu for game testing

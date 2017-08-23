@@ -89,7 +89,6 @@ public class MainMenu implements Screen {
         this.jacksonrpg = jacksonrpg;
         font = this.jacksonrpg.getFont();
         this.batch = menuStage.getBatch();
-        font.getData().setScale(2);
 
 
         Gdx.input.setInputProcessor(menuStage);
