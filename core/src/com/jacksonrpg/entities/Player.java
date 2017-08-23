@@ -178,7 +178,8 @@ public class Player extends Entity {
     /** Checks for keys being pressed and updates the playerName state flags accordingly
      *
      */
-    private void checkKeyPresses() {
+    @Override
+    public void checkKeyPresses() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
             this.movementState = MovementState.WALKING;

@@ -2,15 +2,12 @@ package com.jacksonrpg.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jacksonrpg.JacksonRPG;
-import com.jacksonrpg.entities.Entity;
-import com.jacksonrpg.entities.Player;
+import com.jacksonrpg.game.other.SpeechBox;
 import com.jacksonrpg.maps.*;
 /**
  * Manages the interactions between game levels, saving progress and the in-game menu
@@ -23,15 +20,14 @@ public class Game implements Screen {
     private World world;
     private Stage hudStage;
     private Table statsTable = new Table();
-    private Table textboxTable = new Table();
+    private SpeechBox speechBox;
 
-    private Texture textBox;
 
     public Game(JacksonRPG jacksonrpg) {
         this.jacksonrpg = jacksonrpg;
 
         world = new World(jacksonrpg, World.Level.TUTORIAL);
-
+        speechBox = new SpeechBox(jacksonrpg);
 
 
         //queue all assets and load them
@@ -51,10 +47,9 @@ public class Game implements Screen {
 
 
         jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().HEALTH_BAR_TEXTURE);
-        jacksonrpg.getAssets().queueTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
 
         //pass the queueAssets() call to parts of map
-
+        speechBox.queueAssets();
         world.queueAssets();
     }
 
@@ -67,13 +62,13 @@ public class Game implements Screen {
 
 
         setupHUD();
-        setupTextbox();
+        speechBox.setupTextbox();
 
 
 
         hudStage = new Stage(new ScreenViewport());
         hudStage.addActor(statsTable);
-        hudStage.addActor(textboxTable);
+        hudStage.addActor(speechBox.getTextboxTable());
 
     }
 
@@ -102,31 +97,12 @@ public class Game implements Screen {
         // hud.setDebug(true);
     }
 
-    private void setupTextbox() {
-        textBox = jacksonrpg.getAssets().getTexture(jacksonrpg.getAssets().GAME_TEXT_BANNER);
-        textboxTable.setBackground(new Image(textBox).getDrawable());
-        textboxTable.setX(0);
-        textboxTable.setY(0);
-        textboxTable.setWidth(400);
-        textboxTable.setHeight(100);
-        textboxTable.setVisible(false);
-    }
 
 
     public World getWorld() {return world;}
-    public void setTextBoxVisible(boolean visible) {textboxTable.setVisible(visible);}
-    public void setTextBoxText(String text) {textboxTable.add(text, "Times New Roman", Color.BLACK );}
-    public void addTextBoxButton(String text) {textboxTable.add(text, "Times New Roman", Color.BLACK );}
-    public void resetTextBox() {
+    public SpeechBox getSpeechBox() {return speechBox;}
 
-        while (textboxTable.getCells().size >= 1) {
 
-         int size = textboxTable.getCells().size;
-         //Remove the last row
-         textboxTable.getCells().removeIndex(size-1);
-
-        }
-    }
 
     @Override
     public void render(float delta) {

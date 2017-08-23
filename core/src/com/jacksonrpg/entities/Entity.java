@@ -1,6 +1,7 @@
 package com.jacksonrpg.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.jacksonrpg.JacksonRPG;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /** A simple non-movable entity that can be interacted with.
  *
@@ -31,7 +34,7 @@ public class Entity extends Actor {
     private Boolean flipEntityY;
 
     private boolean interactable = false;
-    private boolean interacted = false;
+    private boolean spokenTo = false;
     private int closenessBuffer = 75;
 
     private Integer interactionAnimationWidth = 25;
@@ -40,6 +43,7 @@ public class Entity extends Actor {
     protected float elapsedTime = 0;//private access to only this and any class that extends it
 
     protected ArrayList<String> speech;
+    protected ArrayList<String> objectivePrompts;
 
 
     /** Creates a new entity with the x, y, width, height, rotation, section, flipEntityX and flipEntityY properties
@@ -223,17 +227,37 @@ public class Entity extends Actor {
      */
     public final void setInteractable(boolean interactable) {this.interactable = interactable;}
 
-    public final void interacted(){
+    public final void interact(){
+        if (!jacksonrpg.getGame().getSpeechBox().isVisible()) {
+            jacksonrpg.getGame().getSpeechBox().setVisible(true);
+        }
+    }
 
+
+    public final void sayFromPreloadedText(ArrayList<String> text){
+        Iterator<String> iter = text.listIterator(); iter.hasNext();
+            String speechChunk = iter.next();
+
+
+
+                iter.remove();
+
+        if (!spokenTo && speech != null) {
+
+        } else {
+
+        }
     }
+
     public final void say(String whatToSay){
-        jacksonrpg.getGame().setTextBoxVisible(true);
-        jacksonrpg.getGame().setTextBoxText(whatToSay);
+        jacksonrpg.getGame().getSpeechBox().setVisible(true);
+        jacksonrpg.getGame().getSpeechBox().setText(whatToSay);
         //TODO: add action to run setTextBoxVisible(false); jacksonrpg.getGame().resetTextBox(); when button clicked
+        //TODO: add buffer to text box for
     }
-    public final void addSpeech(String speech) {
-        this.speech.add(speech);
-    }
+
+    public final void addSpeech(String speech) {this.speech.add(speech); }
+    public final void addObjectivePrompt(String prompt){ this.speech.add(prompt);}
 
     public final String saySpeechLine(int index) {
         String line = this.speech.get(index);
@@ -241,6 +265,19 @@ public class Entity extends Actor {
         return line;
     }
 
+    public void checkKeyPresses() {
+        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
+            interact();
+        }
+
+    }
+
+    @Override
+    public void act(float delta) {
+        checkKeyPresses();
+        super.act(delta);
+
+        }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -268,15 +305,15 @@ public class Entity extends Actor {
         }
 
         //checks if characer is interactable, has an interaction animation, hasnt been interacted with and the player is close to the entity
-        if (interactable && (interactionAnimation != null) && !interacted && isCloseTo(jacksonrpg.getGame().getWorld().getPlayer().getPositionX())) {
+        if (interactable && (interactionAnimation != null) && !spokenTo && isCloseTo(jacksonrpg.getGame().getWorld().getPlayer().getPositionX())) {
 
             batch.draw(interactionAnimation.getKeyFrame(elapsedTime, true), this.getX()+this.getWidth(), this.getY()+this.getHeight(), interactionAnimationWidth, interactionAnimationWidth);
            //TODO: maybe replace with "E" icon to suggest how to interact without having to center text
             jacksonrpg.getFont().draw(batch, "Press E to interact", getX()-50, 75);
 
 
-
-        } else if (interactable && (checkBubble != null) && interacted) {
+        //else display check mark if character has been spoken to
+        } else if (interactable && (checkBubble != null) && spokenTo) {
 
             batch.draw(checkBubble, this.getX()+this.getWidth(), this.getY()+this.getHeight(), interactionAnimationWidth, interactionAnimationWidth);
 
